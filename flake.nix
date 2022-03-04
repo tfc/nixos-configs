@@ -16,7 +16,7 @@
     flake-compat-ci.url = "github:hercules-ci/flake-compat-ci";
   };
 
-  outputs = { self, home-manager, nixpkgs, nixpkgs-unstable, nixos-hardware, flake-compat-ci }: {
+  outputs = { self, home-manager, nixpkgs, nixpkgs-unstable, nixos-hardware, flake-compat, flake-compat-ci }: {
     nixosConfigurations.jongepad = nixpkgs.lib.nixosSystem rec {
       system = "x86_64-linux";
       modules = [
