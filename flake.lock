@@ -1,0 +1,83 @@
+{
+  "nodes": {
+    "home-manager": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1643933536,
+        "narHash": "sha256-yRmsWAG4DnLxLIUtlaZsl0kH7rN5xSoyNRlf0YZrcH4=",
+        "owner": "rycee",
+        "repo": "home-manager",
+        "rev": "2860d7e3bb350f18f7477858f3513f9798896831",
+        "type": "github"
+      },
+      "original": {
+        "owner": "rycee",
+        "ref": "release-21.11",
+        "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "nixos-hardware": {
+      "locked": {
+        "lastModified": 1646398322,
+        "narHash": "sha256-p+WCAOoJLc4R6x60pLYYqAiq30PlDUYJMrXqQ3rkBCg=",
+        "owner": "nixos",
+        "repo": "nixos-hardware",
+        "rev": "a7bca8d0d8188ae9802ecc467150cf018e19b958",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "master",
+        "repo": "nixos-hardware",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1646258393,
+        "narHash": "sha256-mKDoCi5Baqainjf0Nx6oTPhaxKQdj4P17XTdhTtXGRA=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "ed02c2ba0384b2800db41333045a6fb781f12aac",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-21.11",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs-unstable": {
+      "locked": {
+        "lastModified": 1646407055,
+        "narHash": "sha256-bJMp25aukThOvEqsR+rtAIQ95+plnQtDa5ZzitMpgHY=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "7d62054650523a1256fae4aeacf3d77ae4b5f9e7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "master",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "home-manager": "home-manager",
+        "nixos-hardware": "nixos-hardware",
+        "nixpkgs": "nixpkgs",
+        "nixpkgs-unstable": "nixpkgs-unstable"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}
