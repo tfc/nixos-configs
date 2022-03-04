@@ -11,7 +11,8 @@ let
     nix-store --gc --print-dead
     nix-store --optimize
   '';
-in {
+in
+{
   home.packages = with pkgs; [
     bottom
     collectOld

@@ -1,4 +1,4 @@
-{ pkgs, lib, system,... }:
+{ pkgs, lib, system, ... }:
 
 let
   sessionVariables = {
@@ -7,7 +7,8 @@ let
     SSH_AUTH_SOCK = "/run/user/$UID/gnupg/S.gpg-agent.ssh";
   };
 
-in {
+in
+{
   home.packages = with pkgs; [
     gpa
   ];

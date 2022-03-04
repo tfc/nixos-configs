@@ -35,8 +35,8 @@
 
   programs.firefox = {
     enable = true;
-    extensions = [];
-#    package = pkgs.firefox-bin;
+    extensions = [ ];
+    #    package = pkgs.firefox-bin;
     profiles = {
       myprofile = {
         settings = {

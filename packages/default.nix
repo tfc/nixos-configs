@@ -1,5 +1,5 @@
 pkgs:
 
 {
-  neovim = pkgs.callPackage ./neovim {};
+  neovim = pkgs.callPackage ./neovim { };
 }

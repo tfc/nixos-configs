@@ -25,7 +25,8 @@ let
     '';
   };
 
-in neovim.override {
+in
+neovim.override {
   configure = {
     customRC = builtins.readFile ./vimrc;
     packages.nixbundle = with vimPlugins; {
