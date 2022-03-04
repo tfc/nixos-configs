@@ -10,9 +10,13 @@
 
     home-manager.url = github:nix-community/home-manager/release-21.11;
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
+    flake-compat.url = "github:edolstra/flake-compat";
+    flake-compat.flake = false;
+    flake-compat-ci.url = "github:hercules-ci/flake-compat-ci";
   };
 
-  outputs = { self, home-manager, nixpkgs, nixpkgs-unstable, nixos-hardware }: {
+  outputs = { self, home-manager, nixpkgs, nixpkgs-unstable, nixos-hardware, flake-compat-ci }: {
     nixosConfigurations.jongepad = nixpkgs.lib.nixosSystem rec {
       system = "x86_64-linux";
       modules = [
@@ -95,6 +99,11 @@
           };
         })
       ];
+    };
+
+    ciNix = flake-compat-ci.lib.recurseIntoFlakeWith {
+      flake = self;
+      systems = [ "x86_64-linux" ];
     };
   };
 }
