@@ -1,0 +1,141 @@
+filetype plugin on
+filetype indent on
+
+let mapleader   = ","
+let g:mapleader = ","
+
+nmap <leader>w :w!<cr>
+
+set ai " auto indent
+set autoread
+set backspace=eol,start,indent
+set cmdheight=2
+set colorcolumn=80
+set completeopt+=longest
+set confirm
+set encoding=utf8
+set expandtab
+set exrc
+set ffs=unix,dos,mac
+set guioptions-=L "remove scroll bar left
+set guioptions-=T "remove toolbar
+set guioptions-=m "remove menu
+set guioptions-=r "remove scroll bar right
+set history=1000
+set hlsearch
+set ignorecase
+set incsearch
+set laststatus=2 " Airline Plugin settings
+set lazyredraw
+set linebreak   "wrap lines at convenient points
+set list
+set listchars=tab:▷⋅,trail:⋅,nbsp:⋅
+set mouse=a
+set nobackup
+set nocompatible
+set noerrorbells
+set nofoldenable
+set noswapfile
+set novisualbell
+set nowb
+set number
+set ruler
+set secure
+set shiftwidth=2
+set showcmd     "show incomplete cmds down the bottom
+set showmatch
+set showmode    "show current mode down the bottom
+set si " smart indent
+set smartcase
+set smarttab
+set t_Co=256
+set t_vb=
+set tabstop=2
+set tm=500
+set tw=500
+set wildignore+=*\\tmp\\*,*.swp,*.swo,*.zip,.git,.cabal-sandbox
+set wildignore=*.o,*.obj,*~ "stuff to ignore when tab completing
+set wildignore=*.o,*~,*.pyc
+set wildmenu
+set wildmenu                "enable ctrl-n and ctrl-p to scroll thru matches
+set wildmode=longest,list,full
+set wrap " wrap lines
+set wrap "wrap lines
+
+syntax enable
+
+colorscheme Benokai
+
+" move around panes with h,j,k,l
+nnoremap <C-k> :wincmd k <CR>
+nnoremap <C-l> :wincmd l <CR>
+nnoremap <C-h> :wincmd h <CR>
+nnoremap <C-j> :wincmd j <CR>
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0
+let g:syntastic_cpp_compiler_options = ' -std=c++14 -I/usr/include/c++/4.2.1/'
+let g:syntastic_python_checkers=['pylint']
+
+map <C-]> :YcmCompleter GoToImprecise<CR>
+
+" Configure browser for haskell_doc.vim
+let g:haddock_browser = "open"
+let g:haddock_browser_callformat = "%s %s"
+
+autocmd BufEnter *.hs set formatprg=stylish-haskell
+
+function TrimEndLines()
+    let save_cursor = getpos(".")
+    :silent! %s#\s\+$## " Trailing spaces in each line
+    :silent! %s#\($\n\s*\)\+\%$## " Empty lines at end of file
+    call setpos('.', save_cursor)
+endfunction
+autocmd FileType c,cpp,haskell,bash,python,txt,nix,markdown autocmd BufWritePre <buffer> call TrimEndLines()
+
+autocmd FileType html setlocal shiftwidth=2 tabstop=2
+autocmd FileType haskell setlocal shiftwidth=4 tabstop=4
+
+
+"nerdtree settings
+
+"Open NERDTree when nvim starts
+"autocmd StdinReadPre * let s:std_in=1
+"autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+
+let g:NERDTreeDirArrows = 1
+let g:NERDTreeMinimalUI = 1
+let g:NERDTreeMouseMode = 2
+let g:NERDTreeQuitOnOpen = 1
+let g:NERDTreeWinSize = 60
+
+let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+
+let g:haskell_classic_highlighting = 1
+let g:haskell_indent_if = 3
+let g:haskell_indent_case = 2
+let g:haskell_indent_let = 4
+let g:haskell_indent_where = 6
+let g:haskell_indent_before_where = 2
+let g:haskell_indent_after_bare_where = 2
+let g:haskell_indent_do = 3
+let g:haskell_indent_in = 1
+let g:haskell_indent_guard = 2
+let g:haskell_indent_case_alternative = 1
+let g:cabal_indent_section = 2
+
+let g:neomake_open_list = 2
+
+map <Leader>n :NERDTreeToggle<CR>
+
+nnoremap <silent> <F2> :CtrlP<CR>
+nnoremap <silent> <F3> :NERDTreeToggle<CR>
+nnoremap <silent> <F4> :ToggleBufExplorer<CR>
+nnoremap <silent> <F5> :Neomake<CR>
+

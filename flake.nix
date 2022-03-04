@@ -8,7 +8,7 @@
     nixos-hardware.url = github:nixos/nixos-hardware/master;
     nixos-hardware.inputs.nixpkgs.follows = "nixpkgs";
 
-    home-manager.url = github:rycee/home-manager/release-21.11;
+    home-manager.url = github:nix-community/home-manager/release-21.11;
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
@@ -18,20 +18,19 @@
       modules = [
         nixpkgs.nixosModules.notDetected
         nixos-hardware.nixosModules.lenovo-thinkpad-x13-yoga
-        home-manager.nixosModules.home-manager
         ./hardware-configurations/jongepad-x13-yoga.nix
-        ./modules/pipewire.nix
-        ./modules/binary-cache-cyberus.nix
-        ./modules/binary-cache-iohk.nix
-        ./modules/binary-cache-obelisk.nix
-        ./modules/desktop.nix
-        ./modules/flakes.nix
-        ./modules/make-linux-fast-again.nix
-        ./modules/nix-service.nix
-        ./modules/printing.nix
-        ./modules/virtualization.nix
-        ./modules/yubikey.nix
-        ./modules/nixbuild.nix
+        ./system-modules/pipewire.nix
+        ./system-modules/binary-cache-cyberus.nix
+        ./system-modules/binary-cache-iohk.nix
+        ./system-modules/binary-cache-obelisk.nix
+        ./system-modules/desktop.nix
+        ./system-modules/flakes.nix
+        ./system-modules/make-linux-fast-again.nix
+        ./system-modules/nix-service.nix
+        ./system-modules/printing.nix
+        ./system-modules/virtualization.nix
+        ./system-modules/yubikey.nix
+        ./system-modules/nixbuild.nix
         (
           { pkgs, config, ... }: {
 
@@ -79,6 +78,22 @@
             };
           }
         )
+        home-manager.nixosModules.home-manager
+        (_: {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.users.tfc = { ... }: {
+            programs.home-manager.enable = true;
+            imports = [
+              ./home-manager-modules/gnome.nix
+              ./home-manager-modules/programming-haskell.nix
+              ./home-manager-modules/programming.nix
+              ./home-manager-modules/shell/bash.nix
+              ./home-manager-modules/shelltools.nix
+              ./home-manager-modules/yubikey.nix
+            ];
+          };
+        })
       ];
     };
   };
