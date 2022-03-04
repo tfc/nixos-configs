@@ -46,7 +46,7 @@
               device = "/dev/nvme0n1p2";
               preLVM = true;
             };
-            #boot.kernelPackages = pkgs.linuxPackages_latest;
+            boot.kernelPackages = pkgs.linuxPackages_latest;
             boot.kernelParams = [ "intel_idle.max_cstate=4" ];
             boot.cleanTmpDir = true;
 
