@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 let
-  gitlabRunner = { registrationConfigFile, extraPkgs ? [], tagList ? [] }: {
+  gitlabRunner = { registrationConfigFile, extraPkgs ? [ ], tagList ? [ ] }: {
     inherit registrationConfigFile;
     dockerImage = "alpine";
     dockerVolumes = [
