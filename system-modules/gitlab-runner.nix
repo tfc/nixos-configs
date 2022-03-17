@@ -47,11 +47,6 @@ in
         registrationConfigFile = "/var/secrets/gitlab-seven";
         tagList = [ "nix" ];
       };
-      nixPublicGitlab = gitlabRunner {
-        registrationConfigFile = "/var/secrets/gitlab-public";
-        tagList = [ "nix" ];
-        extraPkgs = [ pkgs.cachix ];
-      };
     };
   };
 }
