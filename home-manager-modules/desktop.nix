@@ -7,6 +7,7 @@
 
   home.packages = with pkgs; [
     deja-dup
+    drawio
     element-desktop
     foliate
     foxitreader
