@@ -157,6 +157,14 @@
 
           system.stateVersion = "20.03";
 
+          system.autoUpgrade = {
+            enable = true;
+            flake = "github:tfc/nixos-configs";
+            flags = [
+              " --no-write-lock-file"
+            ];
+          };
+
           users.users.tfc = {
             isNormalUser = true;
             extraGroups = [ "wheel" "libvirtd" ];
