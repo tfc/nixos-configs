@@ -197,7 +197,7 @@
             (file: lib.hasSuffix ".nix" file && file != "default.nix")
             (builtins.attrNames (builtins.readDir dir));
           genKey = str: lib.replaceStrings [ ".nix" ] [ "" ] str;
-          moduleFrom = dir: str: { "${genKey str}" = import "${dir}/${str}"; };
+          moduleFrom = dir: str: { "${genKey str}" = "${dir}/${str}"; };
           modulesFromDir = dir: builtins.foldl' (x: y: x // (moduleFrom dir y)) { } (getNixFilesInDir dir);
         in
         modulesFromDir ./system-modules;
