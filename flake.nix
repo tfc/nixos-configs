@@ -34,18 +34,18 @@
           nixpkgs.nixosModules.notDetected
           nixos-hardware.nixosModules.lenovo-thinkpad-x13-yoga
           ./hardware-configurations/jongepad-x13-yoga.nix
-          self.nixosModules.pipewire
           self.nixosModules.binary-cache-cyberus
           self.nixosModules.binary-cache-iohk
           self.nixosModules.binary-cache-obelisk
           self.nixosModules.desktop
+          self.nixosModules.firmware
           self.nixosModules.flakes
           self.nixosModules.make-linux-fast-again
           self.nixosModules.nix-service
+          self.nixosModules.pipewire
           self.nixosModules.printing
           self.nixosModules.virtualization
           self.nixosModules.yubikey
-          self.nixosModules.nixbuild
           (
             { pkgs, config, ... }: {
 
@@ -68,9 +68,6 @@
 
               environment.systemPackages = with pkgs; [ git vim wget ];
 
-              hardware.enableAllFirmware = true;
-              hardware.cpu.intel.updateMicrocode = true;
-
               i18n.defaultLocale = "en_US.UTF-8";
 
               networking.hostName = "jongepad";
@@ -82,7 +79,6 @@
               programs.bash.enableCompletion = true;
 
               services.avahi.enable = true;
-              services.fwupd.enable = true;
               services.openssh.enable = true;
 
               system.stateVersion = "20.09";
@@ -118,12 +114,13 @@
           nixpkgs.nixosModules.notDetected
           nixos-hardware.nixosModules.lenovo-thinkpad-x250
           ./hardware-configurations/jonge-x250.nix
+          hercules-ci-agent.nixosModules.agent-service
           self.nixosModules.dontsleep
+          self.nixosModules.firmware
           self.nixosModules.gitlab-runner
           self.nixosModules.make-linux-fast-again
           self.nixosModules.nix-service
           self.nixosModules.remote-deployable
-          hercules-ci-agent.nixosModules.agent-service
           ({ pkgs, ... }: {
             boot.cleanTmpDir = true;
 
@@ -137,8 +134,6 @@
             console.keyMap = "us";
 
             environment.systemPackages = with pkgs; [ git vim wget ];
-
-            hardware.enableAllFirmware = true;
 
             i18n.defaultLocale = "en_US.UTF-8";
 
