@@ -1,4 +1,8 @@
 { ... }: {
   nix.daemonIOSchedPriority = 5;
-  nix.trustedUsers = [ "@wheel" ];
 }
+//
+
+if nix ? settings
+then { nix.settings.trusted-users = [ "@wheel" ]; }
+else { nix.trustedUsers = [ "@wheel" ]; }
