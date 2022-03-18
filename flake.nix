@@ -23,18 +23,18 @@
         nixpkgs.nixosModules.notDetected
         nixos-hardware.nixosModules.lenovo-thinkpad-x13-yoga
         ./hardware-configurations/jongepad-x13-yoga.nix
-        ./system-modules/pipewire.nix
-        ./system-modules/binary-cache-cyberus.nix
-        ./system-modules/binary-cache-iohk.nix
-        ./system-modules/binary-cache-obelisk.nix
-        ./system-modules/desktop.nix
-        ./system-modules/flakes.nix
-        ./system-modules/make-linux-fast-again.nix
-        ./system-modules/nix-service.nix
-        ./system-modules/printing.nix
-        ./system-modules/virtualization.nix
-        ./system-modules/yubikey.nix
-        ./system-modules/nixbuild.nix
+        self.nixosModules.pipewire
+        self.nixosModules.binary-cache-cyberus
+        self.nixosModules.binary-cache-iohk
+        self.nixosModules.binary-cache-obelisk
+        self.nixosModules.desktop
+        self.nixosModules.flakes
+        self.nixosModules.make-linux-fast-again
+        self.nixosModules.nix-service
+        self.nixosModules.printing
+        self.nixosModules.virtualization
+        self.nixosModules.yubikey
+        self.nixosModules.nixbuild
         (
           { pkgs, config, ... }: {
 
@@ -107,12 +107,12 @@
         nixpkgs.nixosModules.notDetected
         nixos-hardware.nixosModules.lenovo-thinkpad-x250
         ./hardware-configurations/jonge-x250.nix
-        ./system-modules/dontsleep.nix
-        ./system-modules/gitlab-runner.nix
-        ./system-modules/hercules.nix
-        ./system-modules/make-linux-fast-again.nix
-        ./system-modules/nix-service.nix
-        ./system-modules/remote-deployable.nix
+        self.nixosModules.dontsleep
+        self.nixosModules.gitlab-runner
+        self.nixosModules.hercules
+        self.nixosModules.make-linux-fast-again
+        self.nixosModules.nix-service
+        self.nixosModules.remote-deployable
         ({ pkgs, ... }: {
           boot.cleanTmpDir = true;
 
@@ -177,6 +177,18 @@
         })
       ];
     };
+
+    nixosModules =
+      let
+        inherit (nixpkgs) lib;
+        getNixFilesInDir = dir: builtins.filter
+          (file: lib.hasSuffix ".nix" file && file != "default.nix")
+          (builtins.attrNames (builtins.readDir dir));
+        genKey = str: lib.replaceStrings [ ".nix" ] [ "" ] str;
+        moduleFrom = dir: str: { "${genKey str}" = import "${dir}/${str}"; };
+        modulesFromDir = dir: builtins.foldl' (x: y: x // (moduleFrom dir y)) { } (getNixFilesInDir dir);
+      in
+      modulesFromDir ./system-modules;
 
     ciNix = flake-compat-ci.lib.recurseIntoFlakeWith {
       flake = self;
