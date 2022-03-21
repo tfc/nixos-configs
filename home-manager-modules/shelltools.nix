@@ -31,6 +31,10 @@ in
   ] ++ customPackages;
 
   programs = {
+    autojump = {
+      enable = true;
+      enableBashIntegration = true;
+    };
     bat.enable = true;
     command-not-found.enable = true;
     direnv = {
