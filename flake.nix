@@ -12,16 +12,10 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     hercules-ci-agent.url = github:hercules-ci/hercules-ci-agent/master;
-
-    flake-compat.url = github:edolstra/flake-compat;
-    flake-compat.flake = false;
-    flake-compat-ci.url = github:hercules-ci/flake-compat-ci;
   };
 
   outputs =
     { self
-    , flake-compat
-    , flake-compat-ci
     , hercules-ci-agent
     , home-manager
     , nixos-hardware
@@ -196,10 +190,5 @@
           modulesFromDir = dir: builtins.foldl' (x: y: x // (moduleFrom dir y)) { } (getNixFilesInDir dir);
         in
         modulesFromDir ./system-modules;
-
-      ciNix = flake-compat-ci.lib.recurseIntoFlakeWith {
-        flake = self;
-        systems = [ "x86_64-linux" ];
-      };
     };
 }
