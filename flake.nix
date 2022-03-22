@@ -11,7 +11,7 @@
     home-manager.url = github:nix-community/home-manager/release-21.11;
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    hercules-ci-agent.url = github:hercules-ci/hercules-ci-agent/stable;
+    hercules-ci-agent.url = github:hercules-ci/hercules-ci-agent/master;
 
     flake-compat.url = github:edolstra/flake-compat;
     flake-compat.flake = false;
