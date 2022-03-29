@@ -22,6 +22,9 @@
     userEmail = "jacek@galowicz.de";
     lfs.enable = true;
     delta.enable = true;
+    extraConfig = {
+      credential.helper = "store";
+    };
   };
 
   programs.direnv.enable = true;
