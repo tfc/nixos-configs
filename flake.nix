@@ -88,6 +88,16 @@
         ];
       };
 
+      nixosConfigurations.qssep = nixpkgs-unstable.lib.nixosSystem rec {
+        system = "x86_64-linux";
+        modules = [
+          ./hosts/qssep/hardware-configuration.nix
+          ./hosts/qssep/configuration.nix
+          nixpkgs.nixosModules.notDetected
+          self.nixosModules.remote-deployable
+        ];
+      };
+
       nixosModules =
         let
           inherit (nixpkgs) lib;
