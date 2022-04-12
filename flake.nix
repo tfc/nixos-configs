@@ -36,6 +36,7 @@
           self.nixosModules.firmware
           self.nixosModules.flakes
           self.nixosModules.make-linux-fast-again
+          self.nixosModules.netdata
           self.nixosModules.nix-service
           self.nixosModules.pipewire
           self.nixosModules.printing
@@ -85,6 +86,7 @@
           self.nixosModules.firmware
           self.nixosModules.gitlab-runner
           self.nixosModules.make-linux-fast-again
+          self.nixosModules.netdata
           self.nixosModules.nix-service
           self.nixosModules.remote-deployable
           self.nixosModules.user-tfc
@@ -98,6 +100,7 @@
           ./hosts/qssep/configuration.nix
           nixpkgs.nixosModules.notDetected
           "${nixpkgs}/nixos/modules/profiles/minimal.nix"
+          self.nixosModules.netdata
           self.nixosModules.remote-deployable
           self.nixosModules.auto-upgrade
           self.nixosModules.user-tfc
