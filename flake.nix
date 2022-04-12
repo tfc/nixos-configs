@@ -41,6 +41,7 @@
           self.nixosModules.printing
           self.nixosModules.virtualization
           self.nixosModules.yubikey
+          self.nixosModules.user-tfc
           ({ ... }:
             let
               pkgsUnstable = nixpkgs-unstable.legacyPackages.${system};
@@ -76,15 +77,17 @@
         modules = [
           ./hosts/jonge-x250/hardware-configuration.nix
           ./hosts/jonge-x250/configuration.nix
-          nixpkgs.nixosModules.notDetected
-          nixos-hardware.nixosModules.lenovo-thinkpad-x250
           hercules-ci-agent.nixosModules.agent-service
+          nixos-hardware.nixosModules.lenovo-thinkpad-x250
+          nixpkgs.nixosModules.notDetected
+          self.nixosModules.auto-upgrade
           self.nixosModules.dontsleep
           self.nixosModules.firmware
           self.nixosModules.gitlab-runner
           self.nixosModules.make-linux-fast-again
           self.nixosModules.nix-service
           self.nixosModules.remote-deployable
+          self.nixosModules.user-tfc
         ];
       };
 
@@ -95,6 +98,8 @@
           ./hosts/qssep/configuration.nix
           nixpkgs.nixosModules.notDetected
           self.nixosModules.remote-deployable
+          self.nixosModules.auto-upgrade
+          self.nixosModules.user-tfc
         ];
       };
 

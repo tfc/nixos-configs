@@ -33,9 +33,4 @@
   services.openssh.enable = true;
 
   system.stateVersion = "20.09";
-
-  users.users.tfc = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "libvirtd" ];
-  };
 }
