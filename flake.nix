@@ -97,6 +97,7 @@
           ./hosts/qssep/hardware-configuration.nix
           ./hosts/qssep/configuration.nix
           nixpkgs.nixosModules.notDetected
+          "${nixpkgs}/nixos/modules/profiles/minimal.nix"
           self.nixosModules.remote-deployable
           self.nixosModules.auto-upgrade
           self.nixosModules.user-tfc
