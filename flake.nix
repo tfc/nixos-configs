@@ -40,6 +40,17 @@
           self.nixosModules.printing
           self.nixosModules.virtualization
           self.nixosModules.yubikey
+          ({ ... }:
+            let
+              pkgsUnstable = nixpkgs-unstable.legacyPackages.${system};
+              overlay = final: prev: {
+                sof-firmware = pkgsUnstable.sof-firmware;
+              };
+            in
+            {
+              nixpkgs.overlays = [ overlay ];
+            }
+          )
           (
             { pkgs, config, ... }: {
 
