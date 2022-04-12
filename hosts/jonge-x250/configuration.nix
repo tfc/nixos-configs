@@ -4,9 +4,8 @@
   boot.loader.grub.enable = true;
   boot.loader.grub.efiSupport = true;
   boot.loader.grub.device = "nodev";
-  boot.loader.grub.configurationLimit = 3;
+  boot.loader.grub.configurationLimit = 2;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   console.keyMap = "us";
 
