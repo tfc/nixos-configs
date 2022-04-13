@@ -40,9 +40,9 @@
           self.nixosModules.nix-service
           self.nixosModules.pipewire
           self.nixosModules.printing
+          self.nixosModules.user-tfc
           self.nixosModules.virtualization
           self.nixosModules.yubikey
-          self.nixosModules.user-tfc
           ({ ... }:
             let
               pkgsUnstable = nixpkgs-unstable.legacyPackages.${system};
@@ -81,13 +81,13 @@
           hercules-ci-agent.nixosModules.agent-service
           nixos-hardware.nixosModules.lenovo-thinkpad-x250
           nixpkgs.nixosModules.notDetected
+          "${nixpkgs}/nixos/modules/profiles/minimal.nix"
           self.nixosModules.auto-upgrade
           self.nixosModules.dontsleep
           self.nixosModules.firmware
           self.nixosModules.gitlab-runner
           self.nixosModules.make-linux-fast-again
           self.nixosModules.netdata
-          self.nixosModules.nix-service
           self.nixosModules.remote-deployable
           self.nixosModules.user-tfc
         ];
@@ -100,9 +100,9 @@
           ./hosts/qssep/configuration.nix
           nixpkgs.nixosModules.notDetected
           "${nixpkgs}/nixos/modules/profiles/minimal.nix"
+          self.nixosModules.auto-upgrade
           self.nixosModules.netdata
           self.nixosModules.remote-deployable
-          self.nixosModules.auto-upgrade
           self.nixosModules.user-tfc
         ];
       };
