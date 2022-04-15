@@ -1,4 +1,7 @@
 { pkgs, ... }: {
+  imports = [
+    ./nix-native-gitrunner.nix
+  ];
   boot.cleanTmpDir = true;
 
   boot.loader.grub.enable = true;

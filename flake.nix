@@ -81,7 +81,6 @@
           hercules-ci-agent.nixosModules.agent-service
           nixos-hardware.nixosModules.lenovo-thinkpad-x250
           nixpkgs.nixosModules.notDetected
-          "${nixpkgs}/nixos/modules/profiles/minimal.nix"
           self.nixosModules.auto-upgrade
           self.nixosModules.dontsleep
           self.nixosModules.firmware
