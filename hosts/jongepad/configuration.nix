@@ -31,4 +31,19 @@
   services.openssh.enable = true;
 
   system.stateVersion = "20.09";
+
+  services.postgresql = {
+    enable = true;
+    enableTCPIP = true;
+    authentication = pkgs.lib.mkOverride 10 ''
+      local all all trust
+      host all all 127.0.0.1/32 trust
+      host all all ::1/128 trust
+    '';
+    initialScript = pkgs.writeText "backend-initScript" ''
+      CREATE ROLE tfc WITH LOGIN PASSWORD 'tfc' CREATEDB;
+      CREATE DATABASE tfc;
+      GRANT ALL PRIVILEGES ON DATABASE tfc TO tfc;
+    '';
+  };
 }
