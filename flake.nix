@@ -106,22 +106,6 @@
         ];
       };
 
-      nixosConfigurations.jonge-raspi = nixpkgs-unstable.lib.nixosSystem rec {
-        system = "aarch64-linux";
-        modules = [
-          ./hosts/jonge-raspi/hardware-configuration.nix
-          ./hosts/jonge-raspi/configuration.nix
-          nixos-hardware.nixosModules.raspberry-pi-4
-          nixpkgs.nixosModules.notDetected
-          #self.nixosModules.auto-upgrade
-          self.nixosModules.firmware
-          #self.nixosModules.netdata
-          self.nixosModules.no-docs
-          self.nixosModules.remote-deployable
-          self.nixosModules.user-tfc
-        ];
-      };
-
       nixosModules =
         let
           inherit (nixpkgs) lib;
