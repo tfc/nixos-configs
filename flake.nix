@@ -96,7 +96,6 @@
             home-manager.users.tfc = { ... }: {
               programs.home-manager.enable = true;
               imports = [
-                ./home-manager-modules/programming-haskell.nix
                 ./home-manager-modules/programming.nix
                 ./home-manager-modules/shell/bash.nix
                 ./home-manager-modules/shelltools.nix
