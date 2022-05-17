@@ -7,6 +7,7 @@
   boot.loader.grub.enable = true;
   boot.loader.grub.version = 2;
   boot.loader.grub.devices = [ "/dev/sda" ];
+  boot.loader.grub.configurationLimit = 2;
 
   networking.hostName = "qssep";
   networking.useDHCP = false;
