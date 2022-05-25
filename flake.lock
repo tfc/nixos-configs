@@ -2,7 +2,10 @@
   "nodes": {
     "flake-modules-core": {
       "inputs": {
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": [
+          "hercules-ci-agent",
+          "nixos-unstable"
+        ]
       },
       "locked": {
         "lastModified": 1647368891,
@@ -41,11 +44,11 @@
         "pre-commit-hooks-nix": "pre-commit-hooks-nix"
       },
       "locked": {
-        "lastModified": 1652350492,
-        "narHash": "sha256-2cUlBjFUB70IJWHMh7rCPz6VHpUYsHlKBpRnHmdH0Lw=",
+        "lastModified": 1653393452,
+        "narHash": "sha256-d0GasBxQxvNBXt614BCohYVy448KCGEekZWX2Ck8wC4=",
         "owner": "hercules-ci",
         "repo": "hercules-ci-agent",
-        "rev": "2437ff55720063dcbb9f85a63c40e2589867a29b",
+        "rev": "44b7776f36934cd588612069679ec308f0efba78",
         "type": "github"
       },
       "original": {
@@ -78,7 +81,7 @@
     },
     "nix-darwin": {
       "inputs": {
-        "nixpkgs": "nixpkgs_2"
+        "nixpkgs": "nixpkgs"
       },
       "locked": {
         "lastModified": 1648278671,
@@ -96,11 +99,11 @@
     },
     "nixos-hardware": {
       "locked": {
-        "lastModified": 1650522846,
-        "narHash": "sha256-SxWHXRI3qJwswyXAtzsi6PKVY3KLNNnb072KaJthII8=",
+        "lastModified": 1653463224,
+        "narHash": "sha256-bUxKhqZhki2vPzFTl8HOo1m7pagF7WzY1MZiso8U5ws=",
         "owner": "nixos",
         "repo": "nixos-hardware",
-        "rev": "6b4ebea9093c997c5f275c820e679108de4871ab",
+        "rev": "39a7bfc496d2ddfce73fe9542af1f2029ba4fe39",
         "type": "github"
       },
       "original": {
@@ -128,38 +131,6 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1652231724,
-        "narHash": "sha256-MjalcXFZgcgchp4QqnF05JTkFBBGad5hbksA1EKoP98=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "41ff747f882914c1f8c233207ce280ac9d0c867f",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "nixos-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs-unstable": {
-      "locked": {
-        "lastModified": 1652512479,
-        "narHash": "sha256-QB7gGgJLB+13mMhHJK7NSBbI6rSWL4Poxg0k+LDksM0=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "800b90d2ad007806fe29a5791fc64e432a4fca1c",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "master",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs_2": {
-      "locked": {
         "lastModified": 1602411953,
         "narHash": "sha256-gbupmxRpoQZqL5NBQCJN2GI5G7XDEHHHYKhVwEj5+Ps=",
         "owner": "LnL7",
@@ -172,7 +143,23 @@
         "type": "indirect"
       }
     },
-    "nixpkgs_3": {
+    "nixpkgs-2205": {
+      "locked": {
+        "lastModified": 1653495957,
+        "narHash": "sha256-/6NsjgDB21VY6PeuB9WWDoifuX5wS0gr2tdQsI7PQKM=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "50b9bcc9a48fd6b3ca9a69f38766a7ea5287b2bc",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "release-22.05",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_2": {
       "locked": {
         "lastModified": 1619531122,
         "narHash": "sha256-ovm5bo6PkZzNKh2YGXbRKYIjega0EjiEP0YDwyeXEYU=",
@@ -186,13 +173,13 @@
         "type": "indirect"
       }
     },
-    "nixpkgs_4": {
+    "nixpkgs_3": {
       "locked": {
-        "lastModified": 1652442528,
-        "narHash": "sha256-ctD9BdjN7e6cBipm8k9xt+vgwlRApkvuJLSNdaVrphE=",
+        "lastModified": 1653229824,
+        "narHash": "sha256-klSCYMpR4TqWYoTD/xZ2qM9UIPRFC6pK+S/kJuVLbFw=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "79385ae0aacf7e02871cc8af0623123419dd7884",
+        "rev": "06db2e2197401b74fcf82d4e84be15b0b5851c7b",
         "type": "github"
       },
       "original": {
@@ -205,7 +192,7 @@
     "pre-commit-hooks-nix": {
       "inputs": {
         "flake-utils": "flake-utils",
-        "nixpkgs": "nixpkgs_3"
+        "nixpkgs": "nixpkgs_2"
       },
       "locked": {
         "lastModified": 1638351750,
@@ -227,8 +214,8 @@
         "hercules-ci-agent": "hercules-ci-agent",
         "home-manager": "home-manager",
         "nixos-hardware": "nixos-hardware",
-        "nixpkgs": "nixpkgs_4",
-        "nixpkgs-unstable": "nixpkgs-unstable"
+        "nixpkgs": "nixpkgs_3",
+        "nixpkgs-2205": "nixpkgs-2205"
       }
     }
   },
