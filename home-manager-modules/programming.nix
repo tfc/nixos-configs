@@ -25,6 +25,10 @@
     extraConfig = {
       credential.helper = "store";
     };
+    aliases = {
+      pushfwl = "push --force-with-lease";
+      co = "checkout";
+    };
   };
 
   programs.direnv.enable = true;
