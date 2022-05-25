@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url = github:NixOS/nixpkgs/nixos-21.11;
-    nixpkgs-unstable.url = github:NixOS/nixpkgs/master;
+    nixpkgs-2205.url = github:NixOS/nixpkgs/release-22.05;
 
     nixos-hardware.url = github:nixos/nixos-hardware/master;
     nixos-hardware.inputs.nixpkgs.follows = "nixpkgs";
@@ -20,7 +20,7 @@
     , home-manager
     , nixos-hardware
     , nixpkgs
-    , nixpkgs-unstable
+    , nixpkgs-2205
     }: {
       nixosConfigurations.jongepad = nixpkgs.lib.nixosSystem rec {
         system = "x86_64-linux";
@@ -45,9 +45,9 @@
           self.nixosModules.yubikey
           ({ ... }:
             let
-              pkgsUnstable = nixpkgs-unstable.legacyPackages.${system};
+              pkgs2205 = nixpkgs-2205.legacyPackages.${system};
               overlay = final: prev: {
-                sof-firmware = pkgsUnstable.sof-firmware;
+                sof-firmware = pkgs2205.sof-firmware;
               };
             in
             {
@@ -73,7 +73,7 @@
         ];
       };
 
-      nixosConfigurations.jonge-x250 = nixpkgs-unstable.lib.nixosSystem rec {
+      nixosConfigurations.jonge-x250 = nixpkgs-2205.lib.nixosSystem rec {
         system = "x86_64-linux";
         modules = [
           ./hosts/jonge-x250/hardware-configuration.nix
@@ -106,7 +106,7 @@
         ];
       };
 
-      nixosConfigurations.qssep = nixpkgs-unstable.lib.nixosSystem rec {
+      nixosConfigurations.qssep = nixpkgs-2205.lib.nixosSystem rec {
         system = "x86_64-linux";
         modules = [
           ./hosts/qssep/hardware-configuration.nix
@@ -117,6 +117,7 @@
           self.nixosModules.netdata
           self.nixosModules.remote-deployable
           self.nixosModules.user-tfc
+          self.nixosModules.save-space
         ];
       };
 
