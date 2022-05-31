@@ -41,17 +41,6 @@
           self.nixosModules.user-tfc
           self.nixosModules.virtualization
           self.nixosModules.yubikey
-          ({ ... }:
-            let
-              pkgs2205 = nixpkgs.legacyPackages.${system};
-              overlay = final: prev: {
-                sof-firmware = pkgs2205.sof-firmware;
-              };
-            in
-            {
-              nixpkgs.overlays = [ overlay ];
-            }
-          )
           home-manager.nixosModules.home-manager
           (_: {
             home-manager.useGlobalPkgs = true;
