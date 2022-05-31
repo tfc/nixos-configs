@@ -5,7 +5,7 @@
       brlaser
       mfcj470dw-cupswrapper
       mfcj6510dw-cupswrapper
-      samsungUnifiedLinuxDriver
+      samsung-unified-linux-driver
       splix
     ];
   };

@@ -7,7 +7,7 @@
     gnome3.cheese
     gnome3.eog
     gnome3.evince
-    gnome3.gnome-tweak-tool
+    gnome3.gnome-tweaks
   ];
 
   programs.gnome-terminal = {
