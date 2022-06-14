@@ -65,13 +65,11 @@
         modules = [
           ./hosts/jonge-x250/hardware-configuration.nix
           ./hosts/jonge-x250/configuration.nix
-          hercules-ci-agent.nixosModules.agent-service
           nixos-hardware.nixosModules.lenovo-thinkpad-x250
           nixpkgs.nixosModules.notDetected
           self.nixosModules.auto-upgrade
           self.nixosModules.dontsleep
           self.nixosModules.firmware
-          self.nixosModules.gitlab-runner
           self.nixosModules.make-linux-fast-again
           self.nixosModules.netdata
           self.nixosModules.remote-deployable
