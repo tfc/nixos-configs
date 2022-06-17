@@ -44,11 +44,11 @@
         "pre-commit-hooks-nix": "pre-commit-hooks-nix"
       },
       "locked": {
-        "lastModified": 1654270907,
-        "narHash": "sha256-dsHgEHmuk6utfxKFUeIotdY0UcPKELdx+bpdNPzSKck=",
+        "lastModified": 1655108975,
+        "narHash": "sha256-BVE61UMEhmXTCkMLoIyuOfGjV0Z4yHNtIiC5VYe02FM=",
         "owner": "hercules-ci",
         "repo": "hercules-ci-agent",
-        "rev": "b645080a14e87fbaf4ea108d40a1daec149e2074",
+        "rev": "2ee7b49b01068d0fbd5bec61fdcd12b525dab5d7",
         "type": "github"
       },
       "original": {
@@ -134,11 +134,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1654360807,
-        "narHash": "sha256-wYG86PUkPZ1P/oHsCpepTkb/U26poaEPPp1XFjRsgdA=",
+        "lastModified": 1655278232,
+        "narHash": "sha256-H6s7tnHYiDKFCcLADS4sl1sUq0dDJuRQXCieguk/6SA=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "d9794b04bffb468b886c553557489977ae5f4c65",
+        "rev": "8b538fcb329a7bc3d153962f17c509ee49166973",
         "type": "github"
       },
       "original": {
