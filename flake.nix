@@ -34,7 +34,6 @@
           self.nixosModules.firmware
           self.nixosModules.flakes
           self.nixosModules.make-linux-fast-again
-          self.nixosModules.netdata
           self.nixosModules.nix-service
           self.nixosModules.pipewire
           self.nixosModules.printing
@@ -71,7 +70,6 @@
           self.nixosModules.dontsleep
           self.nixosModules.firmware
           self.nixosModules.make-linux-fast-again
-          self.nixosModules.netdata
           self.nixosModules.remote-deployable
           self.nixosModules.user-tfc
           home-manager.nixosModules.home-manager
@@ -99,7 +97,6 @@
           nixpkgs.nixosModules.notDetected
           "${nixpkgs}/nixos/modules/profiles/minimal.nix"
           self.nixosModules.auto-upgrade
-          self.nixosModules.netdata
           self.nixosModules.remote-deployable
           self.nixosModules.user-tfc
           self.nixosModules.save-space
