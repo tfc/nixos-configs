@@ -22,7 +22,9 @@ let
     environment.systemPackages = with pkgs.gnomeExtensions; [
       tilingnome
       sound-output-device-chooser
-    ];
+    ] ++ (with pkgs; [
+      gnome-network-displays
+    ]);
   };
 
   steam = { pkgs, config, ... }: {
