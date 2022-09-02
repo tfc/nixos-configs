@@ -28,6 +28,7 @@ neovim.override {
         haskell-vim
         neomake
         nerdtree
+        purescript-vim
         surround
         vim-airline
         vim-cmake
