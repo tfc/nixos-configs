@@ -57,6 +57,8 @@ in
     intel
   ];
 
+  security.rtkit.enable = true;
+
   services.xserver = {
     displayManager.gdm.enable = true;
     displayManager.gdm.wayland = false;
