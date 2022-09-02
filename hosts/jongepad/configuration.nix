@@ -1,4 +1,4 @@
-{ pkgs, config, ... }: {
+{ pkgs, lib, config, ... }: {
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.systemd-boot.configurationLimit = 3;
@@ -16,6 +16,10 @@
   };
 
   environment.systemPackages = with pkgs; [ git vim wget ];
+  environment.variables = {
+    EDITOR = lib.mkOverride 0 "vim";
+    TERM = "xterm-256color";
+  };
 
   i18n.defaultLocale = "en_US.UTF-8";
 
