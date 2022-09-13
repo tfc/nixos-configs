@@ -72,7 +72,7 @@
       "cfhdojbkjhnklbpkdaibdccddilifddb" # adblock plus
       "gcbommkclmclpchllfjekcdonpmejbdp" # https everywhere
       "hjdoplcnndgiblooccencgcggcoihigg" # Terms of Service; Didn’t Read
-      "hdokiejnpimakedhajhdlcegeplioahd" # lastpass
+      "kghbmcgihmefcbjlfiafjcigdcbmecbf" # heylogin
     ];
   };
 }
