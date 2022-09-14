@@ -19,6 +19,7 @@ in
     file
     gtop
     killall
+    lsof
     magic-wormhole
     mosh
     nix-top
