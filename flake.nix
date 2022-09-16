@@ -59,6 +59,40 @@
         ];
       };
 
+      nixosConfigurations.jongenuc = nixpkgs.lib.nixosSystem rec {
+        system = "x86_64-linux";
+        modules = [
+          ./hosts/jongenuc/hardware-configuration.nix
+          ./hosts/jongenuc/configuration.nix
+          nixpkgs.nixosModules.notDetected
+          nixos-hardware.nixosModules.intel-nuc-8i7beh
+          self.nixosModules.binary-cache-iohk
+          self.nixosModules.desktop
+          self.nixosModules.firmware
+          self.nixosModules.flakes
+          self.nixosModules.make-linux-fast-again
+          self.nixosModules.nix-service
+          self.nixosModules.pipewire
+          self.nixosModules.user-tfc
+          home-manager.nixosModules.home-manager
+          (_: {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.tfc = { ... }: {
+              programs.home-manager.enable = true;
+              imports = [
+                ./home-manager-modules/gnome.nix
+                ./home-manager-modules/programming-haskell.nix
+                ./home-manager-modules/programming.nix
+                ./home-manager-modules/shell/bash.nix
+                ./home-manager-modules/shelltools.nix
+                ./home-manager-modules/yubikey.nix
+              ];
+            };
+          })
+        ];
+      };
+
       nixosConfigurations.jonge-x250 = nixpkgs.lib.nixosSystem rec {
         system = "x86_64-linux";
         modules = [
