@@ -15,7 +15,6 @@
     gitg
     inkscape
     libreoffice
-    mattermost-desktop
     mupdf
     (wrapOBS {
       plugins = with obs-studio-plugins; [
