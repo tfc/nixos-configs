@@ -11,9 +11,6 @@
     ".ghci".text = ''
       :set prompt "λ> "
     '';
-    ".cabal/config".text = ''
-      nix: True
-    '';
   };
 
   programs.vscode = {
