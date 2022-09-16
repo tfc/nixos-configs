@@ -1,21 +1,6 @@
 { pkgs, ... }:
 
 let
-  intel = { pkgs, ... }: {
-    nixpkgs.config.packageOverrides = pkgs: {
-      vaapiIntel = pkgs.vaapiIntel.override { enableHybridCodec = true; };
-    };
-    hardware.opengl = {
-      enable = true;
-      extraPackages = with pkgs; [
-        intel-media-driver # LIBVA_DRIVER_NAME=iHD
-        libvdpau-va-gl
-        vaapiIntel # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
-        vaapiVdpau
-      ];
-      driSupport32Bit = true;
-    };
-  };
   gnome = { pkgs, lib, ... }: {
     environment.gnome.excludePackages = [ pkgs.gnome3.geary ];
     services.xserver.desktopManager.gnome.enable = true;
@@ -54,7 +39,6 @@ in
     gnome
     steam
     #screen-sharing-in-browser-wayland
-    intel
   ];
 
   security.rtkit.enable = true;
