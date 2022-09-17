@@ -65,7 +65,7 @@
     };
   };
 
-  programs.chromium = {
+  programs.brave = {
     enable = true;
     extensions = [
       "cfhdojbkjhnklbpkdaibdccddilifddb" # adblock plus
