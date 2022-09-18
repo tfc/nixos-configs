@@ -15,7 +15,7 @@
 
   hardware.enableRedistributableFirmware = true;
 
-  networking.hostName = "jongenuc"; # Define your hostname.
+  networking.hostName = "jongenuc";
   networking.networkmanager.enable = true;
 
   time.timeZone = "Europe/Berlin";
