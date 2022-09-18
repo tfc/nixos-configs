@@ -53,12 +53,7 @@ in
     wacom.enable = true;
   };
 
-  environment.extraInit = ''
-    xset s off -dpms
-  '';
-
   environment.systemPackages = with pkgs; [
-    firefox-bin
     thunderbird-bin
   ];
 }
