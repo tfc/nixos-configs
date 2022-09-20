@@ -6,6 +6,7 @@
   fonts.fontconfig.enable = true;
 
   home.packages = with pkgs; [
+    chromium
     deja-dup
     drawio
     element-desktop
