@@ -10,6 +10,14 @@ let
     ] ++ (with pkgs; [
       gnome-network-displays
     ]);
+    services.gnome.evolution-data-server = {
+      enable = true;
+      plugins = [ pkgs.evolution-ews ];
+    };
+    programs.evolution = {
+      enable = true;
+      plugins = [ pkgs.evolution-ews ];
+    };
   };
 
   steam = { pkgs, config, ... }: {
