@@ -8,6 +8,8 @@
     gnome3.eog
     gnome3.evince
     gnome3.gnome-tweaks
+    gnome-firmware
+    gnome-firmware-updater
   ];
 
   programs.gnome-terminal = {
