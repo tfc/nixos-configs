@@ -27,9 +27,7 @@
           ./hosts/jongepad/configuration.nix
           nixpkgs.nixosModules.notDetected
           nixos-hardware.nixosModules.lenovo-thinkpad-x13-yoga
-          self.nixosModules.binary-cache-cyberus
           self.nixosModules.binary-cache-iohk
-          self.nixosModules.binary-cache-obelisk
           self.nixosModules.desktop
           self.nixosModules.firmware
           self.nixosModules.flakes
