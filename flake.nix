@@ -121,20 +121,6 @@
         ];
       };
 
-      nixosConfigurations.qssep = nixpkgs.lib.nixosSystem rec {
-        system = "x86_64-linux";
-        modules = [
-          ./hosts/qssep/hardware-configuration.nix
-          ./hosts/qssep/configuration.nix
-          nixpkgs.nixosModules.notDetected
-          "${nixpkgs}/nixos/modules/profiles/minimal.nix"
-          self.nixosModules.auto-upgrade
-          self.nixosModules.remote-deployable
-          self.nixosModules.user-tfc
-          self.nixosModules.save-space
-        ];
-      };
-
       nixosModules =
         let
           inherit (nixpkgs) lib;
