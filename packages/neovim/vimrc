@@ -97,7 +97,7 @@ function TrimEndLines()
     :silent! %s#\($\n\s*\)\+\%$## " Empty lines at end of file
     call setpos('.', save_cursor)
 endfunction
-autocmd FileType c,cpp,haskell,bash,python,txt,nix,markdown autocmd BufWritePre <buffer> call TrimEndLines()
+autocmd FileType c,cpp,haskell,bash,python,txt,nix,markdown,purs autocmd BufWritePre <buffer> call TrimEndLines()
 
 autocmd FileType html setlocal shiftwidth=2 tabstop=2
 autocmd FileType haskell setlocal shiftwidth=4 tabstop=4
