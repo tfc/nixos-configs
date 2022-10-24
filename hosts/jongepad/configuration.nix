@@ -8,6 +8,7 @@
     device = "/dev/nvme0n1p2";
     preLVM = true;
   };
+  boot.initrd.systemd.enable = true;
   boot.cleanTmpDir = true;
 
   console = {
