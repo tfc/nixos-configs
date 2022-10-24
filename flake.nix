@@ -9,13 +9,10 @@
 
     home-manager.url = github:nix-community/home-manager/release-22.05;
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-
-    hercules-ci-agent.url = github:hercules-ci/hercules-ci-agent/master;
   };
 
   outputs =
     { self
-    , hercules-ci-agent
     , home-manager
     , nixos-hardware
     , nixpkgs
