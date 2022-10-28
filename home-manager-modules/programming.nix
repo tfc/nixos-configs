@@ -14,6 +14,7 @@
     shellcheck
     sloccount
     yq
+    pgcli
   ];
 
   programs.git = {
