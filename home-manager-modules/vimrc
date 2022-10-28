@@ -59,7 +59,6 @@ set wildignore=*.o,*~,*.pyc
 set wildmenu
 set wildmenu                "enable ctrl-n and ctrl-p to scroll thru matches
 set wildmode=longest,list,full
-set wrap " wrap lines
 set wrap "wrap lines
 
 syntax enable
@@ -89,8 +88,6 @@ map <C-]> :YcmCompleter GoToImprecise<CR>
 let g:haddock_browser = "open"
 let g:haddock_browser_callformat = "%s %s"
 
-autocmd BufEnter *.hs set formatprg=stylish-haskell
-
 function TrimEndLines()
     let save_cursor = getpos(".")
     :silent! %s#\s\+$## " Trailing spaces in each line
@@ -100,14 +97,14 @@ endfunction
 autocmd FileType c,cpp,haskell,bash,python,txt,nix,markdown,purs autocmd BufWritePre <buffer> call TrimEndLines()
 
 autocmd FileType html setlocal shiftwidth=2 tabstop=2
-autocmd FileType haskell setlocal shiftwidth=4 tabstop=4
+autocmd FileType haskell setlocal shiftwidth=2 tabstop=2
 
 
 "nerdtree settings
 
 "Open NERDTree when nvim starts
-"autocmd StdinReadPre * let s:std_in=1
-"autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 let g:NERDTreeDirArrows = 1
 let g:NERDTreeMinimalUI = 1
@@ -118,13 +115,13 @@ let g:NERDTreeWinSize = 60
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 
 let g:haskell_classic_highlighting = 1
-let g:haskell_indent_if = 3
+let g:haskell_indent_if = 2
 let g:haskell_indent_case = 2
-let g:haskell_indent_let = 4
-let g:haskell_indent_where = 6
+let g:haskell_indent_let = 2
+let g:haskell_indent_where = 2
 let g:haskell_indent_before_where = 2
 let g:haskell_indent_after_bare_where = 2
-let g:haskell_indent_do = 3
+let g:haskell_indent_do = 2
 let g:haskell_indent_in = 1
 let g:haskell_indent_guard = 2
 let g:haskell_indent_case_alternative = 1

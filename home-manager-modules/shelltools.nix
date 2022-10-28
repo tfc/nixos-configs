@@ -1,9 +1,6 @@
 { pkgs, config, ... }:
 
 let
-  customPackages = with import ../packages pkgs; [
-    neovim
-  ];
   collectOld = pkgs.writeScriptBin "nix-collect-old" ''
     nix-env --delete-generations old
     nix-collect-garbage
@@ -33,7 +30,7 @@ in
     unrar
     unzip
     zip
-  ] ++ customPackages;
+  ];
 
   programs = {
     autojump = {
