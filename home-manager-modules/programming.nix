@@ -25,6 +25,7 @@
     delta.enable = true;
     extraConfig = {
       credential.helper = "store";
+      init.defaultBranch = "main";
     };
     aliases = {
       pushfwl = "push --force-with-lease";
