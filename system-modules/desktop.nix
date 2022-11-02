@@ -5,8 +5,19 @@ let
     environment.gnome.excludePackages = [ pkgs.gnome3.geary ];
     services.xserver.desktopManager.gnome.enable = true;
     environment.systemPackages = with pkgs.gnomeExtensions; [
-      tilingnome
+      appindicator
+      autohide-battery
+      blur-my-shell
+      just-perfection
+      net-speed-simplified
       sound-output-device-chooser
+      spotify-tray
+      thanatophobia
+      time-awareness
+      transparent-top-bar-adjustable-transparency
+      tweaks-in-system-menu
+      unblank
+      useless-gaps
     ] ++ (with pkgs; [
       gnome-network-displays
     ]);
