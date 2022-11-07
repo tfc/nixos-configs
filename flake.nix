@@ -47,6 +47,7 @@
                 ./home-manager-modules/programming.nix
                 ./home-manager-modules/shell/bash.nix
                 ./home-manager-modules/shelltools.nix
+                ./home-manager-modules/vim.nix
                 ./home-manager-modules/yubikey.nix
               ];
             };
