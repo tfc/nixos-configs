@@ -6,6 +6,7 @@
   ];
 
   boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot.configurationLimit = 3;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
 
@@ -17,6 +18,8 @@
   # Enable swap on luks
   boot.initrd.luks.devices."luks-f21e1409-9581-4bd1-b0cb-649421782af9".device = "/dev/disk/by-uuid/f21e1409-9581-4bd1-b0cb-649421782af9";
   boot.initrd.luks.devices."luks-f21e1409-9581-4bd1-b0cb-649421782af9".keyFile = "/crypto_keyfile.bin";
+
+  boot.cleanTmpDir = true;
 
   networking.hostName = "jongebook";
   networking.networkmanager.enable = true;
