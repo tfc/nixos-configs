@@ -75,4 +75,6 @@ in
   environment.systemPackages = with pkgs; [
     thunderbird-bin
   ];
+
+  services.localtime.enable = true;
 }
