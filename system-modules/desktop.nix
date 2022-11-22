@@ -7,16 +7,12 @@ let
     environment.systemPackages = with pkgs.gnomeExtensions; [
       appindicator
       autohide-battery
+      bluetooth-quick-connect
       blur-my-shell
-      just-perfection
-      net-speed-simplified
       sound-output-device-chooser
       spotify-tray
       thanatophobia
-      time-awareness
-      transparent-top-bar-adjustable-transparency
       tweaks-in-system-menu
-      unblank
       useless-gaps
     ] ++ (with pkgs; [
       gnome-network-displays
