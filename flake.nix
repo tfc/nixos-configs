@@ -2,10 +2,9 @@
   description = "My personal NixOS configs";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/release-22.11";
 
     nixos-hardware.url = "github:nixos/nixos-hardware/master";
-    nixos-hardware.inputs.nixpkgs.follows = "nixpkgs";
 
     home-manager.url = "github:nix-community/home-manager/release-22.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -20,6 +19,12 @@
       nixosConfigurations.jongepad = nixpkgs.lib.nixosSystem rec {
         system = "x86_64-linux";
         modules = [
+          (_: {
+            # this should be obsolete once 22.11 gets stable
+            nixpkgs.config.permittedInsecurePackages = [
+              "qtwebkit-5.212.0-alpha4"
+            ];
+          })
           ./hosts/jongepad/hardware-configuration.nix
           ./hosts/jongepad/configuration.nix
           nixpkgs.nixosModules.notDetected

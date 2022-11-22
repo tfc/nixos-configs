@@ -70,7 +70,8 @@ in
 
   environment.systemPackages = with pkgs; [
     thunderbird-bin
+    wireguard-tools
   ];
 
-  services.localtime.enable = true;
+  services.localtimed.enable = true;
 }
