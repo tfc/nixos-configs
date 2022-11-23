@@ -35,7 +35,7 @@
   services.avahi.enable = true;
   services.openssh.enable = true;
 
-  system.stateVersion = "20.09";
+  system.stateVersion = "22.05";
 
   services.postgresql = {
     enable = true;
@@ -51,4 +51,6 @@
       GRANT ALL PRIVILEGES ON DATABASE tfc TO tfc;
     '';
   };
+
+  powerManagement.powertop.enable = true;
 }
