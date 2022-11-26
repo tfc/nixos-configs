@@ -2,11 +2,11 @@
   description = "My personal NixOS configs";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/release-22.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.11";
 
     nixos-hardware.url = "github:nixos/nixos-hardware/master";
 
-    home-manager.url = "github:nix-community/home-manager/release-22.05";
+    home-manager.url = "github:nix-community/home-manager/release-22.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
@@ -45,6 +45,7 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.tfc = { ... }: {
+              home.stateVersion = "22.11";
               programs.home-manager.enable = true;
               imports = [
                 ./home-manager-modules/gnome.nix
