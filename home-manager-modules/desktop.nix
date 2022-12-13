@@ -11,7 +11,7 @@
     drawio
     element-desktop
     foliate
-    foxitreader
+#    foxitreader # disabled because of qtwebkit
     gimp
     gitg
     inkscape
