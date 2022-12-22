@@ -32,5 +32,8 @@
 
   services.openssh.enable = true;
 
-  system.stateVersion = "22.11"; # Did you read the comment?
+  # we're a VM here, so no KVM and nixos tests
+  nix.settings.system-features = [ "benchmark" "big-parallel" ];
+
+  system.stateVersion = "22.11";
 }
