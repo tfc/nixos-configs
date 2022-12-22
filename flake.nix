@@ -61,6 +61,7 @@
           ./hosts/build01/hardware-configuration.nix
           ./hosts/build01/configuration.nix
           nixpkgs.nixosModules.notDetected
+          self.nixosModules.auto-upgrade
           self.nixosModules.binary-cache-iohk
           self.nixosModules.firmware
           self.nixosModules.flakes
