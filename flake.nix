@@ -4,12 +4,14 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.11";
     nixos-hardware.url = "github:nixos/nixos-hardware/master";
+    hercules-ci.url = "github:hercules-ci/hercules-ci-agent";
     home-manager.url = "github:nix-community/home-manager/release-22.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
     { self
+    , hercules-ci
     , home-manager
     , nixos-hardware
     , nixpkgs
@@ -49,6 +51,27 @@
                 ./home-manager-modules/yubikey.nix
               ];
             };
+          })
+        ];
+      };
+
+      nixosConfigurations."build01.nix-consulting.de" = nixpkgs.lib.nixosSystem rec {
+        system = "x86_64-linux";
+        modules = [
+          ./hosts/build01/hardware-configuration.nix
+          ./hosts/build01/configuration.nix
+          nixpkgs.nixosModules.notDetected
+          self.nixosModules.binary-cache-iohk
+          self.nixosModules.firmware
+          self.nixosModules.flakes
+          self.nixosModules.make-linux-fast-again
+          self.nixosModules.nix-service
+          self.nixosModules.remote-deployable
+          self.nixosModules.user-tfc
+          (_: {
+            imports = [ hercules-ci.nixosModules.agent-profile ];
+            services.hercules-ci-agent.enable = true;
+            services.hercules-ci-agent.concurrentTasks = 4;
           })
         ];
       };
