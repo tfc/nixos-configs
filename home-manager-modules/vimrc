@@ -65,12 +65,6 @@ syntax enable
 
 colorscheme Benokai
 
-" move around panes with h,j,k,l
-nnoremap <C-k> :wincmd k <CR>
-nnoremap <C-l> :wincmd l <CR>
-nnoremap <C-h> :wincmd h <CR>
-nnoremap <C-j> :wincmd j <CR>
-
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
@@ -88,17 +82,7 @@ map <C-]> :YcmCompleter GoToImprecise<CR>
 let g:haddock_browser = "open"
 let g:haddock_browser_callformat = "%s %s"
 
-function TrimEndLines()
-    let save_cursor = getpos(".")
-    :silent! %s#\s\+$## " Trailing spaces in each line
-    :silent! %s#\($\n\s*\)\+\%$## " Empty lines at end of file
-    call setpos('.', save_cursor)
-endfunction
-autocmd FileType c,cpp,haskell,bash,python,txt,nix,markdown,purs autocmd BufWritePre <buffer> call TrimEndLines()
-
-autocmd FileType html setlocal shiftwidth=2 tabstop=2
-autocmd FileType haskell setlocal shiftwidth=2 tabstop=2
-
+autocmd FileType c,cpp,haskell,bash,python,txt,nix,markdown,purs autocmd BufWritePre <buffer> call FixWhitespace() " plugin: vim-trailing-whitespace
 
 "nerdtree settings
 
@@ -131,8 +115,6 @@ let g:neomake_open_list = 2
 
 map <Leader>n :NERDTreeToggle<CR>
 
-nnoremap <silent> <F2> :CtrlP<CR>
 nnoremap <silent> <F3> :NERDTreeToggle<CR>
 nnoremap <silent> <F4> :ToggleBufExplorer<CR>
-nnoremap <silent> <F5> :Neomake<CR>
 
