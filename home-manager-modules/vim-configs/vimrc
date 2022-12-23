@@ -1,0 +1,65 @@
+filetype plugin on
+filetype indent on
+
+let mapleader   = ","
+let g:mapleader = ","
+
+nmap <leader>w :w!<cr>
+
+set ai " auto indent
+set autoread
+set backspace=eol,start,indent
+set cmdheight=2
+set colorcolumn=80
+set completeopt+=longest
+set confirm
+set encoding=utf8
+set expandtab
+set exrc
+set ffs=unix,dos,mac
+set guioptions-=L "remove scroll bar left
+set guioptions-=T "remove toolbar
+set guioptions-=m "remove menu
+set guioptions-=r "remove scroll bar right
+set history=1000
+set hlsearch
+set ignorecase
+set incsearch
+set lazyredraw
+set linebreak   "wrap lines at convenient points
+set list
+set listchars=tab:▷⋅,trail:⋅,nbsp:⋅
+set mouse=a
+set nobackup
+set nocompatible
+set noerrorbells
+set nofoldenable
+set noswapfile
+set novisualbell
+set nowb
+set number
+set ruler
+set secure
+set shiftwidth=2
+set showcmd     "show incomplete cmds down the bottom
+set showmatch
+set showmode    "show current mode down the bottom
+set si " smart indent
+set smartcase
+set smarttab
+set t_Co=256
+set t_vb=
+set tabstop=2
+set tm=500
+set tw=500
+set wildignore+=*\\tmp\\*,*.swp,*.swo,*.zip,.git,.cabal-sandbox
+set wildignore=*.o,*.obj,*~ "stuff to ignore when tab completing
+set wildignore=*.o,*~,*.pyc
+set wildmenu
+set wildmenu "enable ctrl-n and ctrl-p to scroll thru matches
+set wildmode=longest,list,full
+set wrap 
+
+syntax enable
+
+colorscheme Benokai
