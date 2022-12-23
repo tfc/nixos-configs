@@ -45,7 +45,10 @@
           nnoremap <silent> <F3> :NERDTreeToggle<CR>
         '';
       }
-      nvim-lspconfig
+      {
+        plugin = nvim-lspconfig;
+        config = ":luafile ${./vim-configs/lsp.lua}";
+      }
       plenary-nvim # dep of haskell-tools.nvim
       purescript-vim
       {
