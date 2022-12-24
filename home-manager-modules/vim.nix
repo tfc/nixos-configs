@@ -9,6 +9,12 @@
     withNodeJs = true;
     extraConfig = builtins.readFile ./vim-configs/vimrc;
     plugins = with pkgs.vimPlugins; [
+      plenary-nvim # dep of haskell-tools.nvim
+      purescript-vim
+      telescope-nvim
+      vim-colorschemes
+      vim-nix
+      vim-tmux-navigator
       {
         plugin = bufexplorer;
         config = "nnoremap <silent> <F4> :ToggleBufExplorer<CR>";
@@ -49,17 +55,12 @@
         plugin = nvim-lspconfig;
         config = ":luafile ${./vim-configs/lsp.lua}";
       }
-      plenary-nvim # dep of haskell-tools.nvim
-      purescript-vim
       {
         plugin = vim-airline;
         config = ''
           set laststatus=2
         '';
       }
-      vim-colorschemes
-      vim-nix
-      vim-tmux-navigator
       {
         plugin = vim-better-whitespace;
         config = ''
