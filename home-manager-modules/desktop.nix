@@ -29,6 +29,7 @@
     signal-desktop
     skypeforlinux
     spotify
+    teamspeak_client # write a wrapper that adds  QT_XCB_GL_INTEGRATION=none
     vlc
     xournalpp
   ];
