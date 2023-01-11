@@ -69,10 +69,6 @@
           let g:strip_whitespace_confirm=0
         '';
       }
-      {
-        plugin = haskell-tools-nvim;
-        config = ":luafile ${./vim-configs/haskell-lsp.lua}";
-      }
     ];
   };
 

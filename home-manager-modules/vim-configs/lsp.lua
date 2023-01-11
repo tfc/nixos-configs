@@ -35,19 +35,25 @@ local on_attach = function(client, bufnr)
 end
 
 lspconfig.bashls.setup{
-    on_attach = on_attach,
+  on_attach = on_attach,
 }
 lspconfig.ltex.setup {
-    on_attach = on_attach,
+  on_attach = on_attach,
 }
 lspconfig.purescriptls.setup{
-    on_attach = on_attach,
-    settings = {
-      purescript = {
-        formatter = 'purs-tidy',
-        diagnosticsOnOpen = true,
-      }
-    },
+  on_attach = on_attach,
+  settings = {
+    purescript = {
+      formatter = 'purs-tidy',
+      diagnosticsOnOpen = true,
+    }
+  },
 }
-
+lspconfig.hls.setup{
+  on_attach = on_attach,
+  haskell = {
+    cabalFormattingProvider = "cabalfmt",
+    formattingProvider = "brittany"
+  },
+}
 
