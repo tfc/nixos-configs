@@ -44,11 +44,11 @@
         "pre-commit-hooks-nix": "pre-commit-hooks-nix"
       },
       "locked": {
-        "lastModified": 1672336180,
-        "narHash": "sha256-sk1OL3USAGl5YESmCbDF45MUILRlRvbF0y9WdZFMeFs=",
+        "lastModified": 1673183923,
+        "narHash": "sha256-vb+AEQJAW4Xn4oHsfsx8H12XQU0aK8VYLtWYJm/ol28=",
         "owner": "hercules-ci",
         "repo": "hercules-ci-agent",
-        "rev": "c6a3416eb303c10e149774a652b0be7bb2f94c9f",
+        "rev": "b3f8aa8e4a8b22dbbe92cc5a89e6881090b933b3",
         "type": "github"
       },
       "original": {
@@ -102,11 +102,11 @@
     },
     "nixos-hardware": {
       "locked": {
-        "lastModified": 1672644464,
-        "narHash": "sha256-RYlvRMcQNT7FDoDkViijQBHg9g+blsB+U6AvL/gAsPI=",
+        "lastModified": 1673390851,
+        "narHash": "sha256-dAhsJUIxfg5gWE+uQ3e0ICssS0QPQZt7Pa+75NKtAEw=",
         "owner": "nixos",
         "repo": "nixos-hardware",
-        "rev": "ca29e25c39b8e117d4d76a81f1e229824a9b3a26",
+        "rev": "9335068481026234c1f41079ad54e28ad92453de",
         "type": "github"
       },
       "original": {
@@ -134,11 +134,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1672844754,
-        "narHash": "sha256-o26WabuHABQsaHxxmIrR3AQRqDFUEdLckLXkVCpIjSU=",
+        "lastModified": 1673345971,
+        "narHash": "sha256-4DfFcKLRfVUTyuGrGNNmw37IeIZSoku9tgTVmu/iD98=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "e9ade2c8240e00a4784fac282a502efff2786bdc",
+        "rev": "54644f409ab471e87014bb305eac8c50190bcf48",
         "type": "github"
       },
       "original": {
