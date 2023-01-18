@@ -8,7 +8,6 @@
     gc.automatic = true;
   };
 
-
   services.journald.extraConfig = ''
     SystemMaxUse=250M
     SystemMaxFileSize=50M
