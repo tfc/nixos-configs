@@ -26,6 +26,7 @@
     extraConfig = {
       credential.helper = "store";
       init.defaultBranch = "main";
+      push.autoSetupRemote = true;
     };
     aliases = {
       pushfwl = "push --force-with-lease";
