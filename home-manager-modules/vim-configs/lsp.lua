@@ -48,10 +48,14 @@ lspconfig.purescriptls.setup{
   on_attach = on_attach,
   settings = {
     purescript = {
-      formatter = 'purs-tidy',
+      addSpagoSources = true,
       diagnosticsOnOpen = true,
+      formatter = 'purs-tidy',
     }
   },
+  flags = {
+    debounce_text_changes = 200,
+  }
 }
 lspconfig.hls.setup{
   on_attach = on_attach,
