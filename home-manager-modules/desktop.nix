@@ -14,6 +14,7 @@
 #    foxitreader # disabled because of qtwebkit
     gimp
     gitg
+    google-chrome
     inkscape
     libreoffice
     mupdf
