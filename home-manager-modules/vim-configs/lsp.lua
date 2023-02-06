@@ -63,4 +63,10 @@ lspconfig.hls.setup{
     cabalFormattingProvider = "cabalfmt",
   },
 }
+lspconfig.ccls.setup {
+  on_attach = on_attach,
+  init_options = {
+    compilationDatabaseDirectory = "build";
+  }
+}
 

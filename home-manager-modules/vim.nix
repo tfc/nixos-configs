@@ -86,5 +86,6 @@
     rnix-lsp
     nodePackages_latest.bash-language-server
     ltex-ls
+    ccls
   ];
 }
