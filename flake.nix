@@ -55,7 +55,7 @@
         ];
       };
 
-      nixosConfigurations."build01.nix-consulting.de" = nixpkgs.lib.nixosSystem rec {
+      nixosConfigurations."build01" = nixpkgs.lib.nixosSystem rec {
         system = "x86_64-linux";
         modules = [
           ./hosts/build01/hardware-configuration.nix
