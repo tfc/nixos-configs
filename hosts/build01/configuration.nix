@@ -10,6 +10,7 @@
   boot.cleanTmpDir = true;
 
   networking.hostName = "build01";
+  networking.domain = "nix-consulting.de";
   networking.interfaces.ens18.ipv4.addresses = [{
     address = "88.198.83.206";
     prefixLength = 24;
