@@ -68,6 +68,7 @@
           self.nixosModules.make-linux-fast-again
           self.nixosModules.nix-service
           self.nixosModules.remote-deployable
+          self.nixosModules.save-space
           self.nixosModules.user-tfc
           (_: {
             imports = [ hercules-ci.nixosModules.agent-profile ];
