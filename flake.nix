@@ -75,6 +75,23 @@
             services.hercules-ci-agent.enable = true;
             services.hercules-ci-agent.settings.concurrentTasks = 4;
           })
+          home-manager.nixosModules.home-manager
+          (_: {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.tfc = { ... }: {
+              home.stateVersion = "22.11";
+              programs.home-manager.enable = true;
+              imports = [
+                ./home-manager-modules/programming-haskell.nix
+                ./home-manager-modules/programming.nix
+                ./home-manager-modules/shell/bash.nix
+                ./home-manager-modules/shelltools.nix
+                ./home-manager-modules/vim.nix
+              ];
+            };
+          })
+
         ];
       };
 
