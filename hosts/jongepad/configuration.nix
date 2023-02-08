@@ -11,6 +11,12 @@
   boot.initrd.systemd.enable = true;
   boot.cleanTmpDir = true;
 
+  # The internet says that this helps against recurring black screen periods
+  # with external screens where dmesg says
+  # "i915 0000:00:02.0: [drm] *ERROR* CPU pipe B FIFO underrun"
+  # https://bbs.archlinux.org/viewtopic.php?id=263720
+  boot.kernelParams = [ "intel_idle.max_cstate=4" ];
+
   console = {
     font = "Lat2-Terminus16";
     keyMap = "us";
