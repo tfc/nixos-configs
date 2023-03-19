@@ -6,15 +6,16 @@
     cachix
     gh
     gti
+    httpie
     jq
     niv
     nix-diff
     nix-linter
     nixpkgs-fmt
+    pgcli
     shellcheck
     sloccount
     yq
-    pgcli
   ];
 
   programs.git = {
