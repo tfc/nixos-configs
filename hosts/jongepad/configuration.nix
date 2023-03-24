@@ -11,6 +11,7 @@
   boot.initrd.systemd.enable = true;
   boot.cleanTmpDir = true;
 
+  boot.kernelPackages = pkgs.linuxPackages_latest;
   # The internet says that this helps against recurring black screen periods
   # with external screens where dmesg says
   # "i915 0000:00:02.0: [drm] *ERROR* CPU pipe B FIFO underrun"
