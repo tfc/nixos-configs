@@ -10,6 +10,9 @@ let
   '';
 in
 {
+  imports = [
+    ./tmux.nix
+  ];
   home.packages = with pkgs; [
     bottom
     collectOld
@@ -73,27 +76,5 @@ in
       enableBashIntegration = true;
     };
     man.enable = true;
-    tmux = {
-      aggressiveResize = true;
-      clock24 = true;
-      enable = true;
-      historyLimit = 5000;
-      keyMode = "vi";
-      newSession = true;
-      sensibleOnTop = true;
-      extraConfig = ''
-        set -sg escape-time 0
-        set -g mouse on
-
-        set -g status-left ""
-        set -g status-right '#[fg=colour233,bg=colour241,bold] %d.%m. #[fg=colour233,bg=colour245,bold] %H:%M:%S '
-        set -g status-right-length 50
-        set -g status-left-length 20
-      '';
-      plugins = with pkgs.tmuxPlugins; [
-        tmux-colors-solarized
-        vim-tmux-navigator
-      ];
-    };
   };
 }
