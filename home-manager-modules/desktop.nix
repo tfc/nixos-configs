@@ -26,6 +26,7 @@
         wlrobs
       ];
     })
+    obsidian
     retext
     signal-desktop
     skypeforlinux
