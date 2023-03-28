@@ -14,6 +14,30 @@
       telescope-nvim
       vim-colorschemes
       vim-nix
+      {
+        plugin = vimtex;
+        config = ''
+          let g:vimtex_view_automatic = 0
+          let g:vimtex_fold_enabled = v:true
+          let  g:vimtex_fold_types = {
+           \ 'envs' : {
+           \   'blacklist' : [
+           \     'block',
+           \     'center',
+           \     'item',
+           \     'itemize',
+           \     'lstlisting',
+           \     'tabular',
+           \     'varblock',
+           \   ],
+           \ },
+           \}
+           let g:vimtex_quickfix_ignore_filters = [
+           \ 'Underfull',
+           \ 'Overfull',
+           \]
+        '';
+      }
       vim-tmux-navigator
       {
         plugin = bufexplorer;
