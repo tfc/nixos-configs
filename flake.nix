@@ -8,12 +8,14 @@
     hercules-ci.url = "github:hercules-ci/hercules-ci-agent";
     home-manager.url = "github:nix-community/home-manager/release-22.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    nixcademy-workstation.url = "path:/home/tfc/src/nixcademy-workstation";
   };
 
   outputs =
     { self
     , hercules-ci
     , home-manager
+    , nixcademy-workstation
     , nixos-hardware
     , nixpkgs
     , nixpkgs-unstable
@@ -36,8 +38,15 @@
           self.nixosModules.user-tfc
           self.nixosModules.virtualization
           self.nixosModules.yubikey
+          nixcademy-workstation.nixosModules.gdm-logo
+          nixcademy-workstation.nixosModules.plymouth-logo
+          nixcademy-workstation.nixosModules.gnome-background
           home-manager.nixosModules.home-manager
           (_: {
+            boot.plymouth.enable = true;
+            customization.gdm-logo.enable = true;
+            customization.plymouth-logo.enable = true;
+            customization.gnome-background.enable = true;
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.tfc = { ... }: {
