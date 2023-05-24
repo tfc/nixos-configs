@@ -32,6 +32,7 @@
   ];
 
   services.openssh.enable = true;
+  services.fail2ban.enable = true;
 
   # we're a VM here, so no KVM and nixos tests
   nix.settings.system-features = [ "benchmark" "big-parallel" ];
