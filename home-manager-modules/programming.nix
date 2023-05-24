@@ -10,7 +10,6 @@
     jq
     niv
     nix-diff
-    nix-linter
     nixpkgs-fmt
     pgcli
     shellcheck

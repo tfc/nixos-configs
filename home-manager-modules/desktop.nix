@@ -9,7 +9,6 @@
     chromium
     deja-dup
     drawio
-    element-desktop
     foliate
 #    foxitreader # disabled because of qtwebkit
     gimp
@@ -29,7 +28,6 @@
     obsidian
     retext
     signal-desktop
-    skypeforlinux
     spotify
     teamspeak_client # write a wrapper that adds  QT_XCB_GL_INTEGRATION=none
     vlc
@@ -40,7 +38,6 @@
 
   programs.firefox = {
     enable = true;
-    extensions = [ ];
     #    package = pkgs.firefox-bin;
     profiles = {
       myprofile = {
