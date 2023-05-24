@@ -5,6 +5,7 @@ vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
 vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
+vim.keymap.set('n', '<space>c', vim.lsp.buf.code_action, bufopts)
 
 lspconfig = require('lspconfig')
 
@@ -29,7 +30,6 @@ local on_attach = function(client, bufnr)
   end, bufopts)
   vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
   vim.keymap.set('n', '<space>r', vim.lsp.buf.rename, bufopts)
-  vim.keymap.set('n', '<space>c', vim.lsp.buf.code_action, bufopts)
   vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
   vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
 end
@@ -69,4 +69,4 @@ lspconfig.ccls.setup {
     compilationDatabaseDirectory = "build";
   }
 }
-
+lspconfig.pyright.setup{}

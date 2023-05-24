@@ -112,6 +112,7 @@
   home.packages = with pkgs; [
     rnix-lsp
     nodePackages_latest.bash-language-server
+    nodePackages_latest.pyright
     ltex-ls
     ccls
   ];
