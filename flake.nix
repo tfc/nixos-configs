@@ -2,11 +2,10 @@
   description = "My personal NixOS configs";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.11";
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.05";
     nixos-hardware.url = "github:nixos/nixos-hardware/master";
     hercules-ci.url = "github:hercules-ci/hercules-ci-agent";
-    home-manager.url = "github:nix-community/home-manager/release-22.11";
+    home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     nixcademy-workstation.url = "path:/home/tfc/src/nixcademy-workstation";
   };
@@ -18,7 +17,6 @@
     , nixcademy-workstation
     , nixos-hardware
     , nixpkgs
-    , nixpkgs-unstable
     }: {
       nixosConfigurations.jongepad = nixpkgs.lib.nixosSystem rec {
         system = "x86_64-linux";
@@ -62,12 +60,8 @@
                 ./home-manager-modules/yubikey.nix
               ];
             };
-          })
-          (_: {
-            nixpkgs.overlays = [
-              (_: _: {
-                inherit (nixpkgs-unstable.legacyPackages.x86_64-linux) cups;
-              })
+            nixpkgs.config.permittedInsecurePackages = [
+              "electron-21.4.0"
             ];
           })
         ];

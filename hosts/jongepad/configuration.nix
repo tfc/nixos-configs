@@ -9,7 +9,7 @@
     preLVM = true;
   };
   boot.initrd.systemd.enable = true;
-  boot.cleanTmpDir = true;
+  boot.tmp.cleanOnBoot = true;
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
   # The internet says that this helps against recurring black screen periods
