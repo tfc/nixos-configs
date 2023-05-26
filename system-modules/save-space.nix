@@ -1,7 +1,7 @@
 { ... }:
 
 {
-  boot.cleanTmpDir = true;
+  boot.tmp.cleanOnBoot = true;
 
   nix = {
     optimise.automatic = true;
