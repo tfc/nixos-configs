@@ -7,7 +7,7 @@
   boot.loader.grub.version = 2;
   boot.loader.grub.device = "/dev/sda"; # or "nodev" for efi only
   boot.initrd.systemd.enable = true;
-  boot.cleanTmpDir = true;
+  boot.tmp.cleanOnBoot = true;
 
   networking.hostName = "build01";
   networking.domain = "nix-consulting.de";
