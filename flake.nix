@@ -5,7 +5,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.05";
     nixos-hardware.url = "github:nixos/nixos-hardware/master";
     hercules-ci.url = "github:hercules-ci/hercules-ci-agent";
-    home-manager.url = "github:nix-community/home-manager/master";
+    home-manager.url = "github:nix-community/home-manager/release-23.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     nixcademy-workstation.url = "path:/home/tfc/src/nixcademy-workstation";
   };
