@@ -9,10 +9,13 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     nixos-hardware.url = "github:nixos/nixos-hardware/master";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.05";
+    darwin.url = "github:lnl7/nix-darwin";
+    darwin.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
     { self
+    , darwin
     , disko
     , hercules-ci
     , home-manager
@@ -138,10 +141,11 @@
               home.stateVersion = "22.11";
               programs.home-manager.enable = true;
               imports = [
-                ./home-manager-modules/programming-haskell.nix
                 ./home-manager-modules/programming.nix
                 ./home-manager-modules/shell/bash.nix
                 ./home-manager-modules/shelltools.nix
+                ./home-manager-modules/shelltools.nix
+                ./home-manager-modules/tmux.nix
                 ./home-manager-modules/vim.nix
               ];
             };
@@ -149,6 +153,29 @@
         ];
       };
 
+      darwinConfigurations.jongebook = darwin.lib.darwinSystem {
+        system = "x86_64-darwin";
+        modules = [
+          ./hosts/jongebook/configuration.nix
+          home-manager.darwinModules.home-manager
+          (_: {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.tfc = { ... }: {
+              home.stateVersion = "23.05";
+              programs.home-manager.enable = true;
+              imports = [
+                ./home-manager-modules/programming-haskell.nix
+                ./home-manager-modules/programming.nix
+                ./home-manager-modules/shell/zsh.nix
+                ./home-manager-modules/shelltools.nix
+                ./home-manager-modules/vim.nix
+                ./home-manager-modules/tmux.nix
+              ];
+            };
+          })
+        ];
+      };
 
       nixosModules =
         let

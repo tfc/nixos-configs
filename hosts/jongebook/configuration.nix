@@ -1,69 +1,30 @@
-{ config, lib, pkgs, ... }:
+{ config, pkgs, ... }:
 
 {
-  imports = [
-    ./hardware-configuration.nix
-  ];
-
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.systemd-boot.configurationLimit = 3;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.efi.efiSysMountPoint = "/boot/efi";
-
-  hardware.enableRedistributableFirmware = true;
-
-  boot.initrd.secrets."/crypto_keyfile.bin" = null;
-  boot.initrd.systemd.enable = true;
-
-  # Enable swap on luks
-  boot.initrd.luks.devices."luks-f21e1409-9581-4bd1-b0cb-649421782af9".device = "/dev/disk/by-uuid/f21e1409-9581-4bd1-b0cb-649421782af9";
-  boot.initrd.luks.devices."luks-f21e1409-9581-4bd1-b0cb-649421782af9".keyFile = "/crypto_keyfile.bin";
-
-  boot.cleanTmpDir = true;
-
-  networking.hostName = "jongebook";
-  networking.networkmanager.enable = true;
-
-  time.timeZone = "Europe/Berlin";
-  i18n.defaultLocale = "en_US.utf8";
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "de_DE.utf8";
-    LC_IDENTIFICATION = "de_DE.utf8";
-    LC_MEASUREMENT = "de_DE.utf8";
-    LC_MONETARY = "de_DE.utf8";
-    LC_NAME = "de_DE.utf8";
-    LC_NUMERIC = "de_DE.utf8";
-    LC_PAPER = "de_DE.utf8";
-    LC_TELEPHONE = "de_DE.utf8";
-    LC_TIME = "de_DE.utf8";
-  };
-
-  environment.variables = {
-    EDITOR = lib.mkOverride 0 "vim";
-    TERM = "xterm-256color";
-  };
-
-  services.xserver = {
-    layout = "us";
-    xkbVariant = "";
-  };
-
-  sound.enable = true;
-
-  nixpkgs.config.allowUnfree = true;
-
+  # List packages installed in system profile. To search by name, run:
+  # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
     git
     vim
-    wget
   ];
 
-  system.stateVersion = "22.05";
+  # Use a custom configuration.nix location.
+  # $ darwin-rebuild switch -I darwin-config=$HOME/.config/nixpkgs/darwin/configuration.nix
+  # environment.darwinConfig = "$HOME/.config/nixpkgs/darwin/configuration.nix";
 
-  services.postgresql.enable = true;
-  services.postgresql.initialScript = pkgs.writeText "postgres-init" ''
-    CREATE ROLE tfc WITH CREATEDB LOGIN;
-    CREATE DATABASE tfc WITH OWNER tfc;
-  '';
-  services.postgresql.enableTCPIP = true;
+  # Auto upgrade nix package and the daemon service.
+  services.nix-daemon.enable = true;
+  # nix.package = pkgs.nix;
+
+  nixpkgs.config.allowUnfree = true;
+
+  programs.zsh.enable = true;  # default shell on catalina
+
+  system.checks.verifyBuildUsers = false;
+
+  users.users.tfc.home = "/Users/tfc";
+
+  # Used for backwards compatibility, please read the changelog before changing.
+  # $ darwin-rebuild changelog
+  system.stateVersion = 4;
 }
