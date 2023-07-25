@@ -34,6 +34,7 @@ let
       enable = true;
       driSupport32Bit = true;
     };
+    hardware.opengl.extraPackages = [ pkgs.mesa.drivers ];
 
     # optionally enable 32bit pulseaudio support if pulseaudio is enabled
     hardware.pulseaudio.support32Bit = config.hardware.pulseaudio.enable;
