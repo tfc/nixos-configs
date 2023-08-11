@@ -57,6 +57,10 @@
       CREATE DATABASE tfc;
       GRANT ALL PRIVILEGES ON DATABASE tfc TO tfc;
     '';
+    settings = {
+      shared_buffers = "2GB";
+      work_mem = "256MB";
+    };
   };
 
   powerManagement.powertop.enable = true;
