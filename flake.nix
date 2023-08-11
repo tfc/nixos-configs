@@ -2,16 +2,19 @@
   description = "My personal NixOS configs";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.05";
-    nixos-hardware.url = "github:nixos/nixos-hardware/master";
+    disko.url = "github:nix-community/disko";
+    disko.inputs.nixpkgs.follows = "nixpkgs";
     hercules-ci.url = "github:hercules-ci/hercules-ci-agent";
     home-manager.url = "github:nix-community/home-manager/release-23.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     nixcademy-workstation.url = "path:/home/tfc/src/nixcademy-workstation";
+    nixos-hardware.url = "github:nixos/nixos-hardware/master";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.05";
   };
 
   outputs =
     { self
+    , disko
     , hercules-ci
     , home-manager
     , nixcademy-workstation
@@ -106,6 +109,46 @@
 
         ];
       };
+
+      nixosConfigurations."build02" = nixpkgs.lib.nixosSystem rec {
+        system = "aarch64-linux";
+        modules = [
+          ./hosts/build02/configuration.nix
+          nixpkgs.nixosModules.notDetected
+          disko.nixosModules.disko
+          self.nixosModules.auto-upgrade
+          self.nixosModules.binary-cache-iohk
+          self.nixosModules.firmware
+          self.nixosModules.flakes
+          self.nixosModules.make-linux-fast-again
+          self.nixosModules.nix-service
+          self.nixosModules.remote-deployable
+          self.nixosModules.save-space
+          self.nixosModules.user-tfc
+          (_: {
+            imports = [ hercules-ci.nixosModules.agent-profile ];
+            services.hercules-ci-agent.enable = true;
+            services.hercules-ci-agent.settings.concurrentTasks = 4;
+          })
+          home-manager.nixosModules.home-manager
+          (_: {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.tfc = { ... }: {
+              home.stateVersion = "22.11";
+              programs.home-manager.enable = true;
+              imports = [
+                ./home-manager-modules/programming-haskell.nix
+                ./home-manager-modules/programming.nix
+                ./home-manager-modules/shell/bash.nix
+                ./home-manager-modules/shelltools.nix
+                ./home-manager-modules/vim.nix
+              ];
+            };
+          })
+        ];
+      };
+
 
       nixosModules =
         let
