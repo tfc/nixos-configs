@@ -7,7 +7,6 @@
     hercules-ci.url = "github:hercules-ci/hercules-ci-agent";
     home-manager.url = "github:nix-community/home-manager/release-23.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    nixcademy-workstation.url = "path:/home/tfc/src/nixcademy-workstation";
     nixos-hardware.url = "github:nixos/nixos-hardware/master";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.05";
   };
@@ -17,7 +16,6 @@
     , disko
     , hercules-ci
     , home-manager
-    , nixcademy-workstation
     , nixos-hardware
     , nixpkgs
     }: {
@@ -39,9 +37,9 @@
           self.nixosModules.user-tfc
           self.nixosModules.virtualization
           self.nixosModules.yubikey
-          nixcademy-workstation.nixosModules.gdm-logo
-          nixcademy-workstation.nixosModules.plymouth-logo
-          nixcademy-workstation.nixosModules.gnome-background
+          self.nixosModules.nixcademy-gdm-logo
+          self.nixosModules.nixcademy-plymouth-logo
+          self.nixosModules.nixcademy-gnome-background
           home-manager.nixosModules.home-manager
           (_: {
             boot.plymouth.enable = true;
