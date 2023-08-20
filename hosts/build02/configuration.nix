@@ -7,6 +7,7 @@
   ];
   boot.loader.systemd-boot.enable = true;
   boot.tmp.cleanOnBoot = true;
+  boot.loader.systemd-boot.configurationLimit = 2;
 
   disko.devices = import ./single-gpt-disk-fullsize-ext4.nix "/dev/sda";
 

@@ -127,7 +127,7 @@
           (_: {
             imports = [ hercules-ci.nixosModules.agent-profile ];
             services.hercules-ci-agent.enable = true;
-            services.hercules-ci-agent.settings.concurrentTasks = 4;
+            services.hercules-ci-agent.settings.concurrentTasks = 2;
           })
           home-manager.nixosModules.home-manager
           (_: {
