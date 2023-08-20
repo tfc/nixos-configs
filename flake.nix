@@ -32,14 +32,15 @@
           self.nixosModules.flakes
           self.nixosModules.make-linux-fast-again
           self.nixosModules.nix-service
+          self.nixosModules.nixcademy-gdm-logo
+          self.nixosModules.nixcademy-gnome-background
+          self.nixosModules.nixcademy-plymouth-logo
           self.nixosModules.pipewire
           self.nixosModules.printing
+          self.nixosModules.remote-builds
           self.nixosModules.user-tfc
           self.nixosModules.virtualization
           self.nixosModules.yubikey
-          self.nixosModules.nixcademy-gdm-logo
-          self.nixosModules.nixcademy-plymouth-logo
-          self.nixosModules.nixcademy-gnome-background
           home-manager.nixosModules.home-manager
           (_: {
             boot.plymouth.enable = true;
