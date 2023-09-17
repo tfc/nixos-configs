@@ -4,6 +4,7 @@
   imports = [
     "${modulesPath}/installer/scan/not-detected.nix"
     "${modulesPath}/profiles/qemu-guest.nix"
+    ./matomo.nix
   ];
   boot.loader.systemd-boot.enable = true;
   boot.tmp.cleanOnBoot = true;
