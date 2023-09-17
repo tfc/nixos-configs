@@ -18,7 +18,7 @@ diskDevice:
         {
           name = "ESP";
           start = "1MiB";
-          end = "100MiB";
+          end = "500MiB";
           bootable = true;
           content = {
             type = "filesystem";
@@ -28,7 +28,7 @@ diskDevice:
         }
         {
           name = "root";
-          start = "100MiB";
+          start = "500MiB";
           end = "100%";
           part-type = "primary";
           bootable = true;
