@@ -32,6 +32,7 @@
           self.nixosModules.flakes
           self.nixosModules.make-linux-fast-again
           self.nixosModules.nix-service
+          self.nixosModules.nix-unstable
           self.nixosModules.nixcademy-gdm-logo
           self.nixosModules.nixcademy-gnome-background
           self.nixosModules.nixcademy-plymouth-logo
