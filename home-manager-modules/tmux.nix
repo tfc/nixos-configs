@@ -3,6 +3,7 @@
 {
   home.packages = with pkgs; [
     xsel # for tmux-yank
+    reattach-to-user-namespace # sensible
   ];
 
   programs.tmux = {
