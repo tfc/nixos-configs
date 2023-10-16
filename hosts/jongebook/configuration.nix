@@ -16,9 +16,16 @@
   # $ darwin-rebuild switch -I darwin-config=$HOME/.config/nixpkgs/darwin/configuration.nix
   # environment.darwinConfig = "$HOME/.config/nixpkgs/darwin/configuration.nix";
 
-  # Auto upgrade nix package and the daemon service.
   services.nix-daemon.enable = true;
-  # nix.package = pkgs.nix;
+  nix.package = pkgs.nix;
+  nix.extraOptions = ''
+    experimental-features = nix-command flakes auto-allocate-uids
+    auto-allocate-uids = true
+    bash-prompt-prefix = (nix:$name)\040
+    build-users-group = nixbld
+    extra-nix-path = nixpkgs=flake:nixpkgs
+  '';
+
 
   nixpkgs.config.allowUnfree = true;
 
