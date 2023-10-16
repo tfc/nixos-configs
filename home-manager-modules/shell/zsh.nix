@@ -20,9 +20,5 @@
       theme = "lambda";
     };
     shellAliases = import ./common_aliases.nix;
-    sessionVariables = {
-      SHELL = "/Users/tfc/.nix-profile/bin/zsh";
-      SSH_AUTH_SOCK = "~/.gnupg/S.gpg-agent.ssh";
-    };
   };
 }
