@@ -62,7 +62,9 @@ set wrap
 
 syntax enable
 
-colorscheme Benokai
+" colorscheme Benokai
 
+set background=light
+colorscheme gruvbox
 
 nnoremap <F2> za
