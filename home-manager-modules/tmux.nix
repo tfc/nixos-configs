@@ -3,6 +3,7 @@
 {
   home.packages = with pkgs; [
     xsel # for tmux-yank
+  ] ++ lib.optional pkgs.stdenv.isDarwin [
     reattach-to-user-namespace # sensible
   ];
 
