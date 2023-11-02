@@ -31,6 +31,7 @@
     aliases = {
       pushfwl = "push --force-with-lease";
       co = "checkout";
+      cp = "cherry-pick";
     };
   };
 
