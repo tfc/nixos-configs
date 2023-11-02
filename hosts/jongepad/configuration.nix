@@ -1,5 +1,8 @@
 { pkgs, lib, config, ... }: {
 
+  nixpkgs.config.permittedInsecurePackages = [ "electron-24.8.6" ];
+
+
   boot.loader.systemd-boot.enable = true;
   boot.loader.systemd-boot.configurationLimit = 3;
   boot.loader.efi.canTouchEfiVariables = true;
