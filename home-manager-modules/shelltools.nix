@@ -23,7 +23,6 @@ in
     magic-wormhole
     mosh
     nix-diff
-    nix-du
     nix-output-monitor
     nix-prefetch-github
     nix-top

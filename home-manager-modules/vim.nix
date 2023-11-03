@@ -1,6 +1,11 @@
 { pkgs, lib, agenix, hostName, ... }:
 
 {
+  home.sessionVariables = {
+    EDITOR = "vim";
+    VISUAL = "vim";
+  };
+
   programs.neovim = {
     enable = true;
     vimAlias = true;
