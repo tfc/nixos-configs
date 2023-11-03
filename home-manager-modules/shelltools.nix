@@ -20,7 +20,6 @@ in
     gtop
     killall
     lsof
-    magic-wormhole
     mosh
     nix-diff
     nix-output-monitor
