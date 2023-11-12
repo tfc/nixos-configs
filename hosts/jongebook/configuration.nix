@@ -6,7 +6,7 @@
     vim
   ];
 
-  #nix.linux-builder.enable = true;
+  nix.linux-builder.enable = true;
 
   security.pam.enableSudoTouchIdAuth = true;
 
@@ -18,7 +18,6 @@
     bash-prompt-prefix = (nix:$name)\040
     build-users-group = nixbld
     extra-nix-path = nixpkgs=flake:nixpkgs
-    sandbox = true
   '';
 
   nixpkgs.config.allowUnfree = true;
