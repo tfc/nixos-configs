@@ -193,5 +193,12 @@
           modulesFromDir = dir: builtins.foldl' (x: y: x // (moduleFrom dir y)) { } (getNixFilesInDir dir);
         in
         modulesFromDir ./system-modules;
+
+      apps.x86_64-darwin.default = {
+        type = "app";
+        program = builtins.toString (nixpkgs.legacyPackages.x86_64-darwin.writeShellScript "activate" ''
+          darwin-rebuild switch --flake .
+        '');
+      };
     };
 }
