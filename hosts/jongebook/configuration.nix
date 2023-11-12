@@ -22,7 +22,7 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  programs.zsh.enable = true;  # default shell on catalina
+  programs.zsh.enable = true; # default shell on catalina
 
   system.checks.verifyBuildUsers = false;
 

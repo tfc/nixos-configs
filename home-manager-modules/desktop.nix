@@ -10,7 +10,7 @@
     deja-dup
     drawio
     foliate
-#    foxitreader # disabled because of qtwebkit
+    #    foxitreader # disabled because of qtwebkit
     gimp
     gitg
     google-chrome

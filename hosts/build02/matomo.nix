@@ -3,7 +3,7 @@
 {
   services.matomo = {
     enable = true;
-    nginx = {};
+    nginx = { };
     hostname = "matomo.nix-consulting.de";
   };
   services.mysql = {
