@@ -3,6 +3,7 @@
 {
   environment.systemPackages = with pkgs; [
     git
+    nixos-rebuild
     vim
   ];
 
