@@ -5,15 +5,12 @@
     disko.url = "github:nix-community/disko";
     disko.inputs.nixpkgs.follows = "nixpkgs";
     hercules-ci.url = "github:hercules-ci/hercules-ci-agent";
-    home-manager.url = "github:nix-community/home-manager/release-23.05";
+    home-manager.url = "github:nix-community/home-manager/release-23.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    home-manager-unstable.url = "github:nix-community/home-manager";
-    home-manager-unstable.inputs.nixpkgs.follows = "nixpkgs-unstable";
     nixos-hardware.url = "github:nixos/nixos-hardware/master";
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.05";
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
     darwin.url = "github:lnl7/nix-darwin";
-    darwin.inputs.nixpkgs.follows = "nixpkgs-unstable";
+    darwin.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
@@ -22,10 +19,8 @@
     , disko
     , hercules-ci
     , home-manager
-    , home-manager-unstable
     , nixos-hardware
     , nixpkgs
-    , nixpkgs-unstable
     }: {
       nixosConfigurations.jongepad = nixpkgs.lib.nixosSystem rec {
         system = "x86_64-linux";
@@ -162,7 +157,7 @@
         system = "x86_64-darwin";
         modules = [
           ./hosts/jongebook/configuration.nix
-          home-manager-unstable.darwinModules.home-manager
+          home-manager.darwinModules.home-manager
           (_: {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
