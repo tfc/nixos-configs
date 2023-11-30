@@ -11,8 +11,6 @@ let
       blur-my-shell
       sound-output-device-chooser
       spotify-tray
-      thanatophobia
-      tweaks-in-system-menu
       useless-gaps
     ] ++ (with pkgs; [
       gnome-network-displays

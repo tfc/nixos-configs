@@ -16,7 +16,7 @@
     enable = true;
     themeVariant = "dark";
     showMenubar = false;
-    profile.default = {
+    profile.e16104d4-a1f9-4c30-9f18-129377deb2f2 = {
       default = true;
       visibleName = "Default";
     };
