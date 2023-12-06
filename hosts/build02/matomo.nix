@@ -14,6 +14,11 @@
       CREATE USER 'matomo'@'localhost' IDENTIFIED WITH unix_socket;
       GRANT ALL PRIVILEGES ON matomo.* TO 'matomo'@'localhost';
     '';
+    settings = {
+      mysqld = {
+        max_allowed_packet = "64M";
+      };
+    };
   };
 
   services.nginx.enable = true;
