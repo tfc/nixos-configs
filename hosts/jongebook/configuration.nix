@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   environment.systemPackages = with pkgs; [
@@ -18,8 +18,10 @@
     auto-allocate-uids = true
     bash-prompt-prefix = (nix:$name)\040
     build-users-group = nixbld
-    extra-nix-path = nixpkgs=flake:nixpkgs
   '';
+  # removed this: extra-nix-path = nixpkgs=flake:nixpkgs
+
+  nix.nixPath = lib.mkForce [ "nixpkgs=${pkgs.path}" ];
 
   nixpkgs.config.allowUnfree = true;
 
