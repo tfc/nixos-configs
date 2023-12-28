@@ -7,7 +7,7 @@
     vim
   ];
 
-  nix.linux-builder.enable = true;
+  #nix.linux-builder.enable = true;
 
   security.pam.enableSudoTouchIdAuth = true;
 
