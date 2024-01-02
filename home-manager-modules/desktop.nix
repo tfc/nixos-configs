@@ -8,7 +8,6 @@
   home.packages = with pkgs; [
     chromium
     deja-dup
-    drawio
     foliate
     #    foxitreader # disabled because of qtwebkit
     gimp
@@ -25,7 +24,7 @@
         wlrobs
       ];
     })
-    obsidian
+    #obsidian
     retext
     signal-desktop
     spotify
