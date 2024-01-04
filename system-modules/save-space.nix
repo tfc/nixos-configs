@@ -1,6 +1,7 @@
-{ ... }:
+{ lib, ... }:
 
 {
+  boot.loader.systemd-boot.configurationLimit = lib.mkDefault 2;
   boot.tmp.cleanOnBoot = true;
 
   nix = {
