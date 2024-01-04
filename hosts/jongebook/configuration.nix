@@ -4,13 +4,21 @@
   environment.systemPackages = with pkgs; [
     git
     nixos-rebuild
+    utm
     vim
   ];
 
-  nix.linux-builder.enable = true;
+  nix.linux-builder = {
+    enable = true;
+    maxJobs = 4;
+  };
 
   services.nix-daemon.enable = true;
   nix = {
+    # Run `softwareupdate --install-rosetta --agree-to-license` first
+    extraOptions = ''
+      extra-platforms = x86_64-darwin aarch64-darwin
+    '';
     settings = {
       auto-optimise-store = true;
       experimental-features = [
