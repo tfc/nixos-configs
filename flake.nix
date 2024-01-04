@@ -154,7 +154,7 @@
       };
 
       darwinConfigurations.jongebook = darwin.lib.darwinSystem {
-        system = "x86_64-darwin";
+        system = "aarch64-darwin";
         modules = [
           ./hosts/jongebook/configuration.nix
           home-manager.darwinModules.home-manager
@@ -162,7 +162,7 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.tfc = { ... }: {
-              home.stateVersion = "23.05";
+              home.stateVersion = "23.11";
               programs.home-manager.enable = true;
               imports = [
                 ./home-manager-modules/programming-haskell.nix
