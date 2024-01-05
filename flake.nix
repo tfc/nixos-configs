@@ -193,17 +193,19 @@
       nixosModules = modulesFromDir ./system-modules;
       homeManagerModules = modulesFromDir ./home-manager-modules;
 
-      apps.x86_64-darwin.default = {
-        type = "app";
-        program = builtins.toString (nixpkgs.legacyPackages.x86_64-darwin.writeShellScript "activate" ''
-          darwin-rebuild switch --flake .
-        '');
-      };
-      apps.aarch64-darwin.default = {
-        type = "app";
-        program = builtins.toString (nixpkgs.legacyPackages.aarch64-darwin.writeShellScript "activate" ''
-          darwin-rebuild switch --flake .
-        '');
-      };
+      apps =
+      let
+        cmd = arch: cmdStr: {
+          "${arch}".default = {
+            type = "app";
+            program = builtins.toString (nixpkgs.legacyPackages.${arch}.writeShellScript "activate" cmdStr);
+          };
+        };
+        forArchs = archs: system: cmdStr:
+          map (arch: cmd "${arch}-${system}" cmdStr) archs;
+        linux = forArchs ["x86_64" "aarch64"] "linux" "sudo nixos-rebuild switch --flake .";
+        darwin = forArchs ["x86_64" "aarch64"] "darwin" "darwin-rebuild switch --flake .";
+      in
+        builtins.foldl' nixpkgs.lib.mergeAttrs {} (linux ++ darwin);
     };
 }
