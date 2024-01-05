@@ -171,6 +171,7 @@
                 ./home-manager-modules/shelltools.nix
                 ./home-manager-modules/vim.nix
                 ./home-manager-modules/tmux.nix
+                ./home-manager-modules/ssh.nix
               ];
             };
           })
