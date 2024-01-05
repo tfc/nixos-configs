@@ -21,19 +21,21 @@
     , home-manager
     , nixos-hardware
     , nixpkgs
-  }:
-  let
-    modulesFromDir =
-      let
-        inherit (nixpkgs) lib;
-        getNixFilesInDir = dir: builtins.filter
-          (file: lib.hasSuffix ".nix" file && file != "default.nix")
-          (builtins.attrNames (builtins.readDir dir));
-        genKey = str: lib.replaceStrings [ ".nix" ] [ "" ] str;
-        moduleFrom = dir: str: { "${genKey str}" = "${dir}/${str}"; };
-      in dir:
+    }:
+    let
+      modulesFromDir =
+        let
+          inherit (nixpkgs) lib;
+          getNixFilesInDir = dir: builtins.filter
+            (file: lib.hasSuffix ".nix" file && file != "default.nix")
+            (builtins.attrNames (builtins.readDir dir));
+          genKey = str: lib.replaceStrings [ ".nix" ] [ "" ] str;
+          moduleFrom = dir: str: { "${genKey str}" = "${dir}/${str}"; };
+        in
+        dir:
         builtins.foldl' (x: y: x // (moduleFrom dir y)) { } (getNixFilesInDir dir);
-  in {
+    in
+    {
       nixosConfigurations.jongepad = nixpkgs.lib.nixosSystem rec {
         system = "x86_64-linux";
         modules = [
@@ -192,18 +194,18 @@
       homeManagerModules = modulesFromDir ./home-manager-modules;
 
       apps =
-      let
-        cmd = arch: cmdStr: {
-          "${arch}".default = {
-            type = "app";
-            program = builtins.toString (nixpkgs.legacyPackages.${arch}.writeShellScript "activate" cmdStr);
+        let
+          cmd = arch: cmdStr: {
+            "${arch}".default = {
+              type = "app";
+              program = builtins.toString (nixpkgs.legacyPackages.${arch}.writeShellScript "activate" cmdStr);
+            };
           };
-        };
-        forArchs = archs: system: cmdStr:
-          map (arch: cmd "${arch}-${system}" cmdStr) archs;
-        linux = forArchs ["x86_64" "aarch64"] "linux" "sudo nixos-rebuild switch --flake .";
-        darwin = forArchs ["x86_64" "aarch64"] "darwin" "darwin-rebuild switch --flake .";
-      in
-        builtins.foldl' nixpkgs.lib.mergeAttrs {} (linux ++ darwin);
+          forArchs = archs: system: cmdStr:
+            map (arch: cmd "${arch}-${system}" cmdStr) archs;
+          linux = forArchs [ "x86_64" "aarch64" ] "linux" "sudo nixos-rebuild switch --flake .";
+          darwin = forArchs [ "x86_64" "aarch64" ] "darwin" "darwin-rebuild switch --flake .";
+        in
+        builtins.foldl' nixpkgs.lib.mergeAttrs { } (linux ++ darwin);
     };
 }
