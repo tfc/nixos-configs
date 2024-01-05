@@ -35,7 +35,20 @@
   nixpkgs.config.allowUnfree = true;
 
   security.pam.enableSudoTouchIdAuth = true;
-  programs.zsh.enable = true;
+  programs.bash.enableCompletion = true;
+
+  programs.zsh = {
+    enable = true;
+    enableBashCompletion = true;
+    enableFzfCompletion = true;
+    enableFzfGit = true;
+    enableFzfHistory = true;
+  };
+
+  environment.loginShell = "${pkgs.zsh}/bin/zsh -l";
+  environment.variables.SHELL = "${pkgs.zsh}/bin/zsh";
+
+  environment.variables.LANG = "en_US.UTF-8";
 
   users.users.tfc.home = "/Users/tfc";
 
@@ -43,6 +56,11 @@
   fonts.fonts = with pkgs; [
     powerline-fonts
   ];
+
+  system.defaults = {
+    dock.autohide = true;
+    finder.AppleShowAllExtensions = true;
+  };
 
   system.stateVersion = 4;
 }
