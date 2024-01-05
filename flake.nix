@@ -21,7 +21,19 @@
     , home-manager
     , nixos-hardware
     , nixpkgs
-    }: {
+  }:
+  let
+    modulesFromDir =
+      let
+        inherit (nixpkgs) lib;
+        getNixFilesInDir = dir: builtins.filter
+          (file: lib.hasSuffix ".nix" file && file != "default.nix")
+          (builtins.attrNames (builtins.readDir dir));
+        genKey = str: lib.replaceStrings [ ".nix" ] [ "" ] str;
+        moduleFrom = dir: str: { "${genKey str}" = "${dir}/${str}"; };
+      in dir:
+        builtins.foldl' (x: y: x // (moduleFrom dir y)) { } (getNixFilesInDir dir);
+  in {
       nixosConfigurations.jongepad = nixpkgs.lib.nixosSystem rec {
         system = "x86_64-linux";
         modules = [
@@ -56,14 +68,14 @@
             home-manager.users.tfc = { ... }: {
               home.stateVersion = "22.11";
               programs.home-manager.enable = true;
-              imports = [
-                ./home-manager-modules/gnome.nix
-                ./home-manager-modules/programming-haskell.nix
-                ./home-manager-modules/programming.nix
-                ./home-manager-modules/shell/bash.nix
-                ./home-manager-modules/shelltools.nix
-                ./home-manager-modules/vim.nix
-                ./home-manager-modules/yubikey.nix
+              imports = with self.homeManagerModules; [
+                gnome
+                programming-haskell
+                programming
+                shell-bash
+                shelltools
+                vim
+                yubikey
               ];
             };
             nixpkgs.config.permittedInsecurePackages = [
@@ -100,12 +112,12 @@
             home-manager.users.tfc = { ... }: {
               home.stateVersion = "22.11";
               programs.home-manager.enable = true;
-              imports = [
-                ./home-manager-modules/programming-haskell.nix
-                ./home-manager-modules/programming.nix
-                ./home-manager-modules/shell/bash.nix
-                ./home-manager-modules/shelltools.nix
-                ./home-manager-modules/vim.nix
+              imports = with self.homeManagerModules; [
+                programming-haskell
+                programming
+                shell-bash
+                shelltools
+                vim
               ];
             };
           })
@@ -140,13 +152,13 @@
             home-manager.users.tfc = { ... }: {
               home.stateVersion = "22.11";
               programs.home-manager.enable = true;
-              imports = [
-                ./home-manager-modules/programming.nix
-                ./home-manager-modules/shell/bash.nix
-                ./home-manager-modules/shelltools.nix
-                ./home-manager-modules/shelltools.nix
-                ./home-manager-modules/tmux.nix
-                ./home-manager-modules/vim.nix
+              imports = with self.homeManagerModules; [
+                programming
+                shell-bash
+                shelltools
+                shelltools
+                tmux
+                vim
               ];
             };
           })
@@ -164,35 +176,32 @@
             home-manager.users.tfc = { ... }: {
               home.stateVersion = "23.11";
               programs.home-manager.enable = true;
-              imports = [
-                ./home-manager-modules/programming-haskell.nix
-                ./home-manager-modules/programming.nix
-                ./home-manager-modules/shell/zsh.nix
-                ./home-manager-modules/shelltools.nix
-                ./home-manager-modules/vim.nix
-                ./home-manager-modules/tmux.nix
-                ./home-manager-modules/ssh.nix
+              imports = with self.homeManagerModules; [
+                programming-haskell
+                programming
+                shell-zsh
+                shelltools
+                vim
+                tmux
+                ssh
               ];
             };
           })
         ];
       };
 
-      nixosModules =
-        let
-          inherit (nixpkgs) lib;
-          getNixFilesInDir = dir: builtins.filter
-            (file: lib.hasSuffix ".nix" file && file != "default.nix")
-            (builtins.attrNames (builtins.readDir dir));
-          genKey = str: lib.replaceStrings [ ".nix" ] [ "" ] str;
-          moduleFrom = dir: str: { "${genKey str}" = "${dir}/${str}"; };
-          modulesFromDir = dir: builtins.foldl' (x: y: x // (moduleFrom dir y)) { } (getNixFilesInDir dir);
-        in
-        modulesFromDir ./system-modules;
+      nixosModules = modulesFromDir ./system-modules;
+      homeManagerModules = modulesFromDir ./home-manager-modules;
 
       apps.x86_64-darwin.default = {
         type = "app";
         program = builtins.toString (nixpkgs.legacyPackages.x86_64-darwin.writeShellScript "activate" ''
+          darwin-rebuild switch --flake .
+        '');
+      };
+      apps.aarch64-darwin.default = {
+        type = "app";
+        program = builtins.toString (nixpkgs.legacyPackages.aarch64-darwin.writeShellScript "activate" ''
           darwin-rebuild switch --flake .
         '');
       };
