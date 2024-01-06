@@ -39,7 +39,6 @@
       nixosConfigurations.jongepad = nixpkgs.lib.nixosSystem rec {
         system = "x86_64-linux";
         modules = [
-          ./hosts/jongepad/hardware-configuration.nix
           ./hosts/jongepad/configuration.nix
           nixpkgs.nixosModules.notDetected
           nixos-hardware.nixosModules.lenovo-thinkpad-x13-yoga
@@ -88,7 +87,6 @@
       nixosConfigurations."build01" = nixpkgs.lib.nixosSystem rec {
         system = "x86_64-linux";
         modules = [
-          ./hosts/build01/hardware-configuration.nix
           ./hosts/build01/configuration.nix
           nixpkgs.nixosModules.notDetected
           self.nixosModules.auto-upgrade
@@ -168,7 +166,7 @@
       darwinConfigurations.jongebook = darwin.lib.darwinSystem {
         system = "aarch64-darwin";
         modules = [
-          ./hosts/jongebook/configuration.nix
+          ./hosts/jongebook/darwin-configuration.nix
           home-manager.darwinModules.home-manager
           (_: {
             home-manager.useGlobalPkgs = true;
