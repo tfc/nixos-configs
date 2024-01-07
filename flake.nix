@@ -190,6 +190,28 @@
         ];
       };
 
+      homeConfigurations.default = home-manager.lib.homeManagerConfiguration {
+        pkgs = import nixpkgs {
+          system = "x86_64-linux";
+          config.allowUnfree = true;
+        };
+        modules = with self.homeManagerModules; [
+          ({
+            home.stateVersion = "23.11";
+            home.username = "tfc";
+            home.homeDirectory = "/home/tfc";
+            programs.home-manager.enable = true;
+          })
+          programming-haskell
+          programming
+          shell-zsh
+          shelltools
+          vim
+          tmux
+          ssh
+        ];
+      };
+
       nixosModules = modulesFromDir ./system-modules;
       homeManagerModules = modulesFromDir ./home-manager-modules;
 
