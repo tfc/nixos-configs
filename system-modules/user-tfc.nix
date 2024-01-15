@@ -18,6 +18,7 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIODOm+UWxSpA1f7+CAQkTHy3njziOUHePTH/O9OKATer root@jongepad"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKYPVxEpmma7zyX0uVBFP9X0AWCkUGIG7Zpx8iKJA2+T jacek@galowicz.de"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIP5MEOU5rwpkGtzR4p/1BEUj2ekg5KmmR+QGF8qNuQFL tfc@jongebook"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF0iyQuS7BycsHPZCLpkl0ojyiRn2GCPwNhtFjdnwHZx jacek@galowicz.de"
     ];
   };
 }
