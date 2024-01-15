@@ -17,5 +17,10 @@ in
       "server-sicherheit.lxht.de"
       "training-machine.nixcademy.com"
     ];
+    extraConfig = lib.optionalString pkgs.stdenv.targetPlatform.isDarwin ''
+      UseKeychain yes
+      AddKeysToAgent yes
+      IdentityFile ~/.ssh/id_ed25519
+    '';
   };
 }
