@@ -34,160 +34,177 @@
         in
         dir:
         builtins.foldl' (x: y: x // (moduleFrom dir y)) { } (getNixFilesInDir dir);
+      createConfigurations = hostSet:
+        let
+          items = builtins.attrValues (builtins.mapAttrs (hostName: set: set // { inherit hostName; }) hostSet);
+          inherit (nixpkgs.lib) hasSuffix;
+          nixItems = builtins.filter (x: hasSuffix "linux" x.system) items;
+          darwinItems = builtins.filter (x: hasSuffix "darwin" x.system) items;
+
+          createConfigAttr = systemFunction: item: {
+            name = item.hostName;
+            value = systemFunction {
+              inherit (item) system;
+              modules = [ (./hosts + "/${item.hostName}/configuration.nix") ]
+                ++ item.modules;
+            };
+          };
+          createNixosConfigAttr = createConfigAttr nixpkgs.lib.nixosSystem;
+          createDarwinConfigAttr = createConfigAttr darwin.lib.darwinSystem;
+
+          mapToAttrs = f: attrList: builtins.listToAttrs (map f attrList);
+        in
+        {
+          nixosConfigurations = mapToAttrs createNixosConfigAttr nixItems;
+          darwinConfigurations = mapToAttrs createDarwinConfigAttr darwinItems;
+        };
+
+      hosts = {
+        jongepad = {
+          system = "x86_64-linux";
+          modules = [
+            nixos-hardware.nixosModules.lenovo-thinkpad-x13-yoga
+            self.nixosModules.binary-cache-iohk
+            self.nixosModules.desktop
+            self.nixosModules.firmware
+            self.nixosModules.flakes
+            self.nixosModules.make-linux-fast-again
+            self.nixosModules.nix-service
+            self.nixosModules.nix-unstable
+            self.nixosModules.nixcademy-gnome-background
+            self.nixosModules.nixcademy-plymouth-logo
+            self.nixosModules.pipewire
+            self.nixosModules.printing
+            self.nixosModules.remote-builds
+            self.nixosModules.user-tfc
+            self.nixosModules.virtualization
+            self.nixosModules.yubikey
+            home-manager.nixosModules.home-manager
+            (_: {
+              boot.plymouth.enable = true;
+              customization.plymouth-logo.enable = true;
+              customization.gnome-background.enable = true;
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.tfc = { ... }: {
+                home.stateVersion = "22.11";
+                programs.home-manager.enable = true;
+                imports = with self.homeManagerModules; [
+                  gnome
+                  programming-haskell
+                  programming
+                  shell-bash
+                  shelltools
+                  vim
+                  yubikey
+                ];
+              };
+              nixpkgs.config.permittedInsecurePackages = [
+                "electron-21.4.0"
+              ];
+            })
+          ];
+        };
+        build01 = {
+          system = "x86_64-linux";
+          modules = [
+            self.nixosModules.auto-upgrade
+            self.nixosModules.binary-cache-iohk
+            self.nixosModules.firmware
+            self.nixosModules.flakes
+            self.nixosModules.make-linux-fast-again
+            self.nixosModules.nix-service
+            self.nixosModules.remote-deployable
+            self.nixosModules.save-space
+            self.nixosModules.user-tfc
+            (_: {
+              imports = [ hercules-ci.nixosModules.agent-profile ];
+              services.hercules-ci-agent.enable = true;
+              services.hercules-ci-agent.settings.concurrentTasks = 4;
+            })
+            home-manager.nixosModules.home-manager
+            (_: {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.tfc = { ... }: {
+                home.stateVersion = "22.11";
+                programs.home-manager.enable = true;
+                imports = with self.homeManagerModules; [
+                  programming-haskell
+                  programming
+                  shell-bash
+                  shelltools
+                  vim
+                ];
+              };
+            })
+          ];
+        };
+        build02 = {
+          system = "aarch64-linux";
+          modules = [
+            disko.nixosModules.disko
+            self.nixosModules.auto-upgrade
+            self.nixosModules.binary-cache-iohk
+            self.nixosModules.firmware
+            self.nixosModules.flakes
+            self.nixosModules.make-linux-fast-again
+            self.nixosModules.nix-service
+            self.nixosModules.remote-deployable
+            self.nixosModules.save-space
+            self.nixosModules.user-tfc
+            (_: {
+              imports = [ hercules-ci.nixosModules.agent-profile ];
+              services.hercules-ci-agent.enable = true;
+              services.hercules-ci-agent.settings.concurrentTasks = 2;
+            })
+            home-manager.nixosModules.home-manager
+            (_: {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.tfc = { ... }: {
+                home.stateVersion = "22.11";
+                programs.home-manager.enable = true;
+                imports = with self.homeManagerModules; [
+                  programming
+                  shell-bash
+                  shelltools
+                  shelltools
+                  tmux
+                  vim
+                ];
+              };
+            })
+          ];
+        };
+
+        jongebook = {
+          system = "aarch64-darwin";
+          modules = [
+            home-manager.darwinModules.home-manager
+            (_: {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.tfc = { ... }: {
+                home.stateVersion = "23.11";
+                programs.home-manager.enable = true;
+                imports = with self.homeManagerModules; [
+                  programming-haskell
+                  programming
+                  shell-zsh
+                  shelltools
+                  vim
+                  tmux
+                  ssh
+                ];
+              };
+            })
+          ];
+        };
+      };
     in
+      createConfigurations hosts //
     {
-      nixosConfigurations.jongepad = nixpkgs.lib.nixosSystem rec {
-        system = "x86_64-linux";
-        modules = [
-          ./hosts/jongepad/configuration.nix
-          nixpkgs.nixosModules.notDetected
-          nixos-hardware.nixosModules.lenovo-thinkpad-x13-yoga
-          self.nixosModules.binary-cache-iohk
-          self.nixosModules.desktop
-          self.nixosModules.firmware
-          self.nixosModules.flakes
-          self.nixosModules.make-linux-fast-again
-          self.nixosModules.nix-service
-          self.nixosModules.nix-unstable
-          self.nixosModules.nixcademy-gnome-background
-          self.nixosModules.nixcademy-plymouth-logo
-          self.nixosModules.pipewire
-          self.nixosModules.printing
-          self.nixosModules.remote-builds
-          self.nixosModules.user-tfc
-          self.nixosModules.virtualization
-          self.nixosModules.yubikey
-          home-manager.nixosModules.home-manager
-          (_: {
-            boot.plymouth.enable = true;
-            customization.plymouth-logo.enable = true;
-            customization.gnome-background.enable = true;
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.tfc = { ... }: {
-              home.stateVersion = "22.11";
-              programs.home-manager.enable = true;
-              imports = with self.homeManagerModules; [
-                gnome
-                programming-haskell
-                programming
-                shell-bash
-                shelltools
-                vim
-                yubikey
-              ];
-            };
-            nixpkgs.config.permittedInsecurePackages = [
-              "electron-21.4.0"
-            ];
-          })
-        ];
-      };
-
-      nixosConfigurations."build01" = nixpkgs.lib.nixosSystem rec {
-        system = "x86_64-linux";
-        modules = [
-          ./hosts/build01/configuration.nix
-          nixpkgs.nixosModules.notDetected
-          self.nixosModules.auto-upgrade
-          self.nixosModules.binary-cache-iohk
-          self.nixosModules.firmware
-          self.nixosModules.flakes
-          self.nixosModules.make-linux-fast-again
-          self.nixosModules.nix-service
-          self.nixosModules.remote-deployable
-          self.nixosModules.save-space
-          self.nixosModules.user-tfc
-          (_: {
-            imports = [ hercules-ci.nixosModules.agent-profile ];
-            services.hercules-ci-agent.enable = true;
-            services.hercules-ci-agent.settings.concurrentTasks = 4;
-          })
-          home-manager.nixosModules.home-manager
-          (_: {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.tfc = { ... }: {
-              home.stateVersion = "22.11";
-              programs.home-manager.enable = true;
-              imports = with self.homeManagerModules; [
-                programming-haskell
-                programming
-                shell-bash
-                shelltools
-                vim
-              ];
-            };
-          })
-
-        ];
-      };
-
-      nixosConfigurations."build02" = nixpkgs.lib.nixosSystem rec {
-        system = "aarch64-linux";
-        modules = [
-          ./hosts/build02/configuration.nix
-          nixpkgs.nixosModules.notDetected
-          disko.nixosModules.disko
-          self.nixosModules.auto-upgrade
-          self.nixosModules.binary-cache-iohk
-          self.nixosModules.firmware
-          self.nixosModules.flakes
-          self.nixosModules.make-linux-fast-again
-          self.nixosModules.nix-service
-          self.nixosModules.remote-deployable
-          self.nixosModules.save-space
-          self.nixosModules.user-tfc
-          (_: {
-            imports = [ hercules-ci.nixosModules.agent-profile ];
-            services.hercules-ci-agent.enable = true;
-            services.hercules-ci-agent.settings.concurrentTasks = 2;
-          })
-          home-manager.nixosModules.home-manager
-          (_: {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.tfc = { ... }: {
-              home.stateVersion = "22.11";
-              programs.home-manager.enable = true;
-              imports = with self.homeManagerModules; [
-                programming
-                shell-bash
-                shelltools
-                shelltools
-                tmux
-                vim
-              ];
-            };
-          })
-        ];
-      };
-
-      darwinConfigurations.jongebook = darwin.lib.darwinSystem {
-        system = "aarch64-darwin";
-        modules = [
-          ./hosts/jongebook/darwin-configuration.nix
-          home-manager.darwinModules.home-manager
-          (_: {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.tfc = { ... }: {
-              home.stateVersion = "23.11";
-              programs.home-manager.enable = true;
-              imports = with self.homeManagerModules; [
-                programming-haskell
-                programming
-                shell-zsh
-                shelltools
-                vim
-                tmux
-                ssh
-              ];
-            };
-          })
-        ];
-      };
-
       homeConfigurations.default = home-manager.lib.homeManagerConfiguration {
         pkgs = import nixpkgs {
           system = "x86_64-linux";

@@ -1,5 +1,8 @@
 { config, pkgs, lib, ... }:
 
+let
+  hostName = "jongebook";
+in
 {
   environment.systemPackages = with pkgs; [
     git
@@ -10,7 +13,16 @@
 
   nix.linux-builder = {
     enable = true;
-    maxJobs = 4;
+    ephemeral = true;
+    config = {
+      virtualisation = {
+        darwin-builder = {
+          diskSize = 40 * 1024;
+          memorySize = 8 * 1024;
+        };
+        cores = 4;
+      };
+    };
   };
 
   services.nix-daemon.enable = true;
@@ -60,7 +72,15 @@
   system.defaults = {
     dock.autohide = true;
     finder.AppleShowAllExtensions = true;
+    finder.FXPreferredViewStyle = "clmv";
+    loginwindow.LoginwindowText = "nixcademy.com";
+    screencapture.location = "~/Pictures/screenshots";
+    screensaver.askForPasswordDelay = 10;
   };
+
+  system.defaults.smb.NetBIOSName = hostName;
+  networking.hostName = hostName;
+  networking.localHostName = hostName;
 
   system.stateVersion = 4;
 }
