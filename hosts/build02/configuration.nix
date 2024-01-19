@@ -34,5 +34,9 @@
   # we're a VM here, so no KVM and nixos tests
   nix.settings.system-features = [ "benchmark" "big-parallel" ];
 
+  # This system sometimes runs OOM
+  nix.settings.max-jobs = 1;
+  nix.settings.cores = 1;
+
   system.stateVersion = "23.05";
 }
