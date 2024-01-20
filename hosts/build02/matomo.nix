@@ -3,6 +3,7 @@
 {
   services.matomo = {
     enable = true;
+    package = pkgs.matomo-beta;
     nginx = { };
     hostname = "matomo.nix-consulting.de";
   };
