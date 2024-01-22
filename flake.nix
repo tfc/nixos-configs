@@ -148,33 +148,10 @@
             self.nixosModules.binary-cache-iohk
             self.nixosModules.firmware
             self.nixosModules.flakes
-            self.nixosModules.make-linux-fast-again
             self.nixosModules.nix-service
             self.nixosModules.remote-deployable
             self.nixosModules.save-space
             self.nixosModules.user-tfc
-            (_: {
-              imports = [ hercules-ci.nixosModules.agent-profile ];
-              services.hercules-ci-agent.enable = true;
-              services.hercules-ci-agent.settings.concurrentTasks = 2;
-            })
-            home-manager.nixosModules.home-manager
-            (_: {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.tfc = { ... }: {
-                home.stateVersion = "22.11";
-                programs.home-manager.enable = true;
-                imports = with self.homeManagerModules; [
-                  programming
-                  shell-bash
-                  shelltools
-                  shelltools
-                  tmux
-                  vim
-                ];
-              };
-            })
           ];
         };
 
