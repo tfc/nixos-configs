@@ -33,7 +33,8 @@ in
       extra-platforms = x86_64-darwin aarch64-darwin
     '';
     settings = {
-      auto-optimise-store = true;
+      # This sometimes leads to https://github.com/NixOS/nix/issues/7273
+      # auto-optimise-store = true;
       experimental-features = [
         "flakes"
         "nix-command"
