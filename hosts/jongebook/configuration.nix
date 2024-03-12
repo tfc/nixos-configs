@@ -40,6 +40,10 @@ in
         "nix-command"
         "repl-flake"
       ];
+      system-features = [
+        "nixos-test"
+        "apple-virt"
+      ];
       #sandbox = true; # breaks many builds
       trusted-users = [ "@admin" ];
     };
