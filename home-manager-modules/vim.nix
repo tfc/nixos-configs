@@ -81,20 +81,6 @@
         '';
       }
       {
-        plugin = nvim-lspconfig;
-        config = ''
-          :luafile ${./vim-configs/lsp.lua}
-
-          if executable('rnix-lsp')
-            au User lsp_setup call lsp#register_server({
-              \ 'name': 'rnix',
-              \ 'cmd': {server_info->[&shell, &shellcmdflag, 'rnix-lsp']},
-              \ 'whitelist': ['nix'],
-              \ })
-          endif
-        '';
-      }
-      {
         plugin = vim-airline;
         config = ''
           set laststatus=2
@@ -115,7 +101,6 @@
   };
 
   home.packages = with pkgs; [
-    rnix-lsp
     nodePackages_latest.bash-language-server
     nodePackages_latest.pyright
     ltex-ls
