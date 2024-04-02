@@ -75,7 +75,6 @@
             self.nixosModules.nixcademy-plymouth-logo
             self.nixosModules.pipewire
             self.nixosModules.printing
-            self.nixosModules.remote-builds
             self.nixosModules.user-tfc
             self.nixosModules.virtualization
             self.nixosModules.yubikey

@@ -61,9 +61,9 @@ in
     displayManager.gdm.enable = true;
     displayManager.gdm.wayland = false;
     enable = true;
-    layout = "us";
     libinput.enable = true;
-    xkbOptions = "eurosign:e";
+    xkb.layout = "us";
+    xkb.options = "eurosign:e";
     wacom.enable = true;
   };
 
