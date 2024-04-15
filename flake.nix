@@ -71,6 +71,7 @@
             self.nixosModules.make-linux-fast-again
             self.nixosModules.nix-service
             self.nixosModules.nix-unstable
+            self.nixosModules.nixcademy-gdm-logo
             self.nixosModules.nixcademy-gnome-background
             self.nixosModules.nixcademy-plymouth-logo
             self.nixosModules.pipewire
@@ -81,8 +82,9 @@
             home-manager.nixosModules.home-manager
             (_: {
               boot.plymouth.enable = true;
-              customization.plymouth-logo.enable = true;
+              customization.gdm-logo.enable = true;
               customization.gnome-background.enable = true;
+              customization.plymouth-logo.enable = true;
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.users.tfc = { ... }: {
