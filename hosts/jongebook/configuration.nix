@@ -38,9 +38,9 @@ in
       experimental-features = [
         "flakes"
         "nix-command"
-        "repl-flake"
       ];
       system-features = [
+        "big-parallel"
         "nixos-test"
         "apple-virt"
       ];
