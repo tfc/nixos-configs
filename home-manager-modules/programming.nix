@@ -37,6 +37,9 @@
 
   programs.lazygit.enable = true;
 
-  programs.direnv.enable = true;
-  programs.direnv.nix-direnv.enable = true;
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+    config.global.hide_env_diff = true;
+  };
 }
