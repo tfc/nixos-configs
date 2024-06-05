@@ -48,7 +48,7 @@ in
       trusted-users = [ "@admin" ];
     };
     nixPath = lib.mkForce [ "nixpkgs=${pkgs.path}" ];
-    package = pkgs.nixUnstable;
+    package = pkgs.nixVersions.latest;
   };
 
   nixpkgs.config.allowUnfree = true;
