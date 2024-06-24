@@ -141,20 +141,6 @@
             })
           ];
         };
-        build02 = {
-          system = "aarch64-linux";
-          modules = [
-            disko.nixosModules.disko
-            self.nixosModules.auto-upgrade
-            self.nixosModules.binary-cache-iohk
-            self.nixosModules.firmware
-            self.nixosModules.flakes
-            self.nixosModules.nix-service
-            self.nixosModules.remote-deployable
-            self.nixosModules.save-space
-            self.nixosModules.user-tfc
-          ];
-        };
 
         jongebook = {
           system = "aarch64-darwin";
