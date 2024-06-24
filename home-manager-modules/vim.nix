@@ -102,7 +102,6 @@
 
   home.packages = with pkgs; [
     nodePackages_latest.bash-language-server
-    nodePackages_latest.pyright
     ltex-ls
     ccls
   ];
