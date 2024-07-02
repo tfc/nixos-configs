@@ -1,21 +1,11 @@
 { pkgs, config, ... }:
 
-let
-  collectOld = pkgs.writeScriptBin "nix-collect-old" ''
-    nix-env --delete-generations old
-    nix-collect-garbage
-    nix-collect-garbage -d
-    nix-store --gc --print-dead
-    nix-store --optimize
-  '';
-in
 {
   imports = [
     ./tmux.nix
   ];
   home.packages = with pkgs; [
     bottom
-    collectOld
     file
     gtop
     killall
@@ -24,7 +14,6 @@ in
     nix-diff
     nix-output-monitor
     nix-prefetch-github
-    nix-top
     pstree
     qemu
     tmate
