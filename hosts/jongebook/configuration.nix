@@ -71,8 +71,7 @@ in
 
   users.users.tfc.home = "/Users/tfc";
 
-  fonts.fontDir.enable = true;
-  fonts.fonts = with pkgs; [
+  fonts.packages = with pkgs; [
     powerline-fonts
   ];
 
