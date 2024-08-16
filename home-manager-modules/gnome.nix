@@ -4,10 +4,9 @@
   imports = [ ./desktop.nix ];
 
   home.packages = with pkgs; [
-    gnome3.cheese
-    gnome3.eog
-    gnome3.evince
-    gnome3.gnome-tweaks
+    cheese
+    eog
+    gnome-tweaks
     gnome-firmware
     gnome-firmware-updater
   ];

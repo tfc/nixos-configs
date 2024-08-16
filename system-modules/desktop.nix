@@ -23,11 +23,11 @@ in
   services.xserver = {
     displayManager.gdm.enable = true;
     enable = true;
-    libinput.enable = true;
     xkb.layout = "us";
     xkb.options = "eurosign:e";
     wacom.enable = true;
   };
+  services.libinput.enable = true;
 
   environment.systemPackages = with pkgs; [
     wireguard-tools # for vpn stuff

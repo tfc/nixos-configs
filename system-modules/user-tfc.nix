@@ -1,8 +1,6 @@
 { ... }:
 
 {
-  programs.vim.defaultEditor = true;
-
   users.users.tfc = {
     isNormalUser = true;
     extraGroups = [

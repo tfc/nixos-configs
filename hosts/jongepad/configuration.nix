@@ -43,8 +43,6 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  programs.bash.enableCompletion = true;
-
   services.avahi.enable = true;
   services.openssh.enable = true;
 
