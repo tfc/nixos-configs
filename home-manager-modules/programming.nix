@@ -22,7 +22,6 @@
     userName = "Jacek Galowicz";
     userEmail = "jacek@galowicz.de";
     lfs.enable = true;
-    delta.enable = true;
     extraConfig = {
       credential.helper = "store";
       init.defaultBranch = "main";
