@@ -107,6 +107,51 @@
             })
           ];
         };
+        work = {
+          system = "x86_64-linux";
+          modules = [
+            self.nixosModules.binary-cache-iohk
+            self.nixosModules.desktop
+            self.nixosModules.dontsleep
+            self.nixosModules.firmware
+            self.nixosModules.flakes
+            self.nixosModules.make-linux-fast-again
+            self.nixosModules.nix-service
+            self.nixosModules.nix-unstable
+            self.nixosModules.nixcademy-gdm-logo
+            self.nixosModules.nixcademy-gnome-background
+            self.nixosModules.nixcademy-plymouth-logo
+            self.nixosModules.pipewire
+            self.nixosModules.printing
+            self.nixosModules.steam
+            self.nixosModules.user-tfc
+            self.nixosModules.virtualization
+            home-manager.nixosModules.home-manager
+            (_: {
+              boot.plymouth.enable = true;
+              customization.gdm-logo.enable = true;
+              customization.gnome-background.enable = true;
+              customization.plymouth-logo.enable = true;
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.tfc = { ... }: {
+                home.stateVersion = "24.11";
+                programs.home-manager.enable = true;
+                imports = with self.homeManagerModules; [
+                  gnome
+                  programming-haskell
+                  programming
+                  shell-bash
+                  shelltools
+                  vim
+                ];
+              };
+              nixpkgs.config.permittedInsecurePackages = [
+                "electron-21.4.0"
+              ];
+            })
+          ];
+        };
         build01 = {
           system = "x86_64-linux";
           modules = [
