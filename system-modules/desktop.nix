@@ -1,23 +1,16 @@
 { pkgs, ... }:
 
-let
-  gnome = { pkgs, lib, ... }: {
-    services.xserver.desktopManager.gnome.enable = true;
-
-    environment.systemPackages = with pkgs.gnomeExtensions; [
-      appindicator
-      autohide-battery
-      bluetooth-quick-connect
-      blur-my-shell
-      sound-output-device-chooser
-      spotify-tray
-      useless-gaps
-    ];
-  };
-in
 {
-  imports = [
-    gnome
+  services.xserver.desktopManager.gnome.enable = true;
+
+  environment.systemPackages = with pkgs.gnomeExtensions; [
+    appindicator
+    autohide-battery
+    bluetooth-quick-connect
+    blur-my-shell
+    sound-output-device-chooser
+    spotify-tray
+    useless-gaps
   ];
 
   services.xserver = {
