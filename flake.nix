@@ -126,6 +126,7 @@
             self.nixosModules.steam
             self.nixosModules.user-tfc
             self.nixosModules.virtualization
+            self.nixosModules.virtualbox
             home-manager.nixosModules.home-manager
             (_: {
               boot.plymouth.enable = true;
