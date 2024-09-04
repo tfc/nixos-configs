@@ -11,6 +11,7 @@
     sound-output-device-chooser
     spotify-tray
     useless-gaps
+    pkgs.wireguard-tools # for vpn stuff
   ];
 
   services.xserver = {
@@ -21,8 +22,4 @@
     wacom.enable = true;
   };
   services.libinput.enable = true;
-
-  environment.systemPackages = with pkgs; [
-    wireguard-tools # for vpn stuff
-  ];
 }
