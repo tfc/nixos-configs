@@ -12,9 +12,4 @@
       :set prompt "λ> "
     '';
   };
-
-  programs.vscode = {
-    enable = true;
-    package = pkgs.vscodium;
-  };
 }

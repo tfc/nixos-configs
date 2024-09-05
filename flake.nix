@@ -140,11 +140,12 @@
                 programs.home-manager.enable = true;
                 imports = with self.homeManagerModules; [
                   gnome
-                  programming-haskell
                   programming
+                  programming-haskell
                   shell-bash
                   shelltools
                   vim
+                  vscode
                 ];
               };
               nixpkgs.config.permittedInsecurePackages = [
