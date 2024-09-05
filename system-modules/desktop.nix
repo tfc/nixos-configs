@@ -22,4 +22,8 @@
     wacom.enable = true;
   };
   services.libinput.enable = true;
+
+  fonts.packages = [
+    pkgs.google-fonts
+  ];
 }
