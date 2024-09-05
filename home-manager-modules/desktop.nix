@@ -6,29 +6,14 @@
   fonts.fontconfig.enable = true;
 
   home.packages = with pkgs; [
-    chromium
-    deja-dup
-    foliate
-    #    foxitreader # disabled because of qtwebkit
     gimp
     gitg
     google-chrome
     inkscape
-    libreoffice
     mupdf
-    (wrapOBS {
-      plugins = with obs-studio-plugins; [
-        obs-gstreamer
-        obs-move-transition
-        obs-multi-rtmp
-        wlrobs
-      ];
-    })
-    #obsidian
     retext
     signal-desktop
     spotify
-    teamspeak_client # write a wrapper that adds  QT_XCB_GL_INTEGRATION=none
     vlc
     xournalpp
   ];
