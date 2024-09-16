@@ -127,6 +127,7 @@
             self.nixosModules.user-tfc
             self.nixosModules.virtualization
             self.nixosModules.virtualbox
+            self.nixosModules.ps4eye
             home-manager.nixosModules.home-manager
             (_: {
               boot.plymouth.enable = true;
