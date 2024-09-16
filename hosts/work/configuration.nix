@@ -9,7 +9,7 @@
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.systemd-boot.configurationLimit = 3;
-  networking.hostName = "ai";
+  networking.hostName = "work";
   networking.networkmanager.enable = true;
 
   powerManagement.cpuFreqGovernor = "performance";
