@@ -16,6 +16,7 @@
 
   services.xserver = {
     displayManager.gdm.enable = true;
+    displayManager.gdm.wayland = false;
     enable = true;
     xkb.layout = "us";
     xkb.options = "eurosign:e";

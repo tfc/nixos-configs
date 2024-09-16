@@ -140,6 +140,7 @@
                 programs.home-manager.enable = true;
                 imports = with self.homeManagerModules; [
                   gnome
+                  obs
                   programming
                   programming-haskell
                   shell-bash
