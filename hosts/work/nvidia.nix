@@ -1,27 +1,9 @@
 { pkgs, lib, config, ... }:
 
 {
-  nixpkgs.overlays = [
-    (final: prev: {
-      myKernelPackages = prev.zfs.latestCompatibleLinuxPackages.extend (kernelFinal: kernelSuper: {
-        nvidiaPackages = kernelSuper.nvidiaPackages // {
-          nvidia_testing = kernelSuper.nvidiaPackages.mkDriver {
-            version = "560.35.03";
-            sha256_32bit = "sha256-kQsvDgnxis9ANFmwIwB7HX5MkIAcpEEAHc8IBOLdXvk=";
-            sha256_64bit = "sha256-8pMskvrdQ8WyNBvkU/xPc/CtcYXCa7ekP73oGuKfH+M=";
-            settingsSha256 = "sha256-kQsvDgnxis9ANFmwIwB7HX5MkIAcpEEAHc8IBOLdXvk=";
-            sha256_aarch64 = lib.fakeHash;
-            openSha256 = lib.fakeHash;
-            persistencedSha256 = lib.fakeHash;
-          };
-        };
-      });
-    })
-  ];
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  boot.kernelPackages = pkgs.myKernelPackages;
-
-  services.xserver.videoDrivers = ["nvidia"];
+  boot.blacklistedKernelModules = [ "nouveau" ];
 
   hardware.nvidia = {
     modesetting.enable = true;
@@ -29,10 +11,10 @@
     powerManagement.finegrained = false;
     open = false;
     nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.nvidia_testing;
+    package = config.boot.kernelPackages.nvidiaPackages.latest;
   };
 
-  boot.blacklistedKernelModules = [ "nouveau" ];
+  services.xserver.videoDrivers = ["nvidia"];
 
   hardware.graphics.enable = true;
 }
