@@ -1,4 +1,4 @@
-{ pkgs, config, lib, ... }:
+{ config, lib, ... }:
 let
   cfg = config.customization.gnome-background;
 in

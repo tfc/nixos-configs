@@ -2,8 +2,8 @@
 
 {
   nixpkgs.overlays = [
-    (final: prev: {
-      myKernelPackages = prev.zfs.latestCompatibleLinuxPackages.extend (kernelFinal: kernelSuper: {
+    (_: prev: {
+      myKernelPackages = prev.zfs.latestCompatibleLinuxPackages.extend (_: kernelSuper: {
         nvidiaPackages = kernelSuper.nvidiaPackages // {
           nvidia_testing = kernelSuper.nvidiaPackages.mkDriver {
             version = "560.35.03";

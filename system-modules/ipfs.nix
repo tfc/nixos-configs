@@ -1,4 +1,4 @@
-{ ... }:
+_:
 {
   services.ipfs = {
     enable = true;

@@ -16,7 +16,6 @@
   outputs =
     { self
     , darwin
-    , disko
     , hercules-ci
     , home-manager
     , nixos-hardware
@@ -225,12 +224,12 @@
           config.allowUnfree = true;
         };
         modules = with self.homeManagerModules; [
-          ({
+          {
             home.stateVersion = "23.11";
             home.username = "tfc";
             home.homeDirectory = "/home/tfc";
             programs.home-manager.enable = true;
-          })
+          }
           programming-haskell
           programming
           shell-zsh

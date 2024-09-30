@@ -1,4 +1,4 @@
-{ ... }:
+_:
 
 {
   system.autoUpgrade = {

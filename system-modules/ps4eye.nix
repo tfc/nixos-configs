@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, ... }:
 
 let
   python3 = pkgs.python3.withPackages (p: [ p.pyusb ]);

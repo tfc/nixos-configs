@@ -1,4 +1,4 @@
-{ pkgs, lib, system, ... }:
+{ pkgs, ... }:
 
 let
   sessionVariables = {

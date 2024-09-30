@@ -1,4 +1,4 @@
-{ ... }:
+_:
 
 {
   systemd.targets.sleep.enable = false;

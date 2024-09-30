@@ -1,7 +1,7 @@
 # this list of cmd line arguments for linux is from
 # https://make-linux-fast-again.com/
 
-{ ... }: {
+_: {
   boot.kernelParams = [
     "noibrs"
     "noibpb"

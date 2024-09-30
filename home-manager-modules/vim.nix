@@ -1,4 +1,4 @@
-{ pkgs, lib, agenix, hostName, ... }:
+{ pkgs, ... }:
 
 {
   home.sessionVariables = {

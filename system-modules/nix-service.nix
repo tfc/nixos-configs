@@ -1,4 +1,4 @@
-{ ... }: {
+_: {
   nix.daemonIOSchedPriority = 5;
   nix.settings = {
     connect-timeout = 5;
