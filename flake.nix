@@ -217,7 +217,7 @@
         };
       };
     in
-      createConfigurations hosts //
+    createConfigurations hosts //
     {
       homeConfigurations.default = home-manager.lib.homeManagerConfiguration {
         pkgs = import nixpkgs {

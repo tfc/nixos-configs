@@ -14,7 +14,7 @@
     package = config.boot.kernelPackages.nvidiaPackages.latest;
   };
 
-  services.xserver.videoDrivers = ["nvidia"];
+  services.xserver.videoDrivers = [ "nvidia" ];
 
   hardware.graphics.enable = true;
 }
