@@ -7,7 +7,7 @@
   environment.systemPackages = with pkgs; [
     libvirt
     virt-manager
-    gnome.gnome-boxes
+    gnome-boxes
   ];
 
   virtualisation.libvirtd.enable = true;
