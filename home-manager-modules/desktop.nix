@@ -14,6 +14,7 @@
     retext
     signal-desktop
     spotify
+    sqlitebrowser
     vlc
     xournalpp
   ];
