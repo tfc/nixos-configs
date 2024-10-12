@@ -21,6 +21,7 @@ in
       "build01.nix-consulting.de"
     ];
     extraConfig = lib.optionalString pkgs.stdenv.targetPlatform.isDarwin ''
+      IgnoreUnknown AddKeysToAgent,UseKeychain
       UseKeychain yes
       AddKeysToAgent yes
       IdentityFile ~/.ssh/id_ed25519
