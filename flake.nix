@@ -4,7 +4,6 @@
   inputs = {
     disko.url = "github:nix-community/disko";
     disko.inputs.nixpkgs.follows = "nixpkgs";
-    hercules-ci.url = "github:hercules-ci/hercules-ci-agent";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     nixos-hardware.url = "github:nixos/nixos-hardware/master";
@@ -16,7 +15,6 @@
   outputs =
     { self
     , darwin
-    , hercules-ci
     , home-manager
     , nixos-hardware
     , nixpkgs
@@ -153,41 +151,6 @@
               nixpkgs.config.permittedInsecurePackages = [
                 "electron-21.4.0"
               ];
-            })
-          ];
-        };
-        build01 = {
-          system = "x86_64-linux";
-          modules = [
-            self.nixosModules.auto-upgrade
-            self.nixosModules.binary-cache-iohk
-            self.nixosModules.firmware
-            self.nixosModules.flakes
-            self.nixosModules.make-linux-fast-again
-            self.nixosModules.nix-service
-            self.nixosModules.remote-deployable
-            self.nixosModules.save-space
-            self.nixosModules.user-tfc
-            (_: {
-              imports = [ hercules-ci.nixosModules.agent-profile ];
-              services.hercules-ci-agent.enable = true;
-              services.hercules-ci-agent.settings.concurrentTasks = 4;
-            })
-            home-manager.nixosModules.home-manager
-            (_: {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.tfc = { ... }: {
-                home.stateVersion = "22.11";
-                programs.home-manager.enable = true;
-                imports = with self.homeManagerModules; [
-                  programming-haskell
-                  programming
-                  shell-bash
-                  shelltools
-                  vim
-                ];
-              };
             })
           ];
         };
