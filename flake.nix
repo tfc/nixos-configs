@@ -79,6 +79,7 @@
             self.nixosModules.steam
             self.nixosModules.user-tfc
             self.nixosModules.virtualization
+            self.nixosModules.virtualbox
             self.nixosModules.yubikey
             home-manager.nixosModules.home-manager
             (_: {
