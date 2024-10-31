@@ -54,7 +54,7 @@ in
   nixpkgs.config.allowUnfree = true;
 
   security.pam.enableSudoTouchIdAuth = true;
-  programs.bash.enableCompletion = true;
+  programs.bash.completion.enable = true;
 
   programs.zsh = {
     enable = true;
