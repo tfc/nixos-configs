@@ -10,7 +10,6 @@
     gtop
     killall
     lsof
-    mosh
     nix-diff
     nix-output-monitor
     nix-prefetch-github

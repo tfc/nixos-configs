@@ -64,9 +64,6 @@ in
     enableFzfHistory = true;
   };
 
-  environment.loginShell = "${pkgs.zsh}/bin/zsh -l";
-  environment.variables.SHELL = "${pkgs.zsh}/bin/zsh";
-
   environment.variables.LANG = "en_US.UTF-8";
 
   users.users.tfc.home = "/Users/tfc";
