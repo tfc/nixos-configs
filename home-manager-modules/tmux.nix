@@ -18,6 +18,10 @@
     extraConfig = ''
       set -sg escape-time 0
       set -g mouse on
+
+      # remove when fixed: https://github.com/nix-community/home-manager/issues/5952
+      set -gu default-command
+      set -g default-shell "$SHELL"
     '';
     plugins = with pkgs.tmuxPlugins; [
       nord
