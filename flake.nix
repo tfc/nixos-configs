@@ -58,6 +58,29 @@
         };
 
       hosts = {
+        homeautomation = {
+          system = "aarch64-linux";
+          modules = [
+            self.nixosModules.flakes
+            self.nixosModules.make-linux-fast-again
+            self.nixosModules.remote-deployable
+            self.nixosModules.user-tfc
+            home-manager.nixosModules.home-manager
+            (_: {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.tfc = { ... }: {
+                home.stateVersion = "22.11";
+                programs.home-manager.enable = true;
+                imports = with self.homeManagerModules; [
+                  shell-bash
+                  shelltools
+                  vim
+                ];
+              };
+            })
+          ];
+        };
         jongepad = {
           system = "x86_64-linux";
           modules = [
