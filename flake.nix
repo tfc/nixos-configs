@@ -64,6 +64,7 @@
             self.nixosModules.flakes
             self.nixosModules.make-linux-fast-again
             self.nixosModules.remote-deployable
+            self.nixosModules.simple-timers
             self.nixosModules.user-tfc
             home-manager.nixosModules.home-manager
             (_: {
