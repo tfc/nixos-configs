@@ -1,7 +1,14 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, flakeInputs, self, ... }:
 
 {
+
   imports = [
+    self.nixosModules.flakes
+    self.nixosModules.make-linux-fast-again
+    self.nixosModules.remote-deployable
+    self.nixosModules.simple-timers
+    self.nixosModules.user-tfc
+    flakeInputs.home-manager.nixosModules.home-manager
     ./ha.nix
   ];
 
@@ -49,7 +56,20 @@
     };
   };
 
+  nixpkgs.hostPlatform = "aarch64-linux";
   nixpkgs.config.allowUnfree = true;
   hardware.enableRedistributableFirmware = true;
   system.stateVersion = "23.11";
+
+  home-manager.useGlobalPkgs = true;
+  home-manager.useUserPackages = true;
+  home-manager.users.tfc = { ... }: {
+    home.stateVersion = "22.11";
+    programs.home-manager.enable = true;
+    imports = with self.homeManagerModules; [
+      shell-bash
+      shelltools
+      vim
+    ];
+  };
 }

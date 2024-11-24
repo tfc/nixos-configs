@@ -4,6 +4,8 @@ let
   hostName = "jongebook";
 in
 {
+  nixpkgs.hostPlatform = "aarch64-darwin";
+
   environment.systemPackages = with pkgs; [
     git
     nixos-rebuild
