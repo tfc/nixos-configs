@@ -1,10 +1,52 @@
-{ pkgs, config, ... }:
+{ pkgs, config, flakeInputs, self, ... }:
 
 {
   imports = [
+    self.nixosModules.binary-cache-iohk
+    self.nixosModules.desktop
+    self.nixosModules.dontsleep
+    self.nixosModules.firmware
+    self.nixosModules.flakes
+    self.nixosModules.make-linux-fast-again
+    self.nixosModules.nix-service
+    self.nixosModules.nix-unstable
+    self.nixosModules.nixcademy-gdm-logo
+    self.nixosModules.nixcademy-gnome-background
+    self.nixosModules.nixcademy-plymouth-logo
+    self.nixosModules.pipewire
+    self.nixosModules.printing
+    self.nixosModules.steam
+    self.nixosModules.user-tfc
+    self.nixosModules.virtualization
+    self.nixosModules.virtualbox
+    flakeInputs.home-manager.nixosModules.home-manager
     ./hardware-configuration.nix
     ./ai.nix
     ./nvidia.nix
+  ];
+
+  boot.plymouth.enable = true;
+  customization.gdm-logo.enable = true;
+  customization.gnome-background.enable = true;
+  customization.plymouth-logo.enable = true;
+  home-manager.useGlobalPkgs = true;
+  home-manager.useUserPackages = true;
+  home-manager.users.tfc = { ... }: {
+    home.stateVersion = "24.11";
+    programs.home-manager.enable = true;
+    imports = with self.homeManagerModules; [
+      gnome
+      obs
+      programming
+      programming-haskell
+      shell-bash
+      shelltools
+      vim
+      vscode
+    ];
+  };
+  nixpkgs.config.permittedInsecurePackages = [
+    "electron-21.4.0"
   ];
 
   boot.loader.systemd-boot.enable = true;
