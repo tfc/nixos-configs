@@ -31,7 +31,7 @@ in
         };
       };
     });
-    default = {};
+    default = { };
     description = "Simple timer wrapper module around systemd.timers to reduce boilerplate";
   };
 
