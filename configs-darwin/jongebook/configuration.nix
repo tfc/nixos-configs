@@ -1,10 +1,14 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, flakeInputs, self, ... }:
 
 let
   hostName = "jongebook";
 in
 {
   nixpkgs.hostPlatform = "aarch64-darwin";
+
+  imports = [
+    flakeInputs.home-manager.darwinModules.home-manager
+  ];
 
   environment.systemPackages = with pkgs; [
     git
@@ -88,4 +92,20 @@ in
   networking.localHostName = hostName;
 
   system.stateVersion = 4;
+
+  home-manager.useGlobalPkgs = true;
+  home-manager.useUserPackages = true;
+  home-manager.users.tfc = { ... }: {
+  home.stateVersion = "23.11";
+  programs.home-manager.enable = true;
+    imports = with self.homeManagerModules; [
+      programming-haskell
+      programming
+      shell-zsh
+      shelltools
+      vim
+      tmux
+      ssh
+    ];
+  };
 }
