@@ -21,17 +21,19 @@ in
 
 {
   options.systemd.simple-timers = lib.mkOption {
-    type = lib.types.attrsOf (lib.types.submodule {
-      options = {
-        OnCalendar = lib.mkOption {
-          type = lib.types.str;
+    type = lib.types.attrsOf (
+      lib.types.submodule {
+        options = {
+          OnCalendar = lib.mkOption {
+            type = lib.types.str;
+          };
+          ExecStart = lib.mkOption {
+            type = lib.types.str;
+          };
         };
-        ExecStart = lib.mkOption {
-          type = lib.types.str;
-        };
-      };
-    });
-    default = {};
+      }
+    );
+    default = { };
     description = "Simple timer wrapper module around systemd.timers to reduce boilerplate";
   };
 

@@ -13,10 +13,12 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    programs.dconf.profiles.gdm.databases = [{
-      settings."org/gnome/login-screen" = {
-        logo = builtins.toString cfg.logoPath;
-      };
-    }];
+    programs.dconf.profiles.gdm.databases = [
+      {
+        settings."org/gnome/login-screen" = {
+          logo = builtins.toString cfg.logoPath;
+        };
+      }
+    ];
   };
 }

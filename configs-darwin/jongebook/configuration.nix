@@ -1,4 +1,11 @@
-{ config, pkgs, lib, flakeInputs, self, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  flakeInputs,
+  self,
+  ...
+}:
 
 let
   hostName = "jongebook";
@@ -95,17 +102,19 @@ in
 
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
-  home-manager.users.tfc = { ... }: {
-  home.stateVersion = "23.11";
-  programs.home-manager.enable = true;
-    imports = with self.homeManagerModules; [
-      programming-haskell
-      programming
-      shell-zsh
-      shelltools
-      vim
-      tmux
-      ssh
-    ];
-  };
+  home-manager.users.tfc =
+    { ... }:
+    {
+      home.stateVersion = "23.11";
+      programs.home-manager.enable = true;
+      imports = with self.homeManagerModules; [
+        programming-haskell
+        programming
+        shell-zsh
+        shelltools
+        vim
+        tmux
+        ssh
+      ];
+    };
 }

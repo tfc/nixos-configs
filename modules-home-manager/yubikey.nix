@@ -27,7 +27,10 @@ in
   services = {
     gnome-keyring = {
       enable = true;
-      components = [ "pkcs11" "secrets" ]; # no SSH
+      components = [
+        "pkcs11"
+        "secrets"
+      ]; # no SSH
     };
     gpg-agent = {
       enable = true;

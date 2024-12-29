@@ -12,10 +12,12 @@
 
   networking.hostName = "build01";
   networking.domain = "nix-consulting.de";
-  networking.interfaces.ens18.ipv4.addresses = [{
-    address = "88.198.83.206";
-    prefixLength = 24;
-  }];
+  networking.interfaces.ens18.ipv4.addresses = [
+    {
+      address = "88.198.83.206";
+      prefixLength = 24;
+    }
+  ];
   networking.defaultGateway = "88.198.83.193";
   networking.nameservers = [ "8.8.8.8" ];
   networking.firewall.logRefusedConnections = false;
@@ -36,7 +38,10 @@
   services.fail2ban.enable = true;
 
   # we're a VM here, so no KVM and nixos tests
-  nix.settings.system-features = [ "benchmark" "big-parallel" ];
+  nix.settings.system-features = [
+    "benchmark"
+    "big-parallel"
+  ];
 
   system.stateVersion = "22.11";
 }

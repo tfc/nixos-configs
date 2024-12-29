@@ -1,16 +1,17 @@
 { lib, pkgs, ... }:
 let
   hostPart = x: builtins.elemAt (lib.strings.splitString "." x) 0;
-  hostPartMapping = urls:
-    builtins.listToAttrs (map
-      (x: {
+  hostPartMapping =
+    urls:
+    builtins.listToAttrs (
+      map (x: {
         name = hostPart x;
         value = {
           hostname = x;
           forwardAgent = true;
         };
-      })
-      urls);
+      }) urls
+    );
 in
 {
   programs.ssh = {

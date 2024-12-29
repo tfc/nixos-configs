@@ -1,4 +1,9 @@
-{ pkgs, config, lib, self, flakeInputs, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 {
   imports = [
     self.nixosModules.desktop
@@ -46,7 +51,11 @@
     keyMap = "us";
   };
 
-  environment.systemPackages = with pkgs; [ git vim wget ];
+  environment.systemPackages = with pkgs; [
+    git
+    vim
+    wget
+  ];
   environment.variables = {
     EDITOR = lib.mkOverride 0 "vim";
     TERM = "xterm-256color";

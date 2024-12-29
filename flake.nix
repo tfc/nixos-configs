@@ -23,18 +23,26 @@
     sysmodule-flake.inputs.flake-parts.follows = "flake-parts";
   };
 
-  outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } {
-    systems = [ "x86_64-linux" "aarch64-linux" "aarch64-darwin" ];
-    imports = [
-      inputs.sysmodule-flake.flakeModules.default
-    ];
-    sysmodules-flake = {
-      modulesPath = ./.;
-      specialArgs.self = inputs.self;
-      nix-darwin = inputs.darwin;
-    };
-    flake = {
-      packages.x86_64-linux.vim = inputs.self.nixosConfigurations.work.config.home-manager.users.tfc.programs.neovim.finalPackage;
+  outputs =
+    inputs:
+    inputs.flake-parts.lib.mkFlake { inherit inputs; } {
+      systems = [
+        "x86_64-linux"
+        "aarch64-linux"
+        "aarch64-darwin"
+      ];
+      imports = [
+        inputs.sysmodule-flake.flakeModules.default
+      ];
+      sysmodules-flake = {
+        modulesPath = ./.;
+        specialArgs.self = inputs.self;
+        nix-darwin = inputs.darwin;
+      };
+
+      perSystem = { pkgs, ... }: {
+        formatter = pkgs.nixfmt-rfc-style;
+      };
     };
   };
 }

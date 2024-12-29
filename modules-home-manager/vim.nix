@@ -101,8 +101,10 @@
   };
 
   home.packages = with pkgs; [
-    nodePackages_latest.bash-language-server
-    ltex-ls
+    bash-language-server
     ccls
+    ltex-ls
+    nixd
+    nixfmt-rfc-style
   ];
 }

@@ -1,4 +1,9 @@
-{ config, lib, modulesPath, ... }:
+{
+  config,
+  lib,
+  modulesPath,
+  ...
+}:
 
 {
   imports = [ "${modulesPath}/profiles/qemu-guest.nix" ];
@@ -20,14 +25,15 @@
     fsType = "ext4";
   };
 
-  swapDevices = [{
-    device = "/dev/disk/by-uuid/500cfb47-c2b5-4081-b08e-b70080263964";
-  }];
+  swapDevices = [
+    {
+      device = "/dev/disk/by-uuid/500cfb47-c2b5-4081-b08e-b70080263964";
+    }
+  ];
 
   networking.useDHCP = lib.mkDefault false;
   networking.interfaces.ens18.useDHCP = lib.mkDefault false;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  hardware.cpu.amd.updateMicrocode =
-    lib.mkDefault config.hardware.enableRedistributableFirmware;
+  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }

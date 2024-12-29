@@ -1,5 +1,4 @@
-_:
-{
+_: {
   services.spotifyd = {
     enable = true;
     settings = {

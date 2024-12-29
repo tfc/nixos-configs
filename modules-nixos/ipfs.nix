@@ -1,5 +1,4 @@
-_:
-{
+_: {
   services.ipfs = {
     enable = true;
     autoMount = true;

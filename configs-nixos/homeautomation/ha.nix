@@ -26,13 +26,15 @@
   systemd.simple-timers = {
     update-containers = {
       OnCalendar = "Mon 02:00";
-      ExecStart = lib.getExe (pkgs.writeShellScriptBin "update-containers" ''
-        images=$(${pkgs.podman}/bin/podman ps -a --format="{{.Image}}" | sort -u)
+      ExecStart = lib.getExe (
+        pkgs.writeShellScriptBin "update-containers" ''
+          images=$(${pkgs.podman}/bin/podman ps -a --format="{{.Image}}" | sort -u)
 
-        for image in $images; do
-          ${pkgs.podman}/bin/podman pull "$image"
-        done
-      '');
+          for image in $images; do
+            ${pkgs.podman}/bin/podman pull "$image"
+          done
+        ''
+      );
     };
     restart-ha = {
       OnCalendar = "Tue 02:00";

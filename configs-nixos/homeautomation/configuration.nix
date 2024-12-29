@@ -1,4 +1,11 @@
-{ config, pkgs, lib, flakeInputs, self, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  flakeInputs,
+  self,
+  ...
+}:
 
 {
 
@@ -14,7 +21,11 @@
 
   boot = {
     kernelPackages = pkgs.linuxKernel.packages.linux_rpi4;
-    initrd.availableKernelModules = [ "xhci_pci" "usbhid" "usb_storage" ];
+    initrd.availableKernelModules = [
+      "xhci_pci"
+      "usbhid"
+      "usb_storage"
+    ];
     loader = {
       grub.enable = false;
       generic-extlinux-compatible.enable = true;
@@ -63,13 +74,15 @@
 
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
-  home-manager.users.tfc = { ... }: {
-    home.stateVersion = "22.11";
-    programs.home-manager.enable = true;
-    imports = with self.homeManagerModules; [
-      shell-bash
-      shelltools
-      vim
-    ];
-  };
+  home-manager.users.tfc =
+    { ... }:
+    {
+      home.stateVersion = "22.11";
+      programs.home-manager.enable = true;
+      imports = with self.homeManagerModules; [
+        shell-bash
+        shelltools
+        vim
+      ];
+    };
 }

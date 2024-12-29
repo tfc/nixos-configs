@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   imports = [
     ./nix-native-gitrunner.nix
   ];
@@ -12,7 +13,11 @@
 
   console.keyMap = "us";
 
-  environment.systemPackages = with pkgs; [ git vim wget ];
+  environment.systemPackages = with pkgs; [
+    git
+    vim
+    wget
+  ];
 
   i18n.defaultLocale = "en_US.UTF-8";
 
