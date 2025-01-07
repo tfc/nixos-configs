@@ -16,7 +16,7 @@
 
   services.postgresql = {
     enable = true;
-    extraPlugins = [
+    extensions = [
       config.services.postgresql.package.pkgs.pgvector
     ];
     initialScript = builtins.toFile "postgres-initScript" ''

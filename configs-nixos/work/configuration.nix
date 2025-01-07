@@ -1,9 +1,16 @@
-{ pkgs, config, ... }:
+{ pkgs, config, self, flakeInputs, ... }:
 
 {
   imports = [
-    ./hardware-configuration.nix
+    self.nixosModules.flakes
+    self.nixosModules.make-linux-fast-again
+    self.nixosModules.remote-deployable
+    self.nixosModules.simple-timers
+    self.nixosModules.user-tfc
+    flakeInputs.home-manager.nixosModules.home-manager
     ./ai.nix
+    ./droidcam.nix
+    ./hardware-configuration.nix
     ./nvidia.nix
   ];
 
@@ -46,4 +53,23 @@
   nixpkgs.config.allowUnfree = true;
   hardware.enableAllFirmware = true;
   system.stateVersion = "24.11";
+
+  home-manager.useGlobalPkgs = true;
+  home-manager.useUserPackages = true;
+  home-manager.users.tfc = { ... }: {
+  home.stateVersion = "23.11";
+  programs.home-manager.enable = true;
+    imports = with self.homeManagerModules; [
+      obs
+      gnome
+      desktop
+      programming-haskell
+      programming
+      shell-bash
+      shelltools
+      vim
+      tmux
+      ssh
+    ];
+  };
 }
