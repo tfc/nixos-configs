@@ -2,8 +2,8 @@
 
 {
   home.packages = with pkgs; [
-    #gpick
     kdenlive
+    losslesscut-bin
     shotcut
     (wrapOBS {
       plugins = with obs-studio-plugins; [

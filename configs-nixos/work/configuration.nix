@@ -3,21 +3,26 @@
 {
   imports = [
     self.nixosModules.flakes
-    self.nixosModules.make-linux-fast-again
     self.nixosModules.remote-deployable
     self.nixosModules.simple-timers
     self.nixosModules.user-tfc
     flakeInputs.home-manager.nixosModules.home-manager
     ./ai.nix
-    ./droidcam.nix
     ./hardware-configuration.nix
     ./nvidia.nix
   ];
 
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.systemd-boot.configurationLimit = 3;
+  boot.loader.systemd-boot = {
+    enable = true;
+    configurationLimit = 3;
+  };
   networking.hostName = "work";
   networking.networkmanager.enable = true;
+
+  boot.kernelParams = [
+    "rtl8821ae.ips=0"
+    "rtl8821ae.aspm=0"
+  ];
 
   powerManagement.cpuFreqGovernor = "performance";
 
@@ -25,14 +30,15 @@
 
   i18n.defaultLocale = "en_US.UTF-8";
 
-  services.xserver.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
-  services.xserver.displayManager.gdm.enable = true;
+  services.xserver = {
+    enable = true;
+    desktopManager.gnome.enable = true;
+    displayManager.gdm.enable = true;
+    xkb.layout = "us";
+    xkb.options = "eurosign:e,caps:escape";
+  };
 
-  services.xserver.xkb.layout = "us";
-  services.xserver.xkb.options = "eurosign:e,caps:escape";
-
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   services.pipewire = {
     enable = true;
     pulse.enable = true;
