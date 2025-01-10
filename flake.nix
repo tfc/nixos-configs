@@ -33,6 +33,8 @@
       specialArgs.self = inputs.self;
       nix-darwin = inputs.darwin;
     };
-    debug = true;
+    flake = {
+      packages.x86_64-linux.vim = inputs.self.nixosConfigurations.work.config.home-manager.users.tfc.programs.neovim.finalPackage;
+    };
   };
 }
