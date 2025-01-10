@@ -11,14 +11,14 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    nixos-hardware.url = "github:nixos/nixos-hardware/master";
+    nixos-hardware.url = "github:nixos/nixos-hardware";
 
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     darwin.url = "github:lnl7/nix-darwin";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
 
-    sysmodule-flake.url = "/Users/tfc/src/asg/sysmodule-flake"; #"github:applicative-systems/sysmodule-flake";
+    sysmodule-flake.url = "github:applicative-systems/sysmodule-flake";
     sysmodule-flake.inputs.nixpkgs.follows = "nixpkgs";
     sysmodule-flake.inputs.flake-parts.follows = "flake-parts";
   };
