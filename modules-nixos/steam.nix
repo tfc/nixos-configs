@@ -1,4 +1,5 @@
 { pkgs, config, ... }:
+
 {
   hardware.graphics = {
     enable = true;
@@ -6,8 +7,7 @@
     enable32Bit = true;
   };
 
-  # optionally enable 32bit pulseaudio support if pulseaudio is enabled
-  hardware.pulseaudio.support32Bit = config.hardware.pulseaudio.enable;
+  services.pulseaudio.support32Bit = config.services.pulseaudio.enable;
 
   hardware.steam-hardware.enable = true;
 

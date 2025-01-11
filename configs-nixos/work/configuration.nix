@@ -3,9 +3,17 @@
 {
   imports = [
     self.nixosModules.flakes
+    self.nixosModules.make-linux-fast-again
+    self.nixosModules.nix-service
+    self.nixosModules.nix-unstable
+    self.nixosModules.nixcademy-gdm-logo
+    self.nixosModules.nixcademy-gnome-background
+    self.nixosModules.nixcademy-plymouth-logo
     self.nixosModules.remote-deployable
     self.nixosModules.simple-timers
+    self.nixosModules.steam
     self.nixosModules.user-tfc
+    self.nixosModules.virtualization
     flakeInputs.home-manager.nixosModules.home-manager
     ./ai.nix
     ./hardware-configuration.nix
