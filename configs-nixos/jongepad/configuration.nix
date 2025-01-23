@@ -1,9 +1,26 @@
-{ pkgs, lib, config, ... }:
+{ pkgs, config, lib, self, flakeInputs, ... }:
 {
   imports = [
+    self.nixosModules.desktop
+    self.nixosModules.firmware
+    self.nixosModules.flakes
+    self.nixosModules.make-linux-fast-again
+    self.nixosModules.nix-unstable
+    self.nixosModules.nixcademy-gdm-logo
+    self.nixosModules.nixcademy-gnome-background
+    self.nixosModules.nixcademy-plymouth-logo
+    self.nixosModules.pipewire
+    self.nixosModules.printing
+    self.nixosModules.remote-deployable
+    self.nixosModules.simple-timers
+    self.nixosModules.steam
+    self.nixosModules.user-tfc
+    self.nixosModules.virtualization
+    flakeInputs.home-manager.nixosModules.home-manager
     ./hardware-configuration.nix
   ];
 
+  nixpkgs.hostPlatform = "x86_64-linux";
   nixpkgs.config.permittedInsecurePackages = [ "electron-24.8.6" ];
 
   boot.loader.systemd-boot.enable = true;
@@ -68,4 +85,23 @@
   };
 
   powerManagement.powertop.enable = true;
+
+  home-manager.useGlobalPkgs = true;
+  home-manager.useUserPackages = true;
+  home-manager.users.tfc = { ... }: {
+  home.stateVersion = "23.11";
+  programs.home-manager.enable = true;
+    imports = with self.homeManagerModules; [
+      obs
+      gnome
+      desktop
+      programming-haskell
+      programming
+      shell-bash
+      shelltools
+      vim
+      tmux
+      ssh
+    ];
+  };
 }
