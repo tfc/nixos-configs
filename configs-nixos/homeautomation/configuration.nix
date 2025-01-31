@@ -17,6 +17,7 @@
     self.nixosModules.user-tfc
     flakeInputs.home-manager.nixosModules.home-manager
     ./ha.nix
+    ./grafana.nix
   ];
 
   boot = {
