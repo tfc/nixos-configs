@@ -63,19 +63,19 @@
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
   home-manager.users.tfc = { ... }: {
-  home.stateVersion = "23.11";
-  programs.home-manager.enable = true;
-    imports = with self.homeManagerModules; [
-      obs
-      gnome
-      desktop
-      programming-haskell
-      programming
-      shell-bash
-      shelltools
-      vim
-      tmux
-      ssh
-    ];
+    home.stateVersion = "23.11";
+    programs.home-manager.enable = true;
+      imports = with self.homeManagerModules; [
+        obs
+        gnome
+        desktop
+        programming-haskell
+        programming
+        shell-bash
+        shelltools
+        vim
+        tmux
+        ssh
+      ];
   };
 }
