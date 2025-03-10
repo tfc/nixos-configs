@@ -2,6 +2,8 @@
   pkgs,
   lib,
   config,
+  self,
+  flakeInputs,
   ...
 }:
 {
@@ -97,11 +99,11 @@
 
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
+  home-manager.backupFileExtension = "backup";
   home-manager.users.tfc = { ... }: {
   home.stateVersion = "23.11";
   programs.home-manager.enable = true;
     imports = with self.homeManagerModules; [
-      obs
       gnome
       desktop
       programming-haskell

@@ -2,7 +2,7 @@
 
 {
   home.packages = with pkgs; [
-    kdenlive
+    kdePackages.kdenlive
     losslesscut-bin
     shotcut
     (wrapOBS {
