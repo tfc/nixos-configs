@@ -47,4 +47,5 @@
   services.hercules-ci-agent.enable = true;
 
   system.stateVersion = "20.03";
+  nixpkgs.hostPlatform = "x86_64-linux";
 }
