@@ -39,7 +39,6 @@ in
     };
   };
 
-  services.nix-daemon.enable = true;
   nix = {
     # Run `softwareupdate --install-rosetta --agree-to-license` first
     extraOptions = ''
@@ -66,7 +65,7 @@ in
 
   nixpkgs.config.allowUnfree = true;
 
-  security.pam.enableSudoTouchIdAuth = true;
+  security.pam.services.sudo_local.touchIdAuth = true;
   programs.bash.completion.enable = true;
 
   programs.zsh = {
@@ -102,6 +101,7 @@ in
 
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
+  home-manager.backupFileExtension = "backup";
   home-manager.users.tfc =
     { ... }:
     {
