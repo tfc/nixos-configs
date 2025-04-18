@@ -42,6 +42,7 @@
     enable = true;
     desktopManager.gnome.enable = true;
     displayManager.gdm.enable = true;
+    displayManager.gdm.wayland = false;
     xkb.layout = "us";
     xkb.options = "eurosign:e,caps:escape";
   };
