@@ -100,7 +100,6 @@ in
   system.stateVersion = 4;
 
   home-manager.useGlobalPkgs = true;
-  home-manager.useUserPackages = true;
   home-manager.backupFileExtension = "backup";
   home-manager.users.tfc =
     { ... }:
