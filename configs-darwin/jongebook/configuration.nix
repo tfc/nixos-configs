@@ -13,6 +13,8 @@ in
 {
   nixpkgs.hostPlatform = "aarch64-darwin";
 
+  system.primaryUser = "tfc";
+
   imports = [
     flakeInputs.home-manager.darwinModules.home-manager
   ];
@@ -107,13 +109,14 @@ in
       home.stateVersion = "23.11";
       programs.home-manager.enable = true;
       imports = with self.homeManagerModules; [
-        programming-haskell
+        ollama
         programming
+        programming-haskell
         shell-zsh
         shelltools
-        vim
-        tmux
         ssh
+        tmux
+        vim
       ];
     };
 }

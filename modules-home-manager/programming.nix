@@ -13,7 +13,7 @@
     nixpkgs-fmt
     pgcli
     shellcheck
-    sloccount
+    loccount
     yq
   ];
 
