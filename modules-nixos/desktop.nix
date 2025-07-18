@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 {
-  services.xserver.desktopManager.gnome.enable = true;
+  services.desktopManager.gnome.enable = true;
 
   environment.systemPackages = with pkgs.gnomeExtensions; [
     appindicator
@@ -14,9 +14,12 @@
     pkgs.wireguard-tools # for vpn stuff
   ];
 
+  services.displayManager.gdm = {
+    enable = true;
+    wayland = false;
+  };
+
   services.xserver = {
-    displayManager.gdm.enable = true;
-    displayManager.gdm.wayland = false;
     enable = true;
     xkb.layout = "us";
     xkb.options = "eurosign:e";

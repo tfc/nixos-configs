@@ -3,7 +3,7 @@
 {
   hardware.graphics = {
     enable = true;
-    extraPackages = [ pkgs.mesa.drivers ];
+    extraPackages = [ pkgs.mesa ];
     enable32Bit = true;
   };
 
