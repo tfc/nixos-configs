@@ -48,6 +48,13 @@
   # https://bbs.archlinux.org/viewtopic.php?id=263720
   boot.kernelParams = [ "intel_idle.max_cstate=4" ];
 
+  boot.plymouth.enable = true;
+  customization = {
+    gdm-logo.enable = true;
+    gnome-background.enable = true;
+    plymouth-logo.enable = true;
+  };
+
   console = {
     font = "Lat2-Terminus16";
     keyMap = "us";
