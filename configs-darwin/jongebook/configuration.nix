@@ -109,7 +109,6 @@ in
       home.stateVersion = "23.11";
       programs.home-manager.enable = true;
       imports = with self.homeManagerModules; [
-        ollama
         programming
         programming-haskell
         shell-zsh
