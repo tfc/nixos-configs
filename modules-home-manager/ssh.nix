@@ -19,7 +19,6 @@ in
     matchBlocks = hostPartMapping [
       "server-sicherheit.lxht.de"
       "training-machine.nixcademy.com"
-      "build01.nix-consulting.de"
     ];
     extraConfig = lib.optionalString pkgs.stdenv.targetPlatform.isDarwin ''
       IgnoreUnknown AddKeysToAgent,UseKeychain

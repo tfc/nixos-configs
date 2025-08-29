@@ -2,7 +2,6 @@
 
 {
   home.packages = with pkgs; [
-    arion
     cachix
     gh
     gti
@@ -11,7 +10,6 @@
     niv
     nix-diff
     nixpkgs-fmt
-    pgcli
     shellcheck
     loccount
     yq
