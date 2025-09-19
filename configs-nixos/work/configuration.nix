@@ -26,13 +26,14 @@
   };
   networking.hostName = "work";
   networking.networkmanager.enable = true;
+  boot.initrd.systemd.enable = true;
 
   boot.kernelParams = [
     "rtl8821ae.ips=0"
     "rtl8821ae.aspm=0"
   ];
 
-  powerManagement.cpuFreqGovernor = "performance";
+  powerManagement.cpuFreqGovernor = "balanced";
 
   time.timeZone = "Europe/Berlin";
 
@@ -40,11 +41,13 @@
 
   services.xserver = {
     enable = true;
-    desktopManager.gnome.enable = true;
-    displayManager.gdm.enable = true;
-    displayManager.gdm.wayland = false;
     xkb.layout = "us";
     xkb.options = "eurosign:e,caps:escape";
+  };
+  services.desktopManager.gnome.enable = true;
+  services.displayManager = {
+    gdm.enable = true;
+    gdm.wayland = false;
   };
 
   services.pulseaudio.enable = false;

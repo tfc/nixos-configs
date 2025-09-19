@@ -13,7 +13,7 @@
         obs-gstreamer
         obs-move-transition
         obs-multi-rtmp
-        obs-nvfbc
+        #obs-nvfbc
         obs-pipewire-audio-capture
         obs-replay-source
         obs-shaderfilter
