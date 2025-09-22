@@ -21,6 +21,7 @@
     self.nixosModules.virtualization
     flakeInputs.home-manager.nixosModules.home-manager
     flakeInputs.disko.nixosModules.default
+    flakeInputs.nixos-hardware.nixosModules.framework-amd-ai-300-series
     ./disk.nix
   ];
 
@@ -64,6 +65,7 @@
 
   nixpkgs.config.allowUnfree = true;
 
+  services.fwupd.enable = true;
   services.openssh.enable = true;
 
   system.stateVersion = "25.05";
