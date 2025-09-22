@@ -10,7 +10,7 @@ let
   logo = pkgs.runCommand "logo.png" { HOME = "/build"; } ''
     ${pkgs.inkscape}/bin/inkscape -w 256 -o $out ${cfg.logoPath}
   '';
-  customBreeze = pkgs.plasma5Packages.breeze-plymouth.override {
+  customBreeze = pkgs.kdePackages.breeze-plymouth.override {
     logoFile = logo;
     logoName = "Nixcademy";
     osName = "NixOS";
