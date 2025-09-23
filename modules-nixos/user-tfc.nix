@@ -19,6 +19,7 @@ _:
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIManOIJLP/sPj7glqo6R1+6+oJJToiNxtbHOLPPU187y tfc@jongebook-legacy"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIODOm+UWxSpA1f7+CAQkTHy3njziOUHePTH/O9OKATer root@jongepad"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIP5MEOU5rwpkGtzR4p/1BEUj2ekg5KmmR+QGF8qNuQFL tfc@jongebook"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL7I8SFIFoKEBJEPEEUp14PuwA1Z+olKcL3OKlaxI//6 tfc@framejonge"
     ];
   };
 }
