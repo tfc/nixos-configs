@@ -13,11 +13,9 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    services.xserver.desktopManager.gnome = {
-      extraGSettingsOverrides = ''
-        [org.gnome.desktop.background]
-        picture-uri='file://${cfg.backgroundFile}'
-      '';
-    };
+    services.desktopManager.gnome.extraGSettingsOverrides = ''
+      [org.gnome.desktop.background]
+      picture-uri='file://${cfg.backgroundFile}'
+    '';
   };
 }

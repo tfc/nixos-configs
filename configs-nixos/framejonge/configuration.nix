@@ -8,9 +8,14 @@
 }:
 {
   imports = [
+    ./disk.nix
+    flakeInputs.disko.nixosModules.default
+    flakeInputs.home-manager.nixosModules.home-manager
+    flakeInputs.nixos-hardware.nixosModules.framework-amd-ai-300-series
     self.nixosModules.desktop
     self.nixosModules.firmware
     self.nixosModules.flakes
+    self.nixosModules.nix-service
     self.nixosModules.nix-unstable
     self.nixosModules.nixcademy-gdm-logo
     self.nixosModules.nixcademy-gnome-background
@@ -19,10 +24,6 @@
     self.nixosModules.steam
     self.nixosModules.user-tfc
     self.nixosModules.virtualization
-    flakeInputs.home-manager.nixosModules.home-manager
-    flakeInputs.disko.nixosModules.default
-    flakeInputs.nixos-hardware.nixosModules.framework-amd-ai-300-series
-    ./disk.nix
   ];
 
   nixpkgs.hostPlatform = "x86_64-linux";

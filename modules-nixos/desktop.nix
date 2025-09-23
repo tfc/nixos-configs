@@ -14,18 +14,13 @@
     pkgs.wireguard-tools # for vpn stuff
   ];
 
-  services.displayManager.gdm = {
-    enable = true;
-    wayland = false;
-  };
+  services.displayManager.gdm.enable = true;
 
   services.xserver = {
     enable = true;
     xkb.layout = "us";
     xkb.options = "eurosign:e";
-    wacom.enable = true;
   };
-  services.libinput.enable = true;
 
   fonts.packages = [
     pkgs.google-fonts
