@@ -21,6 +21,9 @@
     sysmodule-flake.url = "github:applicative-systems/sysmodule-flake";
     sysmodule-flake.inputs.nixpkgs.follows = "nixpkgs";
     sysmodule-flake.inputs.flake-parts.follows = "flake-parts";
+
+    microvm.url = "github:microvm-nix/microvm.nix";
+    microvm.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =

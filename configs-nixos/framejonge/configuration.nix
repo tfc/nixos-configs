@@ -35,6 +35,7 @@
   boot.tmp.cleanOnBoot = true;
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
+  hardware.framework.enableKmod = true;
 
   boot.plymouth.enable = true;
   customization = {
@@ -63,6 +64,7 @@
   networking.hostName = "framejonge";
   networking.firewall.logRefusedConnections = false;
   networking.networkmanager.enable = true;
+  networking.useNetworkd = true;
 
   nixpkgs.config.allowUnfree = true;
 
