@@ -3,15 +3,18 @@
 {
   home.packages = with pkgs; [
     cachix
+    deadnix
     gh
     gti
     httpie
     jq
+    loccount
     niv
     nix-diff
+    nixfmt
     nixpkgs-fmt
     shellcheck
-    loccount
+    statix
     yq
   ];
 
