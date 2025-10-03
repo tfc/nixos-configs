@@ -26,18 +26,20 @@
   services.prometheus = {
     enable = true;
 
-    scrapeConfigs = [ {
-      job_name = "homeautomation";
-      static_configs =
-        let
-          f = port: { targets = [ "localhost:${builtins.toString port}" ]; };
-          ports = [
-            config.services.prometheus.exporters.node.port
-            config.services.prometheus.exporters.systemd.port
-          ];
-        in
+    scrapeConfigs = [
+      {
+        job_name = "homeautomation";
+        static_configs =
+          let
+            f = port: { targets = [ "localhost:${builtins.toString port}" ]; };
+            ports = [
+              config.services.prometheus.exporters.node.port
+              config.services.prometheus.exporters.systemd.port
+            ];
+          in
           map f ports;
-    } ];
+      }
+    ];
   };
 
   services.prometheus.exporters = {

@@ -1,7 +1,6 @@
 {
   pkgs,
   lib,
-  config,
   self,
   flakeInputs,
   ...
@@ -107,19 +106,21 @@
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
   home-manager.backupFileExtension = "backup";
-  home-manager.users.tfc = { ... }: {
-  home.stateVersion = "23.11";
-  programs.home-manager.enable = true;
-    imports = with self.homeManagerModules; [
-      gnome
-      desktop
-      programming-haskell
-      programming
-      shell-bash
-      shelltools
-      vim
-      tmux
-      ssh
-    ];
-  };
+  home-manager.users.tfc =
+    { ... }:
+    {
+      home.stateVersion = "23.11";
+      programs.home-manager.enable = true;
+      imports = with self.homeManagerModules; [
+        gnome
+        desktop
+        programming-haskell
+        programming
+        shell-bash
+        shelltools
+        vim
+        tmux
+        ssh
+      ];
+    };
 }

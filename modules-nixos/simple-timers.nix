@@ -11,7 +11,7 @@ let
     wantedBy = [ "timers.target" ];
   };
 
-  attrsToService = name: value: {
+  attrsToService = _name: value: {
     serviceConfig = {
       Type = "oneshot";
       inherit (value) ExecStart;

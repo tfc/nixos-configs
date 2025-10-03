@@ -1,4 +1,9 @@
-{ pkgs, config, self, flakeInputs, ... }:
+{
+  pkgs,
+  self,
+  flakeInputs,
+  ...
+}:
 
 {
   imports = [
@@ -74,9 +79,11 @@
 
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
-  home-manager.users.tfc = { ... }: {
-    home.stateVersion = "23.11";
-    programs.home-manager.enable = true;
+  home-manager.users.tfc =
+    { ... }:
+    {
+      home.stateVersion = "23.11";
+      programs.home-manager.enable = true;
       imports = with self.homeManagerModules; [
         obs
         gnome
@@ -89,5 +96,5 @@
         tmux
         ssh
       ];
-  };
+    };
 }

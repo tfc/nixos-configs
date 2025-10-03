@@ -43,8 +43,10 @@
         nix-darwin = inputs.darwin;
       };
 
-      perSystem = { pkgs, ... }: {
-        formatter = pkgs.nixfmt-rfc-style;
-      };
+      perSystem =
+        { pkgs, ... }:
+        {
+          formatter = pkgs.nixfmt-rfc-style;
+        };
     };
 }
