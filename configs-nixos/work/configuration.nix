@@ -85,16 +85,17 @@
       home.stateVersion = "23.11";
       programs.home-manager.enable = true;
       imports = with self.homeManagerModules; [
-        obs
-        gnome
         desktop
-        programming-haskell
+        gnome
+        obs
         programming
+        programming-haskell
         shell-bash
         shelltools
-        vim
-        tmux
         ssh
+        tmux
+        vim
+        vscode
       ];
     };
 }
