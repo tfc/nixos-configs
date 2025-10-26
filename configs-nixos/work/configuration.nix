@@ -20,7 +20,7 @@
     self.nixosModules.user-tfc
     self.nixosModules.virtualization
     flakeInputs.home-manager.nixosModules.home-manager
-    ./ai.nix
+    #./ai.nix
     ./hardware-configuration.nix
     ./nvidia.nix
   ];
