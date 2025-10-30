@@ -15,6 +15,7 @@
     sqlitebrowser
     vlc
     xournalpp
+    ghostty
   ];
 
   manual.html.enable = true;
