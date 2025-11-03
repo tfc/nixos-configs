@@ -1,5 +1,6 @@
 {
   pkgs,
+  config,
   lib,
   self,
   flakeInputs,
@@ -70,6 +71,13 @@
 
   services.fwupd.enable = true;
   services.openssh.enable = true;
+
+  services.tailscale.enable = true;
+  networking.firewall = {
+    checkReversePath = "loose";
+    trustedInterfaces = [ "tailscale0" ];
+    allowedUDPPorts = [ config.services.tailscale.port ];
+  };
 
   system.stateVersion = "25.05";
 
