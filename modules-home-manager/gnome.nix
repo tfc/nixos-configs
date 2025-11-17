@@ -8,7 +8,6 @@
     eog
     gnome-tweaks
     gnome-firmware
-    gnome-firmware-updater
   ];
 
   programs.gnome-terminal = {

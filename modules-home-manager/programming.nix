@@ -21,12 +21,10 @@
   programs.git = {
     enable = true;
     lfs.enable = true;
-    extraConfig = {
+    settings = {
       credential.helper = "store";
       init.defaultBranch = "main";
       push.autoSetupRemote = true;
-    };
-    settings = {
       user = {
         name = "Jacek Galowicz";
         email = "jacek@galowicz.de";
