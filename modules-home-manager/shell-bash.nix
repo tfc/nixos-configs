@@ -1,11 +1,6 @@
 { pkgs, ... }:
 
 {
-  home.packages = with pkgs; [
-    bash-completion
-    bashInteractive
-  ];
-
   programs.bash = {
     enable = true;
     sessionVariables = {
