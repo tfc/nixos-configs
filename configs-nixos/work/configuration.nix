@@ -50,10 +50,7 @@
     xkb.options = "eurosign:e,caps:escape";
   };
   services.desktopManager.gnome.enable = true;
-  services.displayManager = {
-    gdm.enable = true;
-    gdm.wayland = false;
-  };
+  services.displayManager.gdm.enable = true;
 
   services.pulseaudio.enable = false;
   services.pipewire = {
