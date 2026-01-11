@@ -39,6 +39,10 @@
     "rtl8821ae.aspm=0"
   ];
 
+  customization.gdm-logo.enable = true;
+  customization.gnome-background.enable = true;
+  customization.plymouth-logo.enable = true;
+
   powerManagement.cpuFreqGovernor = "balanced";
 
   time.timeZone = "Europe/Berlin";
