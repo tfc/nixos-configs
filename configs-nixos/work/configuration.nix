@@ -1,5 +1,6 @@
 {
   pkgs,
+  lib,
   self,
   flakeInputs,
   ...
@@ -67,6 +68,10 @@
     vim
     wget
   ];
+
+  programs.dconf.profiles.gdm.databases = [{
+    settings."org/gnome/desktop/interface".scaling-factor = lib.gvariant.mkUint32 2;
+  }];
 
   services.openssh.enable = true;
 
