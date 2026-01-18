@@ -69,6 +69,10 @@
 
   nixpkgs.config.allowUnfree = true;
 
+  security.run0.wheelNeedsPassword = true;
+  security.run0.enableSudoAlias = true;
+  security.sudo.enable = false;
+
   services.fwupd.enable = true;
   services.openssh.enable = true;
 
