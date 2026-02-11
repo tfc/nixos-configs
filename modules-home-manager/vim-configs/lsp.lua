@@ -49,9 +49,6 @@ nvim_lsp.nixd.setup({
 lspconfig.bashls.setup{
   on_attach = on_attach,
 }
-lspconfig.ltex.setup {
-  on_attach = on_attach,
-}
 lspconfig.purescriptls.setup{
   on_attach = on_attach,
   settings = {
