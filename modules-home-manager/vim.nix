@@ -80,6 +80,6 @@
     bash-language-server
     ccls
     nixd
-    nixfmt-rfc-style
+    nixfmt
   ];
 }
