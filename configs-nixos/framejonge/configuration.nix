@@ -83,6 +83,11 @@
     allowedUDPPorts = [ config.services.tailscale.port ];
   };
 
+  programs.captive-browser.enable = true;
+  programs.captive-browser.interface = "wlp192s0";
+  # not needed with captive browser
+  #networking.resolvconf.dnsExtensionMechanism = false;
+
   system.stateVersion = "25.05";
 
   home-manager.useGlobalPkgs = true;
