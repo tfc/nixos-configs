@@ -14,6 +14,7 @@
     nixfmt
     nixpkgs-fmt
     shellcheck
+    socat
     statix
     yq
   ];
