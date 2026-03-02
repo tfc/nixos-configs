@@ -7,6 +7,7 @@
 
   nix.settings.experimental-features = [
     "auto-allocate-uids"
+    "ca-derivations"
     "cgroups"
   ];
 
