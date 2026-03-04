@@ -14,4 +14,8 @@
   nix.settings.extra-system-features = [
     "uid-range"
   ];
+
+  nix.settings.extra-sandbox-paths = [
+    "/dev/net"
+  ];
 }
