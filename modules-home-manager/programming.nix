@@ -16,6 +16,7 @@
     shellcheck
     socat
     statix
+    vhs
     yq
   ];
 
