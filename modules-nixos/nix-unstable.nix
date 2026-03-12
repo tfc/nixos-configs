@@ -6,6 +6,7 @@
   nix.settings.auto-allocate-uids = true;
 
   nix.settings.experimental-features = [
+    "dynamic-derivations"
     "auto-allocate-uids"
     "ca-derivations"
     "cgroups"
