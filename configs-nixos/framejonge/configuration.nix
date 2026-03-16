@@ -64,8 +64,6 @@
   networking.hostName = "framejonge";
   networking.firewall.logRefusedConnections = false;
   networking.networkmanager.enable = true;
-  networking.useNetworkd = true;
-  systemd.services.NetworkManager-wait-online.enable = lib.mkForce false;
 
   nixpkgs.config.allowUnfree = true;
 
