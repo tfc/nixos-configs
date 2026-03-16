@@ -74,12 +74,12 @@
   services.fwupd.enable = true;
   services.openssh.enable = true;
 
-  services.tailscale.enable = true;
-  networking.firewall = {
-    checkReversePath = "loose";
-    trustedInterfaces = [ "tailscale0" ];
-    allowedUDPPorts = [ config.services.tailscale.port ];
-  };
+  #services.tailscale.enable = true;
+  #networking.firewall = {
+  #  checkReversePath = "loose";
+  #  trustedInterfaces = [ "tailscale0" ];
+  #  allowedUDPPorts = [ config.services.tailscale.port ];
+  #};
 
   programs.captive-browser.enable = true;
   programs.captive-browser.interface = "wlp192s0";
