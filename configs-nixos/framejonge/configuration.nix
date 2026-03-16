@@ -67,7 +67,7 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  security.run0.wheelNeedsPassword = true;
+  security.run0.wheelNeedsPassword = false;
   security.run0.enableSudoAlias = true;
   security.sudo.enable = false;
 
