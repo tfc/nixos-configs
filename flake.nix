@@ -13,7 +13,7 @@
 
     nixos-hardware.url = "github:nixos/nixos-hardware";
 
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable-small";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
     darwin.url = "github:lnl7/nix-darwin";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
@@ -21,9 +21,6 @@
     sysmodule-flake.url = "github:applicative-systems/sysmodule-flake";
     sysmodule-flake.inputs.nixpkgs.follows = "nixpkgs";
     sysmodule-flake.inputs.flake-parts.follows = "flake-parts";
-
-    microvm.url = "github:microvm-nix/microvm.nix";
-    microvm.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
