@@ -8,4 +8,12 @@
     enable = true;
     presets.zluda.enable = true;
   };
+
+  services.ollama = {
+    enable = true;
+    package = pkgs.ollama-rocm;
+  };
+
+  services.nextjs-ollama-llm-ui.enable = true;
+
 }
