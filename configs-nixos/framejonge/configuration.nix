@@ -9,6 +9,7 @@
 {
   imports = [
     ./disk.nix
+    ./zluda.nix
     flakeInputs.disko.nixosModules.default
     flakeInputs.home-manager.nixosModules.home-manager
     flakeInputs.nixos-hardware.nixosModules.framework-amd-ai-300-series
