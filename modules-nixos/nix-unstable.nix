@@ -10,6 +10,7 @@
     "auto-allocate-uids"
     "ca-derivations"
     "cgroups"
+    "blake3-hashes"
   ];
 
   nix.settings.extra-system-features = [
