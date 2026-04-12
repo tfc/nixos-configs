@@ -87,6 +87,8 @@
   # not needed with captive browser
   #networking.resolvconf.dnsExtensionMechanism = false;
 
+  hardware.framework.laptop13.audioEnhancement.enable = true;
+
   system.stateVersion = "25.05";
 
   home-manager.useGlobalPkgs = true;
