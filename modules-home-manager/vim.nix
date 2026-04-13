@@ -12,6 +12,8 @@
     viAlias = true;
     vimdiffAlias = true;
     withNodeJs = true;
+    withRuby = false;
+    withPython3 = false;
     extraConfig = builtins.readFile ./vim-configs/vimrc;
     plugins = with pkgs.vimPlugins; [
       plenary-nvim # dep of haskell-tools.nvim
@@ -23,6 +25,7 @@
       {
         plugin = bufexplorer;
         config = "nnoremap <silent> <F4> :ToggleBufExplorer<CR>";
+        type = "viml";
       }
       {
         plugin = haskell-vim;
@@ -40,6 +43,7 @@
           let g:haskell_indent_case_alternative = 1
           let g:cabal_indent_section = 2
         '';
+        type = "viml";
       }
       {
         plugin = nerdtree;
@@ -55,12 +59,14 @@
 
           nnoremap <silent> <F3> :NERDTreeToggle<CR>
         '';
+        type = "viml";
       }
       {
         plugin = vim-airline;
         config = ''
           set laststatus=2
         '';
+        type = "viml";
       }
       {
         plugin = vim-better-whitespace;
@@ -72,6 +78,7 @@
           let g:show_spaces_that_precede_tabs = 1
           let g:better_whitespace_filetypes_blacklist = ['diff', 'git', 'gitcommit', 'unite', 'qf', 'help', 'fugitive']
         '';
+        type = "viml";
       }
     ];
   };
