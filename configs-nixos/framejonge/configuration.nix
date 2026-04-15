@@ -47,6 +47,9 @@
     git
     vim
     wget
+    via
+    qmk
+    pciutils
   ];
   environment.variables = {
     EDITOR = lib.mkOverride 0 "vim";
@@ -81,6 +84,15 @@
   #networking.resolvconf.dnsExtensionMechanism = false;
 
   hardware.framework.laptop13.audioEnhancement.enable = true;
+
+  services.udev.packages = [
+    pkgs.qmk
+    pkgs.qmk-udev-rules
+    pkgs.qmk_hid
+    pkgs.via
+    pkgs.vial
+  ];
+  hardware.keyboard.qmk.enable = true;
 
   system.stateVersion = "25.05";
 

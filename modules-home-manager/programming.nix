@@ -7,6 +7,7 @@
     gh
     gti
     httpie
+    iotop
     jq
     loccount
     niv
