@@ -22,9 +22,8 @@
       set -sg escape-time 0
       set -g mouse on
 
-      # remove when fixed: https://github.com/nix-community/home-manager/issues/5952
-      set -gu default-command
-      set -g default-shell "$SHELL"
+      bind '"' split-window -c "#{pane_current_path}"
+      bind % split-window -h -c "#{pane_current_path}"
     '';
     plugins = with pkgs.tmuxPlugins; [
       nord
