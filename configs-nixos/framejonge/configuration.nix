@@ -18,9 +18,7 @@
     self.nixosModules.flakes
     self.nixosModules.nix-service
     self.nixosModules.nix-unstable
-    self.nixosModules.nixcademy-gdm-logo
-    self.nixosModules.nixcademy-gnome-background
-    self.nixosModules.nixcademy-plymouth-logo
+    self.nixosModules.applicative-systems-customization
     self.nixosModules.pipewire
     self.nixosModules.steam
     self.nixosModules.user-tfc
@@ -39,11 +37,6 @@
   hardware.framework.enableKmod = true;
 
   boot.plymouth.enable = true;
-  customization = {
-    gdm-logo.enable = true;
-    gnome-background.enable = true;
-    plymouth-logo.enable = true;
-  };
 
   console = {
     font = "Lat2-Terminus16";
