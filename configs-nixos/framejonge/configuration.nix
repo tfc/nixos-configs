@@ -12,14 +12,16 @@
     ./zluda.nix
     flakeInputs.disko.nixosModules.default
     flakeInputs.home-manager.nixosModules.home-manager
+    flakeInputs.lanzaboote.nixosModules.lanzaboote
     flakeInputs.nixos-hardware.nixosModules.framework-amd-ai-300-series
+    self.nixosModules.applicative-systems-customization
     self.nixosModules.desktop
     self.nixosModules.firmware
     self.nixosModules.flakes
     self.nixosModules.nix-service
     self.nixosModules.nix-unstable
-    self.nixosModules.applicative-systems-customization
     self.nixosModules.pipewire
+    self.nixosModules.secureboot
     self.nixosModules.steam
     self.nixosModules.user-tfc
     self.nixosModules.virtualization
