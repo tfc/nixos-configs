@@ -8,14 +8,12 @@ let
     ];
 
     text = ''
-      set -x
       BRIGHTNESS=$(cat '/sys/bus/iio/devices/iio:device0/in_illuminance_raw')
       if [ "$BRIGHTNESS" -lt 100 ]; then
         gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
       else
         gsettings set org.gnome.desktop.interface color-scheme 'prefer-light'
       fi
-      set +x
     '';
   };
 in
