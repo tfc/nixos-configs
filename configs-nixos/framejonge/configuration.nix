@@ -25,6 +25,7 @@
     self.nixosModules.steam
     self.nixosModules.user-tfc
     self.nixosModules.virtualization
+    self.nixosProfiles.gnome-autotheme
   ];
 
   nixpkgs.hostPlatform = "x86_64-linux";
