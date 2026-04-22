@@ -86,6 +86,8 @@
   # not needed with captive browser
   #networking.resolvconf.dnsExtensionMechanism = false;
 
+  services.automatic-timezoned.enable = true;
+
   hardware.framework.laptop13.audioEnhancement.enable = true;
 
   services.udev.packages = [
