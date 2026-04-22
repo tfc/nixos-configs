@@ -30,24 +30,6 @@
         type = "lua";
       }
       {
-        plugin = haskell-vim;
-        config = ''
-          vim.g.haskell_classic_highlighting = 1
-          vim.g.haskell_indent_if = 2
-          vim.g.haskell_indent_case = 2
-          vim.g.haskell_indent_let = 2
-          vim.g.haskell_indent_where = 2
-          vim.g.haskell_indent_before_where = 2
-          vim.g.haskell_indent_after_bare_where = 2
-          vim.g.haskell_indent_do = 2
-          vim.g.haskell_indent_in = 1
-          vim.g.haskell_indent_guard = 2
-          vim.g.haskell_indent_case_alternative = 1
-          vim.g.cabal_indent_section = 2
-        '';
-        type = "lua";
-      }
-      {
         plugin = nerdtree;
         config = ''
           vim.api.nvim_create_autocmd("StdinReadPre", {

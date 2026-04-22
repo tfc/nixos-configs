@@ -1,6 +1,6 @@
 vim.opt.signcolumn = 'yes'
 
-local lspconfig = require('lspconfig')
+local lspconfig = vim.lsp.config
 
 local opts = { noremap=true, silent=true }
 vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
@@ -34,43 +34,3 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
 end
 
-lspconfig.nixd.setup({
-   settings = {
-      nixd = {
-         formatting = {
-            command = { "nixfmt" },
-         },
-      },
-   },
-   on_attach = on_attach,
-})
-
-lspconfig.bashls.setup{
-  on_attach = on_attach,
-}
-lspconfig.purescriptls.setup{
-  on_attach = on_attach,
-  settings = {
-    purescript = {
-      addSpagoSources = true,
-      diagnosticsOnOpen = true,
-      formatter = 'purs-tidy',
-    }
-  },
-  flags = {
-    debounce_text_changes = 200,
-  }
-}
-lspconfig.hls.setup{
-  on_attach = on_attach,
-  haskell = {
-    cabalFormattingProvider = "cabalfmt",
-  },
-}
-lspconfig.ccls.setup {
-  on_attach = on_attach,
-  init_options = {
-    compilationDatabaseDirectory = "build";
-  }
-}
-lspconfig.pyright.setup{}
