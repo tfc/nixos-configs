@@ -30,7 +30,7 @@
       push.autoSetupRemote = true;
       user = {
         name = "Jacek Galowicz";
-        email = "jacek@galowicz.de";
+        email = "jacek@applicative.systems";
       };
       alias = {
         pushfwl = "push --force-with-lease";
