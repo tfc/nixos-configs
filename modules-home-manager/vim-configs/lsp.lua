@@ -1,13 +1,13 @@
 vim.opt.signcolumn = 'yes'
 
+local lspconfig = require('lspconfig')
+
 local opts = { noremap=true, silent=true }
 vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
 vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
-vim.keymap.set('n', '<space>c', vim.lsp.buf.code_action, bufopts)
-
-lspconfig = require('lspconfig')
+vim.keymap.set('n', '<space>c', vim.lsp.buf.code_action, opts)
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -34,8 +34,7 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
 end
 
-local nvim_lsp = require("lspconfig")
-nvim_lsp.nixd.setup({
+lspconfig.nixd.setup({
    settings = {
       nixd = {
          formatting = {
