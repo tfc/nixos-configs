@@ -51,6 +51,7 @@ in
       experimental-features = [
         "flakes"
         "nix-command"
+        "blake3-hashes"
       ];
       system-features = [
         "big-parallel"
