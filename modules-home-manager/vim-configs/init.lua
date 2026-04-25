@@ -63,9 +63,38 @@ opt.guioptions:remove("r")
 
 -- Appearance
 opt.termguicolors = true
-opt.background = "light"
 vim.cmd("syntax enable")
-vim.cmd("colorscheme gruvbox")
+
+local function detect_background()
+  local handle = io.popen("gsettings get org.gnome.desktop.interface color-scheme 2>/dev/null")
+  if not handle then return "light" end
+  local out = handle:read("*a") or ""
+  handle:close()
+  if out:match("prefer%-dark") then
+    return "dark"
+  end
+  return "light"
+end
+
+local function apply_theme()
+  vim.opt.background = detect_background()
+  vim.cmd("colorscheme gruvbox")
+end
+
+apply_theme()
+
+if vim.fn.executable("dconf") == 1 then
+  vim.fn.jobstart({ "dconf", "watch", "/org/gnome/desktop/interface/" }, {
+    on_stdout = function(_, data)
+      for _, line in ipairs(data) do
+        if line:match("color%-scheme") then
+          vim.schedule(apply_theme)
+          break
+        end
+      end
+    end,
+  })
+end
 
 -- Load LSP config
 local lsp_config_path = vim.fn.stdpath('config') .. '/lsp.lua'
