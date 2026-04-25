@@ -14,7 +14,6 @@
     flakeInputs.home-manager.nixosModules.home-manager
     flakeInputs.lanzaboote.nixosModules.lanzaboote
     flakeInputs.nixos-hardware.nixosModules.framework-amd-ai-300-series
-    self.nixosModules.applicative-systems-customization
     self.nixosModules.desktop
     self.nixosModules.firmware
     self.nixosModules.flakes
@@ -26,6 +25,7 @@
     self.nixosModules.user-tfc
     self.nixosModules.virtualization
     self.nixosProfiles.gnome-autotheme
+    self.nixosProfiles.applicative-systems-customization
   ];
 
   nixpkgs.hostPlatform = "x86_64-linux";

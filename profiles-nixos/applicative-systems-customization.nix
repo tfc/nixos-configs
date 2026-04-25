@@ -27,10 +27,15 @@ in
     };
     gnome-background = {
       enable = lib.mkEnableOption "GNOME custom background setter" // { default = true; };
-      backgroundFile = lib.mkOption {
+      lightFile = lib.mkOption {
         type = lib.types.path;
-        default = ./artwork/wallpaper-applicative.png;
-        description = "Path to the background file";
+        default = ./artwork/wallpaper-applicative-light.webp;
+        description = "Path to the wallpaper used with the light color scheme";
+      };
+      darkFile = lib.mkOption {
+        type = lib.types.path;
+        default = ./artwork/wallpaper-applicative-dark.webp;
+        description = "Path to the wallpaper used with the dark color scheme";
       };
     };
     plymouth-logo = {
@@ -56,7 +61,8 @@ in
     (lib.mkIf cfg.gnome-background.enable {
       services.desktopManager.gnome.extraGSettingsOverrides = ''
         [org.gnome.desktop.background]
-        picture-uri='file://${cfg.gnome-background.backgroundFile}'
+        picture-uri='file://${cfg.gnome-background.lightFile}'
+        picture-uri-dark='file://${cfg.gnome-background.darkFile}'
       '';
     })
     (lib.mkIf cfg.plymouth-logo.enable {
