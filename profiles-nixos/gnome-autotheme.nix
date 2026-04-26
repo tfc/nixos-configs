@@ -11,7 +11,7 @@ let
     ];
 
     text = ''
-      threshold=100
+      threshold=800
       interval=20
       current=""
 
