@@ -10,6 +10,21 @@
       reattach-to-user-namespace # sensible
     ];
 
+  programs.bash.profileExtra = ''
+    _tmux_rename_pwd() {
+      [ -n "$TMUX" ] && tmux rename-window "''${PWD##*/}"
+    }
+    PROMPT_COMMAND="_tmux_rename_pwd''${PROMPT_COMMAND:+;$PROMPT_COMMAND}"
+  '';
+
+  programs.zsh.initContent = ''
+    _tmux_rename_pwd() {
+      [ -n "$TMUX" ] && tmux rename-window "''${PWD##*/}"
+    }
+    chpwd_functions+=(_tmux_rename_pwd)
+    _tmux_rename_pwd
+  '';
+
   programs.tmux = {
     aggressiveResize = true;
     clock24 = true;
