@@ -22,9 +22,6 @@
       set -sg escape-time 0
       set -g mouse on
 
-      set -g pane-border-status top
-      set -g pane-border-format " #{b:pane_current_path} "
-
       bind '"' split-window -c "#{pane_current_path}"
       bind % split-window -h -c "#{pane_current_path}"
     '';
