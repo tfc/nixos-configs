@@ -42,6 +42,7 @@
         cp = "cherry-pick";
       };
     };
+    signing.format = null;
   };
 
   programs.lazygit.enable = true;
