@@ -9,7 +9,6 @@
     gh
     gti
     httpie
-    iotop
     jq
     loccount
     niv
@@ -22,7 +21,9 @@
     statix
     vhs
     yq
-  ];
+  ] ++ (lib.optionals pkgs.stdenv.isLinux [
+    iotop
+  ]);
 
   programs.git = {
     enable = true;
