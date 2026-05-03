@@ -12,14 +12,12 @@
     self.nixosModules.make-linux-fast-again
     self.nixosModules.nix-service
     self.nixosModules.nix-unstable
-    self.nixosModules.nixcademy-gdm-logo
-    self.nixosModules.nixcademy-gnome-background
-    self.nixosModules.nixcademy-plymouth-logo
     self.nixosModules.remote-deployable
     self.nixosModules.simple-timers
     self.nixosModules.steam
     self.nixosModules.user-tfc
     self.nixosModules.virtualization
+    self.nixosProfiles.applicative-systems-customization
     flakeInputs.home-manager.nixosModules.home-manager
     ./ai.nix
     ./hardware-configuration.nix
@@ -38,10 +36,6 @@
     "rtl8821ae.ips=0"
     "rtl8821ae.aspm=0"
   ];
-
-  customization.gdm-logo.enable = true;
-  customization.gnome-background.enable = true;
-  customization.plymouth-logo.enable = true;
 
   powerManagement.cpuFreqGovernor = "balanced";
 
