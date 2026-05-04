@@ -19,6 +19,7 @@
     self.nixosModules.virtualization
     self.nixosProfiles.applicative-systems-customization
     flakeInputs.home-manager.nixosModules.home-manager
+    flakeInputs.medusa.nixosModules.medusa-builder
     ./ai.nix
     ./hardware-configuration.nix
     ./nvidia.nix
@@ -26,7 +27,15 @@
 
   nixpkgs.overlays = [
     self.overlays.default
+    flakeInputs.medusa.overlays.default
   ];
+
+  services.medusa-builder = {
+    enable = true;
+    medusaHost = "medusa.nix-consulting.net";
+    medusaPort = 45678;
+    enrollmentTokenFile = "/tmp/medusa-token";
+  };
 
   boot.loader.systemd-boot = {
     enable = true;

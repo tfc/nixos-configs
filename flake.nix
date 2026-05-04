@@ -11,6 +11,10 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
+    medusa.url = "git+ssh://git@github.com/tfc/argunix";
+    medusa.inputs.nixpkgs.follows = "nixpkgs";
+    medusa.inputs.flake-parts.follows = "flake-parts";
+
     lanzaboote.url = "github:nix-community/lanzaboote/v1.0.0";
     lanzaboote.inputs.nixpkgs.follows = "nixpkgs";
 
