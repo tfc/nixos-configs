@@ -4,8 +4,10 @@ Reads ~/.claude/sessions/*.json and renders a table that refreshes
 once per second. Busy sessions are green, idle sessions yellow,
 waiting sessions red. Quit with Ctrl-C or 'q'.
 
-Pass --on-idle CMD to run a shell command whenever any session
-transitions into the idle state (e.g. --on-idle play-ready-sound).
+Pass --on-idle CMD / --on-waiting CMD to run a shell command whenever
+any session transitions into the matching state (e.g. --on-idle
+play-ready-sound). The "waiting" state is when Claude is blocked on a
+permission prompt or other user input.
 """
 
 from __future__ import annotations
@@ -49,14 +51,29 @@ def pid_alive(pid: int) -> bool:
     return True
 
 
+def _read_session_file(path: Path) -> dict | None:
+    # Sessions are rewritten in place, so a read can race with a write
+    # and yield empty / truncated JSON. Retry briefly so we don't drop
+    # the session — and miss its state transition — for a whole cycle.
+    for attempt in range(4):
+        try:
+            return json.loads(path.read_text())
+        except json.JSONDecodeError:
+            if attempt == 3:
+                return None
+            time.sleep(0.02)
+        except OSError:
+            return None
+    return None
+
+
 def load_sessions() -> list[Session]:
     sessions: list[Session] = []
     if not SESSIONS_DIR.is_dir():
         return sessions
     for path in sorted(SESSIONS_DIR.glob("*.json")):
-        try:
-            data = json.loads(path.read_text())
-        except (OSError, json.JSONDecodeError):
+        data = _read_session_file(path)
+        if data is None:
             continue
         pid = int(data.get("pid", 0))
         if not pid:
@@ -105,7 +122,7 @@ COLUMNS = [
 ]
 
 
-def run_idle_command(command: str) -> None:
+def run_transition_command(command: str) -> None:
     try:
         subprocess.Popen(
             command,
@@ -119,7 +136,11 @@ def run_idle_command(command: str) -> None:
         pass
 
 
-def draw(stdscr: "curses._CursesWindow", on_idle: str | None) -> None:
+def draw(
+    stdscr: "curses._CursesWindow",
+    on_idle: str | None,
+    on_waiting: str | None,
+) -> None:
     curses.curs_set(0)
     stdscr.nodelay(True)
     stdscr.timeout(int(REFRESH_SECONDS * 1000))
@@ -133,21 +154,31 @@ def draw(stdscr: "curses._CursesWindow", on_idle: str | None) -> None:
     curses.init_pair(5, curses.COLOR_CYAN, -1)    # header
     DIM = curses.A_DIM
 
+    triggers = {"idle": on_idle, "waiting": on_waiting}
     prev_status: dict[int, str] = {}
     first_pass = True
 
     while True:
         sessions = load_sessions()
 
-        if on_idle and not first_pass:
+        if not first_pass:
+            fired: set[str] = set()
             for s in sessions:
-                if not s.alive or s.status != "idle":
+                if not s.alive or s.status in fired:
+                    continue
+                cmd = triggers.get(s.status)
+                if not cmd:
                     continue
                 prev = prev_status.get(s.pid)
-                if prev is not None and prev != "idle":
-                    run_idle_command(on_idle)
-                    break
-        prev_status = {s.pid: s.status for s in sessions if s.alive}
+                if prev is not None and prev != s.status:
+                    run_transition_command(cmd)
+                    fired.add(s.status)
+        # Carry forward last-known status for sessions that briefly
+        # vanished (e.g. transient JSON read failure) so the very next
+        # cycle still sees a real "prev" and can detect the transition.
+        for s in sessions:
+            if s.alive:
+                prev_status[s.pid] = s.status
         first_pass = False
 
         height, width = stdscr.getmaxyx()
@@ -227,6 +258,16 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
             "are discarded."
         ),
     )
+    parser.add_argument(
+        "--on-waiting",
+        default=None,
+        metavar="CMD",
+        help=(
+            "Shell command to run whenever any session transitions to "
+            "waiting (Claude is blocked on a permission prompt or other "
+            "user input). Runs detached; stdout/stderr are discarded."
+        ),
+    )
     return parser.parse_args(argv)
 
 
@@ -240,7 +281,7 @@ def main() -> None:
     except (AttributeError, ValueError):
         pass
     try:
-        curses.wrapper(draw, args.on_idle)
+        curses.wrapper(draw, args.on_idle, args.on_waiting)
     except KeyboardInterrupt:
         pass
 
