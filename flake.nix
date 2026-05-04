@@ -43,10 +43,26 @@
         nix-darwin = inputs.darwin;
       };
 
+      flake = {
+        overlays.default = import ./packages;
+      };
+
       perSystem =
-        { pkgs, ... }:
+        { system, pkgs, ... }:
         {
+          _module.args.pkgs = import inputs.nixpkgs {
+            inherit system;
+            overlays = [ inputs.self.overlays.default ];
+          };
           formatter = pkgs.nixfmt;
+
+          packages = {
+            inherit (pkgs)
+              claude-top
+              claude-top-sound
+              play-ready-sound
+              ;
+          };
         };
     };
 }

@@ -24,6 +24,10 @@
     ./nvidia.nix
   ];
 
+  nixpkgs.overlays = [
+    self.overlays.default
+  ];
+
   boot.loader.systemd-boot = {
     enable = true;
     configurationLimit = 3;
@@ -77,11 +81,10 @@
   hardware.enableAllFirmware = true;
   system.stateVersion = "24.11";
 
-  home-manager.useGlobalPkgs = true;
-  home-manager.useUserPackages = true;
-  home-manager.users.tfc =
-    { ... }:
-    {
+  home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    users.tfc = {
       home.stateVersion = "23.11";
       programs.home-manager.enable = true;
       imports = with self.homeManagerModules; [
@@ -98,4 +101,5 @@
         vscode
       ];
     };
+  };
 }
