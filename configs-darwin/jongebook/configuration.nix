@@ -12,6 +12,10 @@ in
 {
   nixpkgs.hostPlatform = "aarch64-darwin";
 
+  nixpkgs.overlays = [
+    self.overlays.default
+  ];
+
   system.primaryUser = "tfc";
 
   imports = [
