@@ -49,6 +49,7 @@
 
   programs.direnv = {
     enable = true;
+    package = pkgs.direnv.overrideAttrs (_: { doCheck = false; }); # test hangs indefinitely on macos
     nix-direnv.enable = true;
     config.global.hide_env_diff = true;
   };
