@@ -30,7 +30,7 @@
     flakeInputs.medusa.overlays.default
   ];
 
-  services.xserver.displayManager.gdm.autoSuspend = false;
+  services.displayManager.gdm.autoSuspend = false;
 
   services.medusa-builder = {
     enable = true;
