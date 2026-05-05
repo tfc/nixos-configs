@@ -45,12 +45,12 @@
   };
   networking.hostName = "work";
   networking.networkmanager.enable = true;
+  networking.networkmanager.wifi.powersave = false;
   boot.initrd.systemd.enable = true;
 
-  boot.kernelParams = [
-    "rtl8821ae.ips=0"
-    "rtl8821ae.aspm=0"
-  ];
+  boot.extraModprobeConfig = ''
+    options rtl8821ae fwlps=0 swlps=0 msi=1
+  '';
 
   powerManagement.cpuFreqGovernor = "balanced";
 
