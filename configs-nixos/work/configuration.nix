@@ -30,6 +30,8 @@
     flakeInputs.medusa.overlays.default
   ];
 
+  services.xserver.displayManager.gdm.autoSuspend = false;
+
   services.medusa-builder = {
     enable = true;
     medusaHost = "medusa.nix-consulting.net";
@@ -84,6 +86,11 @@
     settings."org/gnome/desktop/interface".scaling-factor = lib.gvariant.mkUint32 2;
   }];
 
+  security.run0.wheelNeedsPassword = false;
+  security.run0.enableSudoAlias = true;
+  security.sudo.enable = false;
+
+  services.fwupd.enable = true;
   services.openssh.enable = true;
 
   nixpkgs.config.allowUnfree = true;
