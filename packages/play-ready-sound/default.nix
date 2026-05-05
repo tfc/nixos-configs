@@ -10,11 +10,13 @@
 
 writeShellApplication {
   name = "play-ready-sound";
-  runtimeInputs =
-    lib.optionals stdenv.hostPlatform.isLinux [
-      vorbis-tools
-      pulseaudio
-    ];
+  runtimeInputs = [
+    coreutils
+  ]
+  ++ lib.optionals stdenv.hostPlatform.isLinux [
+    vorbis-tools
+    pulseaudio
+  ];
   text = ''
     sounds_dir=${./sounds}
     file=$(find "$sounds_dir" -name '*.ogg' | shuf -n 1)
