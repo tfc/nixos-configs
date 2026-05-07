@@ -48,7 +48,7 @@
   networking.networkmanager.wifi.powersave = false;
   boot.initrd.systemd.enable = true;
 
-  boot.kernelParams = [ "pcie_aspm=off" ];
+  boot.kernelParams = [ "iommu=pt" "pcie_aspm=off" ];
   boot.extraModprobeConfig = ''
     options rtl8821ae fwlps=0 swlps=0 ips=0 aspm=0 msi=1
   '';
