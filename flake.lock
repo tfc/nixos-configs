@@ -1,5 +1,33 @@
 {
   "nodes": {
+    "argunix": {
+      "inputs": {
+        "disko": [
+          "disko"
+        ],
+        "flake-parts": [
+          "flake-parts"
+        ],
+        "naersk": "naersk",
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "treefmt-nix": "treefmt-nix"
+      },
+      "locked": {
+        "lastModified": 1778162823,
+        "narHash": "sha256-z3gFI2TQwfsLF4FS6dJJXLpoHVviL9PaDK6G8Nd1zWw=",
+        "ref": "refs/heads/main",
+        "rev": "00fb9b169e8cd737a5f871d230450f2da8d98253",
+        "revCount": 87,
+        "type": "git",
+        "url": "ssh://git@github.com/tfc/argunix"
+      },
+      "original": {
+        "type": "git",
+        "url": "ssh://git@github.com/tfc/argunix"
+      }
+    },
     "crane": {
       "locked": {
         "lastModified": 1765145449,
@@ -58,7 +86,7 @@
     "fenix": {
       "inputs": {
         "nixpkgs": [
-          "medusa",
+          "argunix",
           "naersk",
           "nixpkgs"
         ],
@@ -180,39 +208,11 @@
         "type": "github"
       }
     },
-    "medusa": {
-      "inputs": {
-        "disko": [
-          "disko"
-        ],
-        "flake-parts": [
-          "flake-parts"
-        ],
-        "naersk": "naersk",
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "treefmt-nix": "treefmt-nix"
-      },
-      "locked": {
-        "lastModified": 1778077366,
-        "narHash": "sha256-FoMaKHsu9Ie0WJoYpIw5VnWg7hEgjF7JNuyZoIEOA0c=",
-        "ref": "refs/heads/main",
-        "rev": "e76106053f013e148e89218e6d9716c50dad7ce2",
-        "revCount": 80,
-        "type": "git",
-        "url": "ssh://git@github.com/tfc/argunix"
-      },
-      "original": {
-        "type": "git",
-        "url": "ssh://git@github.com/tfc/argunix"
-      }
-    },
     "naersk": {
       "inputs": {
         "fenix": "fenix",
         "nixpkgs": [
-          "medusa",
+          "argunix",
           "nixpkgs"
         ]
       },
@@ -286,12 +286,12 @@
     },
     "root": {
       "inputs": {
+        "argunix": "argunix",
         "darwin": "darwin",
         "disko": "disko",
         "flake-parts": "flake-parts",
         "home-manager": "home-manager",
         "lanzaboote": "lanzaboote",
-        "medusa": "medusa",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
         "sysmodule-flake": "sysmodule-flake"
@@ -361,7 +361,7 @@
     "treefmt-nix": {
       "inputs": {
         "nixpkgs": [
-          "medusa",
+          "argunix",
           "nixpkgs"
         ]
       },
