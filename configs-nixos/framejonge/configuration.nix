@@ -29,6 +29,9 @@
   ];
 
   nixpkgs.hostPlatform = "x86_64-linux";
+  nixpkgs.overlays = [
+    self.overlays.default
+  ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.systemd-boot.configurationLimit = 2;
