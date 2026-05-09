@@ -15,11 +15,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1778162823,
-        "narHash": "sha256-z3gFI2TQwfsLF4FS6dJJXLpoHVviL9PaDK6G8Nd1zWw=",
+        "lastModified": 1778330895,
+        "narHash": "sha256-1xoIALhGGuJ9QqjnOZv+pe2txIWmOetti9bbEYNNgDM=",
         "ref": "refs/heads/main",
-        "rev": "00fb9b169e8cd737a5f871d230450f2da8d98253",
-        "revCount": 87,
+        "rev": "3acaad8d5889e9491080f994c20dc41c15ed577d",
+        "revCount": 123,
         "type": "git",
         "url": "ssh://git@github.com/tfc/argunix"
       },
