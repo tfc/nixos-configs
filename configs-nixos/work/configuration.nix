@@ -39,6 +39,9 @@
     enrollmentTokenFile = "/tmp/argunix-token";
   };
 
+  services.tailscale.enable = true;
+
+
   boot.loader.systemd-boot = {
     enable = true;
     configurationLimit = 3;
