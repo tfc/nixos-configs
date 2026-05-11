@@ -19,7 +19,7 @@
   hardware.graphics.enable = true;
 
   programs.nix-required-mounts = {
-    enable = false;
+    enable = true;
     presets.nvidia-gpu.enable = true;
   };
 }
