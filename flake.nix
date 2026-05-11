@@ -65,6 +65,7 @@
             inherit (pkgs)
               claude-top
               claude-top-sound
+              obsbot-camera-control
               play-ready-sound
               ;
           };
