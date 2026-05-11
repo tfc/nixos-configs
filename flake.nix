@@ -67,6 +67,7 @@
               claude-top-sound
               obsbot-camera-control
               play-ready-sound
+              tiny2
               ;
           };
         };
