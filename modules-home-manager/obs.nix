@@ -16,10 +16,9 @@
         obs-backgroundremoval
         obs-composite-blur
         obs-gstreamer
-        obs-media-controlss
+        obs-media-controls
         obs-move-transition
         obs-multi-rtmp
-        obs-nvfbc
         obs-pipewire-audio-capture
         obs-replay-source
         obs-shaderfilter
