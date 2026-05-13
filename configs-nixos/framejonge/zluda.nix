@@ -1,4 +1,9 @@
-{ lib, pkgs, config, ... }:
+{
+  lib,
+  pkgs,
+  config,
+  ...
+}:
 
 let
   llama-cpp = pkgs.llama-cpp.override { rocmSupport = true; };
@@ -13,11 +18,11 @@ in
     presets.zluda.enable = true;
   };
 
-#  services.ollama = {
-#    enable = true;
-#    package = pkgs.ollama-rocm;
-#  };
-#  services.nextjs-ollama-llm-ui.enable = true;
+  #  services.ollama = {
+  #    enable = true;
+  #    package = pkgs.ollama-rocm;
+  #  };
+  #  services.nextjs-ollama-llm-ui.enable = true;
 
   environment.systemPackages = [
     pkgs.llama-cpp

@@ -12,18 +12,18 @@ let
         };
       }) urls
     );
-  defaultAsterisk = { 
+  defaultAsterisk = {
     "*" = {
-	forwardAgent = false;
-	addKeysToAgent = "no";
-	compression = false;
-	serverAliveInterval = 0;
-	serverAliveCountMax = 3;
-	hashKnownHosts = false;
-	userKnownHostsFile = "~/.ssh/known_hosts";
-	controlMaster = "no";
-	controlPath = "~/.ssh/master-%r@%n:%p";
-	controlPersist = "no";
+      forwardAgent = false;
+      addKeysToAgent = "no";
+      compression = false;
+      serverAliveInterval = 0;
+      serverAliveCountMax = 3;
+      hashKnownHosts = false;
+      userKnownHostsFile = "~/.ssh/known_hosts";
+      controlMaster = "no";
+      controlPath = "~/.ssh/master-%r@%n:%p";
+      controlPersist = "no";
     };
   };
 in
@@ -31,10 +31,12 @@ in
   programs.ssh = {
     enable = true;
     enableDefaultConfig = false;
-    matchBlocks = defaultAsterisk // hostPartMapping [
-      "server-sicherheit.lxht.de"
-      "training-machine.nixcademy.com"
-    ];
+    matchBlocks =
+      defaultAsterisk
+      // hostPartMapping [
+        "server-sicherheit.lxht.de"
+        "training-machine.nixcademy.com"
+      ];
     extraConfig = lib.optionalString pkgs.stdenv.targetPlatform.isDarwin ''
       IgnoreUnknown AddKeysToAgent,UseKeychain
       UseKeychain yes

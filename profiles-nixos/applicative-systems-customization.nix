@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
   cfg = config.customization;
 
@@ -27,7 +32,9 @@ in
 {
   options.customization = {
     gdm-logo = {
-      enable = lib.mkEnableOption "GDM icon customization" // { default = true; };
+      enable = lib.mkEnableOption "GDM icon customization" // {
+        default = true;
+      };
       logoPath = lib.mkOption {
         type = lib.types.path;
         default = ./artwork/applicative-white.svg;
@@ -35,7 +42,9 @@ in
       };
     };
     gnome-background = {
-      enable = lib.mkEnableOption "GNOME custom background setter" // { default = true; };
+      enable = lib.mkEnableOption "GNOME custom background setter" // {
+        default = true;
+      };
       lightFile = lib.mkOption {
         type = lib.types.path;
         default = ./artwork/wallpaper-applicative-light.webp;
@@ -46,13 +55,19 @@ in
         default = ./artwork/wallpaper-applicative-dark.webp;
         description = "Path to the wallpaper used with the dark color scheme";
       };
-      resetUserBackground = lib.mkEnableOption (
-        "resetting each user's GNOME background keys to the system default at session start, "
-        + "so per-user dconf overrides do not shadow the system-provided wallpaper"
-      ) // { default = true; };
+      resetUserBackground =
+        lib.mkEnableOption (
+          "resetting each user's GNOME background keys to the system default at session start, "
+          + "so per-user dconf overrides do not shadow the system-provided wallpaper"
+        )
+        // {
+          default = true;
+        };
     };
     plymouth-logo = {
-      enable = lib.mkEnableOption "Plymouth icon customization" // { default = true; };
+      enable = lib.mkEnableOption "Plymouth icon customization" // {
+        default = true;
+      };
       logoPath = lib.mkOption {
         type = lib.types.path;
         default = ./artwork/applicative-white.svg;

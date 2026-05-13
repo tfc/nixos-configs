@@ -1,29 +1,32 @@
 { pkgs, ... }:
 
 {
-  home.packages = with pkgs; [
-    cachix
-    claude-top
-    claude-top-sound
-    deadnix
-    gh
-    gti
-    httpie
-    jq
-    loccount
-    niv
-    nix-diff
-    nixfmt
-    nixpkgs-fmt
-    play-ready-sound
-    shellcheck
-    socat
-    statix
-    vhs
-    yq
-  ] ++ (lib.optionals pkgs.stdenv.isLinux [
-    iotop
-  ]);
+  home.packages =
+    with pkgs;
+    [
+      cachix
+      claude-top
+      claude-top-sound
+      deadnix
+      gh
+      gti
+      httpie
+      jq
+      loccount
+      niv
+      nix-diff
+      nixfmt
+      nixpkgs-fmt
+      play-ready-sound
+      shellcheck
+      socat
+      statix
+      vhs
+      yq
+    ]
+    ++ (lib.optionals pkgs.stdenv.isLinux [
+      iotop
+    ]);
 
   programs.git = {
     enable = true;
@@ -49,7 +52,9 @@
 
   programs.direnv = {
     enable = true;
-    package = pkgs.direnv.overrideAttrs (_: { doCheck = false; }); # test hangs indefinitely on macos
+    package = pkgs.direnv.overrideAttrs (_: {
+      doCheck = false;
+    }); # test hangs indefinitely on macos
     nix-direnv.enable = true;
     config.global.hide_env_diff = true;
   };

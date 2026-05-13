@@ -40,7 +40,6 @@
 
   services.tailscale.enable = true;
 
-
   boot.loader.systemd-boot = {
     enable = true;
     configurationLimit = 3;
@@ -50,7 +49,10 @@
   networking.networkmanager.wifi.powersave = false;
   boot.initrd.systemd.enable = true;
 
-  boot.kernelParams = [ "iommu=pt" "pcie_aspm=off" ];
+  boot.kernelParams = [
+    "iommu=pt"
+    "pcie_aspm=off"
+  ];
   boot.extraModprobeConfig = ''
     options rtl8821ae fwlps=0 swlps=0 ips=0 aspm=0 msi=1 swenc=1
     options kvm_amd nested=1
@@ -86,9 +88,11 @@
     wget
   ];
 
-  programs.dconf.profiles.gdm.databases = [{
-    settings."org/gnome/desktop/interface".scaling-factor = lib.gvariant.mkUint32 2;
-  }];
+  programs.dconf.profiles.gdm.databases = [
+    {
+      settings."org/gnome/desktop/interface".scaling-factor = lib.gvariant.mkUint32 2;
+    }
+  ];
 
   security.run0.wheelNeedsPassword = false;
   security.run0.enableSudoAlias = true;
