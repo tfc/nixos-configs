@@ -11,7 +11,7 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    argunix.url = "git+ssh://git@github.com/tfc/argunix";
+    argunix.url = "git+https://codeberg.org/tfc/argunix";
     argunix.inputs.disko.follows = "disko";
     argunix.inputs.flake-parts.follows = "flake-parts";
     argunix.inputs.nixpkgs.follows = "nixpkgs";

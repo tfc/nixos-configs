@@ -15,17 +15,17 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1778330954,
-        "narHash": "sha256-CTnwrtG2g41GGV97Rxv52nMp7xEcIdAu3Zq9pSgC1gQ=",
+        "lastModified": 1778577902,
+        "narHash": "sha256-fYtjYpLUIyt8N7g4lgI1pnnEQBy8l2zV1lZW5AV1EVk=",
         "ref": "refs/heads/main",
-        "rev": "3f35b96906d9a98b5a3f176d66cbf73c4d2298d2",
-        "revCount": 124,
+        "rev": "1a1fb478eacb1f78484fecf4d0381af210e0a261",
+        "revCount": 165,
         "type": "git",
-        "url": "ssh://git@github.com/tfc/argunix"
+        "url": "https://codeberg.org/tfc/argunix"
       },
       "original": {
         "type": "git",
-        "url": "ssh://git@github.com/tfc/argunix"
+        "url": "https://codeberg.org/tfc/argunix"
       }
     },
     "crane": {
@@ -171,11 +171,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1778248595,
-        "narHash": "sha256-dhFgEjoeJMYN/7OY6xfxS799YB4IjbbYXTjyGIJyLpc=",
+        "lastModified": 1778535464,
+        "narHash": "sha256-kkUQYSv70wynJ/DfnGals6r98I6bK3CVNVTN1zbAd7Y=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "fdb2ccba9d5e1238d32e0c4a3ec1a277efa80c1d",
+        "rev": "b659c7ffd40fc9e3bb60d420c79c67e769b9f4ab",
         "type": "github"
       },
       "original": {
