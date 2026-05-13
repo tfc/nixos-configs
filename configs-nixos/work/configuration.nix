@@ -124,4 +124,22 @@
       ];
     };
   };
+
+  fileSystems."/data" = {
+    device = "/dev/disk/by-uuid/93ae924f-d73d-4bb4-8c0b-589d63e5b6f8";
+    fsType = "btrfs";
+    options = [
+      "defaults"
+      "noatime" # no atime writes on a video archive
+      "compress=zstd:3"
+      "nofail" # don't block boot if the disk is missing
+    ];
+  };
+
+  systemd.tmpfiles.rules = [
+    "d /data 0755 tfc users - -"
+    "d /data/video-cut   0755 tfc users - -"
+    "h /data/video-cut   -    -   -     - +C"
+  ];
+
 }
