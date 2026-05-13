@@ -97,7 +97,11 @@
   services.fwupd.enable = true;
   services.openssh.enable = true;
 
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config = {
+    allowUnfree = true;
+    cudaSupport = true;
+  };
+
   hardware.enableAllFirmware = true;
   system.stateVersion = "24.11";
 
