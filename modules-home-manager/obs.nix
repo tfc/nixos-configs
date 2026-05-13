@@ -9,6 +9,10 @@
     obsbot-camera-control
     tiny2
 
+    obs-cmd
+    streamcontroller
+    wmctrl
+
     (wrapOBS {
       plugins = with obs-studio-plugins; [
         # > CMake Error at /nix/store/v2i1hgv567g3v91im5x4g5bff52143i0-cmake-4.1.2/share/cmake-4.1/Modules/FindCUDAToolkit.cmake:890 (message):

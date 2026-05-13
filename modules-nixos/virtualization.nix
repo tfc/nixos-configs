@@ -21,9 +21,10 @@ in
       "";
 
   environment.systemPackages = with pkgs; [
-    libvirt
-    virt-manager
     gnome-boxes
+    libvirt
+    quickemu
+    virt-manager
   ];
 
   virtualisation.libvirtd = {
