@@ -82,5 +82,6 @@
     ccls
     nixd
     nixfmt
+    ripgrep
   ];
 }
