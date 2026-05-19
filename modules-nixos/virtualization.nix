@@ -20,6 +20,19 @@ in
     else
       "";
 
+  # quickemu starts the GTK display with zoom-to-fit=off; flip it to on.
+  # --replace-fail makes the build error out if upstream changes the string.
+  nixpkgs.overlays = [
+    (_: prev: {
+      quickemu = prev.quickemu.overrideAttrs (old: {
+        postPatch = (old.postPatch or "") + ''
+          substituteInPlace quickemu \
+            --replace-fail 'zoom-to-fit=off' 'zoom-to-fit=on'
+        '';
+      });
+    })
+  ];
+
   environment.systemPackages = with pkgs; [
     gnome-boxes
     libvirt
