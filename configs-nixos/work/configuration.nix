@@ -17,6 +17,7 @@
     self.nixosModules.user-tfc
     self.nixosModules.virtualization
     self.nixosProfiles.applicative-systems-customization
+    self.nixosProfiles.desktop-responsiveness
     flakeInputs.home-manager.nixosModules.home-manager
     flakeInputs.argunix.nixosModules.argunix-builder
     ./ai.nix
