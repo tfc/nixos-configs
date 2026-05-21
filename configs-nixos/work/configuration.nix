@@ -34,7 +34,7 @@
   services.displayManager.gdm.autoSuspend = false;
 
   services.argunix-builder = {
-    enable = true;
+    enable = false;
     argunixHost = "argunix.nix-consulting.net";
     argunixPort = 45678;
     enrollmentTokenFile = "/tmp/argunix-token";
