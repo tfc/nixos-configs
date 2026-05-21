@@ -9,7 +9,7 @@
     modesetting.enable = true;
     powerManagement.enable = false;
     powerManagement.finegrained = false;
-    open = false;
+    open = true; # RTX 2080 SUPER is Turing (TU104); open modules support Turing+
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.production;
   };

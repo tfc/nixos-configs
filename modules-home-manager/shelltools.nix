@@ -13,11 +13,13 @@
     nix-diff
     nix-output-monitor
     nix-prefetch-github
+    pciutils
     pstree
     qemu
     tmate
     unrar
     unzip
+    usbutils
     zip
   ];
 

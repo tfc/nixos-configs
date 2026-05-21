@@ -102,7 +102,10 @@
     cudaSupport = true;
   };
 
-  hardware.enableAllFirmware = true;
+  # Intel wifi+bluetooth firmware ships in linux-firmware (redistributable,
+  # cached). enableAllFirmware would additionally pull in build-requiring
+  # unfree blobs we no longer need (broadcom-bt-firmware, b43, ...).
+  hardware.enableRedistributableFirmware = true;
   system.stateVersion = "24.11";
 
   home-manager = {
