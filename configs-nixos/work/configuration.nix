@@ -18,6 +18,7 @@
     self.nixosModules.virtualization
     self.nixosProfiles.applicative-systems-customization
     self.nixosProfiles.desktop-responsiveness
+    self.nixosProfiles.obsbot
     flakeInputs.home-manager.nixosModules.home-manager
     flakeInputs.argunix.nixosModules.argunix-builder
     ./ai.nix
