@@ -28,6 +28,7 @@
   nixpkgs.overlays = [
     self.overlays.default
     flakeInputs.argunix.overlays.default
+    flakeInputs.llm-agents.overlays.default
   ];
 
   services.displayManager.gdm.autoSuspend = false;

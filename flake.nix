@@ -19,6 +19,15 @@
     lanzaboote.url = "github:nix-community/lanzaboote/v1.0.0";
     lanzaboote.inputs.nixpkgs.follows = "nixpkgs";
 
+    # AI coding agents — provides the `omp` (oh-my-pi) package.
+    # Intentionally NOT following nixpkgs: its packages are built against this
+    # flake's own pinned nixpkgs so numtide's binary cache stays usable.
+    #
+    # Pinned to the last revision packaging omp 15.0.0. Newer omp requires bun
+    # >= 1.3.14, and llm-agents.nix's bun-bin 1.3.14 compiles standalone
+    # binaries that segfault on this host. Revisit once that is fixed upstream.
+    llm-agents.url = "github:numtide/llm-agents.nix/9b98dcf7a74f67820987871e1dd102ff90519d15";
+
     nixos-hardware.url = "github:nixos/nixos-hardware";
 
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
