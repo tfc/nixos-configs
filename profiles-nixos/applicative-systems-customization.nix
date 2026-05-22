@@ -20,6 +20,36 @@ let
     osVersion = "2026";
   };
 
+  # Render the tiling wallpaper SVG to a 4K PNG, recoloring its .bg (background)
+  # and .logo (logo) fills to the requested HTML color codes. Both placeholder
+  # fills appear exactly once in the SVG's <style> block, so the substitution is
+  # unambiguous.
+  mkWallpaper =
+    name:
+    { backgroundColor, logoColor }:
+    pkgs.runCommand name
+      {
+        HOME = "/build";
+        nativeBuildInputs = [ pkgs.inkscape ];
+      }
+      ''
+        cp ${cfg.gnome-background.tilingSvg} colored.svg
+        # Anchor each substitution on its class selector. Replacing the bare
+        # 'fill:#000000' would also hit a background recolored to #000000 (the
+        # dark scheme), collapsing background and logo to the same grey.
+        substituteInPlace colored.svg \
+          --replace-fail '.bg   { fill:#ffffff }' '.bg   { fill:${backgroundColor} }' \
+          --replace-fail '.logo { fill:#000000 }' '.logo { fill:${logoColor} }'
+        inkscape -w 3840 -h 2160 -o "$out" colored.svg
+      '';
+
+  lightWallpaper = mkWallpaper "wallpaper-applicative-light.png" {
+    inherit (cfg.gnome-background.light) backgroundColor logoColor;
+  };
+  darkWallpaper = mkWallpaper "wallpaper-applicative-dark.png" {
+    inherit (cfg.gnome-background.dark) backgroundColor logoColor;
+  };
+
   reset-background = pkgs.writeShellApplication {
     name = "gnome-reset-background";
     runtimeInputs = [ pkgs.glib ];
@@ -45,15 +75,38 @@ in
       enable = lib.mkEnableOption "GNOME custom background setter" // {
         default = true;
       };
-      lightFile = lib.mkOption {
+      tilingSvg = lib.mkOption {
         type = lib.types.path;
-        default = ./artwork/wallpaper-applicative-light.webp;
-        description = "Path to the wallpaper used with the light color scheme";
+        default = ./artwork/asg-tiling-raw.svg;
+        description = ''
+          Path to the tiling wallpaper SVG. Its <style> block must expose a
+          .bg fill of #ffffff and a .logo fill of #000000, which get recolored
+          to the light/dark color codes below when rendering the PNGs.
+        '';
       };
-      darkFile = lib.mkOption {
-        type = lib.types.path;
-        default = ./artwork/wallpaper-applicative-dark.webp;
-        description = "Path to the wallpaper used with the dark color scheme";
+      light = {
+        backgroundColor = lib.mkOption {
+          type = lib.types.str;
+          default = "#f0f0f0";
+          description = "HTML color code for the wallpaper background in the light color scheme";
+        };
+        logoColor = lib.mkOption {
+          type = lib.types.str;
+          default = "#999999";
+          description = "HTML color code for the tiled logos in the light color scheme";
+        };
+      };
+      dark = {
+        backgroundColor = lib.mkOption {
+          type = lib.types.str;
+          default = "#000000";
+          description = "HTML color code for the wallpaper background in the dark color scheme";
+        };
+        logoColor = lib.mkOption {
+          type = lib.types.str;
+          default = "#737373";
+          description = "HTML color code for the tiled logos in the dark color scheme";
+        };
       };
       resetUserBackground =
         lib.mkEnableOption (
@@ -89,8 +142,8 @@ in
     (lib.mkIf cfg.gnome-background.enable {
       services.desktopManager.gnome.extraGSettingsOverrides = ''
         [org.gnome.desktop.background]
-        picture-uri='file://${cfg.gnome-background.lightFile}'
-        picture-uri-dark='file://${cfg.gnome-background.darkFile}'
+        picture-uri='file://${lightWallpaper}'
+        picture-uri-dark='file://${darkWallpaper}'
       '';
     })
     (lib.mkIf (cfg.gnome-background.enable && cfg.gnome-background.resetUserBackground) {
