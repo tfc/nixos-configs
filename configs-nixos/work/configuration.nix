@@ -20,26 +20,18 @@
     self.nixosProfiles.desktop-responsiveness
     self.nixosProfiles.obsbot
     flakeInputs.home-manager.nixosModules.home-manager
-    flakeInputs.argunix.nixosModules.argunix-builder
     ./ai.nix
     ./hardware-configuration.nix
     ./nvidia.nix
+    #self.nixosProfiles.argunix
   ];
 
   nixpkgs.overlays = [
     self.overlays.default
-    flakeInputs.argunix.overlays.default
     flakeInputs.llm-agents.overlays.default
   ];
 
   services.displayManager.gdm.autoSuspend = false;
-
-  services.argunix-builder = {
-    enable = false;
-    argunixHost = "argunix.nix-consulting.net";
-    argunixPort = 45678;
-    enrollmentTokenFile = "/tmp/argunix-token";
-  };
 
   services.tailscale.enable = true;
 

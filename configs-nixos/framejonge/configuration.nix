@@ -26,6 +26,7 @@
     self.nixosModules.virtualization
     self.nixosProfiles.gnome-autotheme
     self.nixosProfiles.applicative-systems-customization
+    self.nixosProfiles.argunix
   ];
 
   nixpkgs.hostPlatform = "x86_64-linux";
