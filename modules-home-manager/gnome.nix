@@ -8,6 +8,7 @@
     eog
     gnome-tweaks
     gnome-firmware
+    gnomeExtensions.appindicator
   ];
 
   programs.gnome-terminal = {
