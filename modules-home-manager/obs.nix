@@ -1,7 +1,25 @@
 { pkgs, ... }:
 
+let
+  # nixpkgs ships StreamController 1.5.0-beta.13, which misbehaves for us.
+  # Bump to beta.14. Upstream hardcodes the rev in the nixpkgs derivation
+  # (it cuts multiple releases per version), so we override src + version.
+  pkgs' = pkgs.extend (
+    _: prev: {
+      streamcontroller = prev.streamcontroller.overrideAttrs (_: {
+        version = "1.5.0-beta.14";
+        src = prev.fetchFromGitHub {
+          owner = "StreamController";
+          repo = "StreamController";
+          rev = "12052dec15d0e0948032c7ec11eff2da0d109106";
+          hash = "sha256-JGJc7bj58oZwvtExSv+tv7Ug84RYdEkcMBI3ZmqpaKY=";
+        };
+      });
+    }
+  );
+in
 {
-  home.packages = with pkgs; [
+  home.packages = with pkgs'; [
     kdePackages.kdenlive
     losslesscut-bin
     shotcut
