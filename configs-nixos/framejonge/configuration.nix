@@ -42,6 +42,14 @@
   boot.kernelPackages = pkgs.linuxPackages_latest;
   hardware.framework.enableKmod = true;
 
+  swapDevices = [
+    {
+      device = "/swapfile";
+      size = 8 * 1024;
+    }
+  ];
+  boot.kernel.sysctl."vm.swappiness" = 10;
+
   boot.plymouth.enable = true;
 
   console = {
