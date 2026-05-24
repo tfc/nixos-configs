@@ -16,6 +16,10 @@
       OLLAMA_CONTEXT_LENGTH = "16384";
       OLLAMA_FLASH_ATTENTION = "1";
       OLLAMA_KV_CACHE_TYPE = "q8_0";
+      # Default is 5m. With only one ~5GB model resident at a time on this
+      # 8GB GPU, keeping it warm across an interactive agent session avoids
+      # the 5-15s reload from disk on every prompt after a short pause.
+      OLLAMA_KEEP_ALIVE = "1h";
     };
   };
 

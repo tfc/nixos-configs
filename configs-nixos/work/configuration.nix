@@ -43,11 +43,26 @@
   networking.networkmanager.enable = true;
   boot.initrd.systemd.enable = true;
 
-  boot.extraModprobeConfig = ''
-    options kvm_amd nested=1
-  '';
+  # amd-pstate-epp (the active driver on this CPU) only accepts "performance"
+  # and "powersave". "balanced" was silently rejected; the system fell back to
+  # the kernel default ("powersave"). For a sustained AI/video workstation,
+  # pin to performance — the GPU is mostly idle anyway, but CPU bursts during
+  # encodes / model loads benefit from immediate boost.
+  powerManagement.cpuFreqGovernor = "performance";
 
-  powerManagement.cpuFreqGovernor = "balanced";
+  # Compressed RAM swap takes priority over the on-disk swap partition. With
+  # 32 GB RAM and heavy Resolve/Ollama peaks, this keeps the working set off
+  # the NVMe and avoids the latency cliff of paging to disk.
+  zramSwap.enable = true;
+  zramSwap.memoryPercent = 50;
+  boot.kernel.sysctl."vm.swappiness" = 10;
+
+  # Hardware-accelerated video decode for Firefox / mpv on NVIDIA via the
+  # libva → NVDEC shim shipped in nvidia_drv_video.so.
+  environment.sessionVariables = {
+    LIBVA_DRIVER_NAME = "nvidia";
+    NVD_BACKEND = "direct";
+  };
 
   time.timeZone = "Europe/Berlin";
 

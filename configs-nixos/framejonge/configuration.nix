@@ -8,6 +8,7 @@
 }:
 {
   imports = [
+    ./battery.nix
     ./disk.nix
     ./zluda.nix
     flakeInputs.disko.nixosModules.default
@@ -49,7 +50,6 @@
       size = 8 * 1024;
     }
   ];
-  boot.kernel.sysctl."vm.swappiness" = 10;
 
   boot.plymouth.enable = true;
 
@@ -99,6 +99,8 @@
   #networking.resolvconf.dnsExtensionMechanism = false;
 
   services.automatic-timezoned.enable = true;
+
+  hardware.bluetooth.enable = true;
 
   hardware.framework.laptop13.audioEnhancement.enable = true;
 
