@@ -12,14 +12,14 @@
 
   programs.bash.profileExtra = ''
     _tmux_rename_pwd() {
-      [ -n "$TMUX" ] && tmux rename-window "''${PWD##*/}"
+      [ -n "$TMUX" ] && tmux rename-window -t "$TMUX_PANE" "''${PWD##*/}"
     }
     PROMPT_COMMAND="_tmux_rename_pwd''${PROMPT_COMMAND:+;$PROMPT_COMMAND}"
   '';
 
   programs.zsh.initContent = ''
     _tmux_rename_pwd() {
-      [ -n "$TMUX" ] && tmux rename-window "''${PWD##*/}"
+      [ -n "$TMUX" ] && tmux rename-window -t "$TMUX_PANE" "''${PWD##*/}"
     }
     chpwd_functions+=(_tmux_rename_pwd)
     _tmux_rename_pwd
