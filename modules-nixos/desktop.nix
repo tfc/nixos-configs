@@ -9,7 +9,6 @@
     bluetooth-quick-connect
     blur-my-shell
     sound-output-device-chooser
-    spotify-tray
     useless-gaps
     pkgs.wireguard-tools # for vpn stuff
   ];

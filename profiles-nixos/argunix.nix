@@ -16,6 +16,6 @@
     enable = true;
     argunixHost = "argunix.nix-consulting.net";
     argunixPort = 45678;
-    enrollmentTokenFile = "/tmp/argunix-token";
+    enrollmentTokenFile = "/var/lib/argunix-builder/cred";
   };
 }
