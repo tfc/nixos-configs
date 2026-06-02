@@ -1,9 +1,23 @@
 { pkgs, ... }:
 
+let
+  # applicative forgejo: fj preconfigured for our internal instance
+  afj = pkgs.symlinkJoin {
+    name = "afj";
+    paths = [ pkgs.forgejo-cli ];
+    nativeBuildInputs = [ pkgs.makeWrapper ];
+    postBuild = ''
+      mv $out/bin/fj $out/bin/afj
+      wrapProgram $out/bin/afj \
+        --add-flags "-H http://git.applicative.internal"
+    '';
+  };
+in
 {
   home.packages =
     with pkgs;
     [
+      afj
       cachix
       claude-top
       claude-top-sound
