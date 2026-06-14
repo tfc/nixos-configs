@@ -8,6 +8,10 @@
 
 {
   imports = [
+    ./ai.nix
+    ./hardware-configuration.nix
+    ./nvidia.nix
+    flakeInputs.home-manager.nixosModules.home-manager
     self.nixosModules.flakes
     self.nixosModules.nix-service
     self.nixosModules.nix-unstable
@@ -19,20 +23,12 @@
     self.nixosProfiles.applicative-systems-customization
     self.nixosProfiles.desktop-responsiveness
     self.nixosProfiles.obsbot
-    flakeInputs.home-manager.nixosModules.home-manager
-    flakeInputs.traynix.nixosModules.default
-    ./ai.nix
-    ./hardware-configuration.nix
-    ./nvidia.nix
-    #self.nixosProfiles.argunix
+    self.nixosProfiles.traynix
   ];
 
   nixpkgs.overlays = [
     self.overlays.default
     flakeInputs.llm-agents.overlays.default
-    flakeInputs.traynix.overlays.default
-    flakeInputs.traynix.inputs.naersk.overlays.default
-    flakeInputs.traynix.inputs.gcan.overlays.default
   ];
 
   services.displayManager.gdm.autoSuspend = false;
