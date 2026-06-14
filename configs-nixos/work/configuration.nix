@@ -33,8 +33,6 @@
 
   services.displayManager.gdm.autoSuspend = false;
 
-  services.traynix.enable = true;
-
   services.tailscale.enable = true;
 
   boot.loader.systemd-boot = {

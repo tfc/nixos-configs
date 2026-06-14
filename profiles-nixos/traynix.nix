@@ -13,4 +13,6 @@
     flakeInputs.traynix.inputs.naersk.overlays.default
     flakeInputs.traynix.inputs.gcan.overlays.default
   ];
+
+  services.traynix.enable = true;
 }
