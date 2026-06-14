@@ -14,12 +14,15 @@ in
 
   nixpkgs.overlays = [
     self.overlays.default
+    flakeInputs.traynix.overlays.default
+    flakeInputs.traynix.inputs.gcan.overlays.default
   ];
 
   system.primaryUser = "tfc";
 
   imports = [
     flakeInputs.home-manager.darwinModules.home-manager
+    flakeInputs.traynix.darwinModules.default
   ];
 
   environment.systemPackages = with pkgs; [
@@ -28,6 +31,8 @@ in
     utm
     vim
   ];
+
+  services.traynix.enable = true;
 
   nix.linux-builder = {
     enable = true;
