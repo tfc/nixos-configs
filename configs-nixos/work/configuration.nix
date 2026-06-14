@@ -20,6 +20,7 @@
     self.nixosProfiles.desktop-responsiveness
     self.nixosProfiles.obsbot
     flakeInputs.home-manager.nixosModules.home-manager
+    flakeInputs.traynix.nixosModules.default
     ./ai.nix
     ./hardware-configuration.nix
     ./nvidia.nix
@@ -29,9 +30,14 @@
   nixpkgs.overlays = [
     self.overlays.default
     flakeInputs.llm-agents.overlays.default
+    flakeInputs.traynix.overlays.default
+    flakeInputs.traynix.inputs.naersk.overlays.default
+    flakeInputs.traynix.inputs.gcan.overlays.default
   ];
 
   services.displayManager.gdm.autoSuspend = false;
+
+  services.traynix.enable = true;
 
   services.tailscale.enable = true;
 

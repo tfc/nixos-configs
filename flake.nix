@@ -38,6 +38,10 @@
     sysmodule-flake.url = "github:applicative-systems/sysmodule-flake";
     sysmodule-flake.inputs.nixpkgs.follows = "nixpkgs";
     sysmodule-flake.inputs.flake-parts.follows = "flake-parts";
+
+    traynix.url = "git+https://codeberg.org/tfc/traynixd";
+    traynix.inputs.nixpkgs.follows = "nixpkgs";
+    traynix.inputs.flake-parts.follows = "flake-parts";
   };
 
   outputs =
