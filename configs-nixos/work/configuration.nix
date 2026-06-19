@@ -42,6 +42,7 @@
   networking.hostName = "work";
   networking.networkmanager.enable = true;
   boot.initrd.systemd.enable = true;
+  boot.tmp.cleanOnBoot = true;
 
   # amd-pstate-epp (the active driver on this CPU) only accepts "performance"
   # and "powersave". "balanced" was silently rejected; the system fell back to
@@ -100,6 +101,7 @@
 
   security.run0.wheelNeedsPassword = false;
   security.run0.enableSudoAlias = true;
+  security.run0.enable = true;
   security.sudo.enable = false;
 
   services.fwupd.enable = true;
