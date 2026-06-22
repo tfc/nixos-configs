@@ -7,6 +7,15 @@ vim.keymap.set('n', ']d', function() vim.diagnostic.jump({ count = 1 }) end, opt
 vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
 vim.keymap.set('n', '<space>c', vim.lsp.buf.code_action, opts)
 
+-- Show diagnostics inline at the end of the line.
+vim.diagnostic.config({ virtual_text = true })
+
+-- Auto-show the diagnostic float when the cursor idles on a line.
+vim.o.updatetime = 250
+vim.api.nvim_create_autocmd('CursorHold', {
+  callback = function() vim.diagnostic.open_float(nil, { focusable = false }) end,
+})
+
 -- nixd: the Nix language server
 vim.lsp.config('nixd', {
   cmd = { 'nixd' },
