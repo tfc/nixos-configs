@@ -17,8 +17,6 @@
     xournalpp
   ];
 
-  manual.html.enable = true;
-
   programs.firefox = {
     enable = true;
     configPath = "${config.xdg.configHome}/mozilla/firefox";
