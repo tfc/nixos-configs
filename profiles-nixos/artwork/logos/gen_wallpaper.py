@@ -29,8 +29,9 @@ B_paths = all_paths('NixCademy_vertical_white.svg')       # snowflake + NIXCADEM
 # Full-logo bounding boxes and alignment-reference groups (from Inkscape --query-all)
 A_VB   = (35, 37.8, 667, 434.6)     # full applicative logo  (x y w h)
 A_REF_H = 332.4                     # height of g13 (icon) within that box; its top == logo top
-B_VB   = (0, 0, 127.55, 83.79)      # full NixCademy vertical logo
-B_REF_H = 74.22                     # height of g8+g34 within that box; its top == logo top
+B_VB   = (0, 0, 127.55, 101.32424)  # full NixCademy vertical logo
+B_REF_H = 91.71                     # top (snowflake, y=0) -> bottom of NIXCADEMY wordmark,
+                                    # excluding the EXPERT EDUCATION subtitle below it
 
 # --- page & layout parameters
 PAGE_W, PAGE_H = 3840, 2160

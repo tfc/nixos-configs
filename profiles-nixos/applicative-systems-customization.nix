@@ -77,7 +77,7 @@ in
       };
       tilingSvg = lib.mkOption {
         type = lib.types.path;
-        default = ./artwork/asg-tiling-raw.svg;
+        default = ./artwork/logos/tiling-wallpaper.svg;
         description = ''
           Path to the tiling wallpaper SVG. Its <style> block must expose a
           .bg fill of #ffffff and a .logo fill of #000000, which get recolored
