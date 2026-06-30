@@ -25,21 +25,6 @@
 
   services.nextjs-ollama-llm-ui.enable = true;
 
-  # Terminal coding agents, both pointed at the local Ollama instance:
-  #  - omp (oh-my-pi): a fork of pi with a batteries-included workflow
-  #  - pi (pi-mono): the upstream project omp forked from
-  #
-  # The llm-agents.nix input is pinned (see flake.nix) to the last revision
-  # packaging omp 15.0.0. Newer omp (15.0.1+) requires bun >= 1.3.14, and
-  # llm-agents.nix's bun-bin 1.3.14 produces standalone binaries that segfault
-  # on this host — so 15.0.0 is the newest version that actually runs. pi is a
-  # plain Node (buildNpmPackage) build and is unaffected; it comes from the
-  # same pinned revision (pi 0.74.0).
-  environment.systemPackages = [
-    pkgs.llm-agents.omp
-    pkgs.llm-agents.pi
-  ];
-
   # omp reads ~/.omp/agent/models.yml. Declare the local Ollama instance as an
   # OpenAI-compatible provider. ~/.omp itself stays writable for omp's session
   # and auth state; only this one file is managed by Nix.
