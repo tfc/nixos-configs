@@ -39,6 +39,10 @@
 
       bind '"' split-window -c "#{pane_current_path}"
       bind % split-window -h -c "#{pane_current_path}"
+
+      # Sync tmux paste buffer with the system clipboard.
+      # Paste pulls the current clipboard contents into a fresh buffer first.
+      bind ] run-shell "xsel -o -b | tmux load-buffer - && tmux paste-buffer"
     '';
     plugins = with pkgs.tmuxPlugins; [
       nord
@@ -47,6 +51,11 @@
       {
         plugin = yank;
         extraConfig = ''
+          # Always copy to the system clipboard (not the X primary selection),
+          # including mouse selections, so tmux and the system stay in sync.
+          set -g @yank_selection 'clipboard'
+          set -g @yank_selection_mouse 'clipboard'
+
           bind -T copy-mode    C-c send -X copy-pipe-no-clear "xsel -i --clipboard"
           bind -T copy-mode-vi C-c send -X copy-pipe-no-clear "xsel -i --clipboard"
         '';
