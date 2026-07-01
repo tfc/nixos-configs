@@ -1,6 +1,5 @@
 {
   pkgs,
-  config,
   lib,
   self,
   flakeInputs,
@@ -77,6 +76,8 @@
   networking.hostName = "framejonge";
   networking.firewall.logRefusedConnections = false;
   networking.networkmanager.enable = true;
+
+  services.tailscale.enable = true;
 
   nixpkgs.config.allowUnfree = true;
 
