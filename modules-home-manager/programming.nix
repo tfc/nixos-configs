@@ -26,6 +26,7 @@ in
       gti
       httpie
       jq
+      jless
       loccount
       niv
       nix-diff
