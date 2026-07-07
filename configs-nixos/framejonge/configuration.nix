@@ -83,6 +83,7 @@
 
   security.run0.wheelNeedsPassword = false;
   security.run0.enableSudoAlias = true;
+  security.run0.enable = true;
   security.sudo.enable = false;
 
   services.fwupd.enable = true;
