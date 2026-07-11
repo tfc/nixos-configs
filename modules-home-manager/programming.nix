@@ -22,6 +22,8 @@ in
       claude-top
       claude-top-sound
       deadnix
+      flake-du
+      gcan
       gh
       gti
       httpie
