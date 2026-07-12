@@ -10,8 +10,7 @@
 
   nixpkgs.overlays = [
     flakeInputs.traynix.overlays.default
-    flakeInputs.traynix.inputs.naersk.overlays.default
-    flakeInputs.traynix.inputs.gcan.overlays.default
+    flakeInputs.traynix.overlays.naersk
   ];
 
   services.traynix.enable = true;
