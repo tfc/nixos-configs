@@ -17,7 +17,18 @@
     xournalpp
   ];
 
-  programs.kitty.enable = true;
+  programs.kitty = {
+    enable = true;
+    font = {
+      package = pkgs.adwaita-fonts;
+      name = "Adwaita Mono";
+    };
+    autoThemeFiles = {
+      light = "GnomeLight";
+      dark = "3024_Night";
+      noPreference = "3024_Night";
+    };
+  };
 
   programs.firefox = {
     enable = true;
