@@ -28,7 +28,6 @@
 
   nixpkgs.overlays = [
     self.overlays.default
-    flakeInputs.llm-agents.overlays.default
   ];
 
   services.displayManager.gdm.autoSuspend = false;
