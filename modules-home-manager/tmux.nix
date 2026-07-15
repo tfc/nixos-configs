@@ -10,7 +10,7 @@
       reattach-to-user-namespace # sensible
     ];
 
-  programs.bash.profileExtra = ''
+  programs.bash.bashrcExtra = ''
     _tmux_rename_pwd() {
       [ -n "$TMUX" ] && tmux rename-window -t "$TMUX_PANE" "''${PWD##*/}"
     }
