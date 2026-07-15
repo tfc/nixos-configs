@@ -24,9 +24,9 @@
       name = "Adwaita Mono";
     };
     autoThemeFiles = {
-      light = "GnomeLight";
-      dark = "3024_Night";
-      noPreference = "3024_Night";
+      light = "adwaita_light";
+      dark = "adwaita_darker";
+      noPreference = "adwaita_darker";
     };
   };
 
