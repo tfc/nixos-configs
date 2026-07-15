@@ -33,9 +33,20 @@
     keyMode = "vi";
     newSession = true;
     sensibleOnTop = true;
+    # A 256-color terminfo inside tmux; the default is "screen" (8 colors),
+    # which mangles vim-airline's truecolor output into muddy palette hues.
+    terminal = "tmux-256color";
     extraConfig = ''
       set -sg escape-time 0
       set -g mouse on
+
+      # Pass 24-bit truecolor through to the outer terminal, so neovim/vim-airline
+      # (termguicolors) render the same theme-independent RGB colors inside tmux
+      # as they do in a bare terminal window. Gate on $COLORTERM so RGB is only
+      # advertised when the outer terminal actually supports truecolor (kitty and
+      # most GUI terminals set it) -- not on a plain tty or a legacy ssh session.
+      if-shell '[ "$COLORTERM" = truecolor ] || [ "$COLORTERM" = 24bit ]' \
+        'set -as terminal-features ",*:RGB"'
 
       bind '"' split-window -c "#{pane_current_path}"
       bind % split-window -h -c "#{pane_current_path}"
@@ -46,7 +57,6 @@
     '';
     plugins = with pkgs.tmuxPlugins; [
       nord
-      tmux-colors-solarized
       vim-tmux-navigator
       {
         plugin = yank;
