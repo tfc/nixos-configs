@@ -17,6 +17,8 @@
     xournalpp
   ];
 
+  programs.kitty.enable = true;
+
   programs.firefox = {
     enable = true;
     configPath = "${config.xdg.configHome}/mozilla/firefox";
