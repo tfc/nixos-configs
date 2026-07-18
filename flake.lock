@@ -11,11 +11,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1783788709,
-        "narHash": "sha256-NwraIUav1MzfoEspQY/meegjN0CygRNhGLuzS35ZoXE=",
+        "lastModified": 1784053345,
+        "narHash": "sha256-WQhwf/CqTv1SGDB4cy9bW37EigytYAo9+0dTSB9ntGc=",
         "ref": "refs/heads/main",
-        "rev": "874152e49ddb6f821883372361d3f787483828d0",
-        "revCount": 268,
+        "rev": "6412e5490376ef5325cdd4b4e39c3361dc6d679f",
+        "revCount": 269,
         "type": "git",
         "url": "https://codeberg.org/tfc/argunix"
       },
@@ -46,11 +46,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1783395956,
-        "narHash": "sha256-AAbexQvDoK+6GFJdhY6kqjA+6ECKRkidgWxkn4gMwAA=",
+        "lastModified": 1784362797,
+        "narHash": "sha256-EP9b9b+OXDxHBPefFwMYCIaLq0fn3UkmrbfzbLUT7kQ=",
         "owner": "lnl7",
         "repo": "nix-darwin",
-        "rev": "d5bd9cd77aea4c0a8f49e7fd85545671a208ed15",
+        "rev": "b4cccbd4bc299c1f71ae185b79c3cf99aa82805c",
         "type": "github"
       },
       "original": {
@@ -144,11 +144,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1783963347,
-        "narHash": "sha256-r376E2XpakiXwModDHIxlvB6qLq4iFVEq730vxOO4JY=",
+        "lastModified": 1784351324,
+        "narHash": "sha256-By+kuRJZRqs2TuXgtR8vJ8cTKWXw33YG/Yollu5cO1U=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "a45a7c451455a51ae740ec3bce4024b312809c29",
+        "rev": "460108009ca1ff69ca2ff19079ca2c838d6e3080",
         "type": "github"
       },
       "original": {
@@ -218,11 +218,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1783792734,
-        "narHash": "sha256-50rvY9GdFvpYDcMLcD/4cWSi0hVxArT5wsGlVsHy8eY=",
+        "lastModified": 1784310968,
+        "narHash": "sha256-rkSPTePrKqs4dg+i7ZFCq93+HrClac6oSwXX927SVjA=",
         "owner": "nixos",
         "repo": "nixos-hardware",
-        "rev": "8efb4337e857949f4cfac86d12ef1066f417f31f",
+        "rev": "779c32a00155994c86cde8213a8dd4df139d4355",
         "type": "github"
       },
       "original": {
@@ -246,11 +246,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1783776592,
-        "narHash": "sha256-UgCQzxeWI75XM8G+hPrPh+MKzEPjG3SpAj7dtqSbksA=",
+        "lastModified": 1784356753,
+        "narHash": "sha256-12KrbMiWLcf8m7pCvAtZh1ZrgF85ZXDXvfR/fWTKy84=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "e7a3ca8092b61ff85b6a45bf863ea2b2d6a661b3",
+        "rev": "61b7c44c4073f0b827768aff0049561b5110ea5a",
         "type": "github"
       },
       "original": {
@@ -349,11 +349,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1783797539,
-        "narHash": "sha256-wi4ZlBvSCAlfvH6HlymJX7oAFeSH8o1pY7GtngDU7F0=",
+        "lastModified": 1784371641,
+        "narHash": "sha256-KQhcIA2AoI9Fj+W1p7BpQ6rofF0xSms1+XaollSRni8=",
         "ref": "refs/heads/main",
-        "rev": "750a1b92cc249bc7b4ce67a48ab6c953f9cb0cae",
-        "revCount": 13,
+        "rev": "00c49b70e427fea80a2e5547675cb10b086add7d",
+        "revCount": 14,
         "type": "git",
         "url": "https://codeberg.org/tfc/traynixd"
       },
