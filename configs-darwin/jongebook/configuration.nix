@@ -15,7 +15,7 @@ in
   nixpkgs.overlays = [
     self.overlays.default
     flakeInputs.traynix.overlays.default
-    flakeInputs.traynix.inputs.gcan.overlays.default
+    flakeInputs.traynix.overlays.naersk
   ];
 
   system.primaryUser = "tfc";
