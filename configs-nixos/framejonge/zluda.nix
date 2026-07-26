@@ -61,6 +61,6 @@ in
   # fix llama-cpp not able to create cache directory
   systemd.services.llama-swap = {
     environment.XDG_CACHE_HOME = "/var/cache/llama.cpp";
-    serviceConfig.CacheDirectory = "llama.cpp";
+    #serviceConfig.CacheDirectory = "llama.cpp";
   };
 }

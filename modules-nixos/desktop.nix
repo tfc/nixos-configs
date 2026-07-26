@@ -8,7 +8,6 @@
     autohide-battery
     bluetooth-quick-connect
     blur-my-shell
-    sound-output-device-chooser
     useless-gaps
     pkgs.wireguard-tools # for vpn stuff
   ];
