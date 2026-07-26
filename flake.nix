@@ -13,7 +13,6 @@
 
     argunix.url = "git+https://codeberg.org/tfc/argunix";
     argunix.inputs.disko.follows = "disko";
-    argunix.inputs.flake-parts.follows = "flake-parts";
     argunix.inputs.nixpkgs.follows = "nixpkgs";
 
     lanzaboote.url = "github:nix-community/lanzaboote/v1.1.0";
@@ -32,7 +31,6 @@
 
     traynix.url = "git+https://codeberg.org/tfc/traynixd";
     traynix.inputs.nixpkgs.follows = "nixpkgs";
-    traynix.inputs.flake-parts.follows = "flake-parts";
   };
 
   outputs =
