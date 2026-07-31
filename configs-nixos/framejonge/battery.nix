@@ -5,8 +5,7 @@
   # audio codec power save, etc. Typically 1-3 W saved on a Framework 13.
   powerManagement.powertop.enable = true;
 
-  # Let NetworkManager put the Wi-Fi radio into power-save when associated.
-  networking.networkmanager.wifi.powersave = true;
+  # Wi-Fi power saving moved to wifi.nix, where it is now disabled.
 
   # Compressed RAM swap takes priority over the on-disk swapfile, reducing
   # NVMe writes under memory pressure and softening the latency cliff when

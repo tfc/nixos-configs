@@ -9,6 +9,7 @@
   imports = [
     ./battery.nix
     ./disk.nix
+    ./wifi.nix
     ./zluda.nix
     flakeInputs.disko.nixosModules.default
     flakeInputs.home-manager.nixosModules.home-manager
@@ -75,7 +76,6 @@
 
   networking.hostName = "framejonge";
   networking.firewall.logRefusedConnections = false;
-  networking.networkmanager.enable = true;
 
   services.tailscale.enable = true;
 
@@ -95,11 +95,6 @@
   #  trustedInterfaces = [ "tailscale0" ];
   #  allowedUDPPorts = [ config.services.tailscale.port ];
   #};
-
-  programs.captive-browser.enable = true;
-  programs.captive-browser.interface = "wlp192s0";
-  # not needed with captive browser
-  #networking.resolvconf.dnsExtensionMechanism = false;
 
   services.automatic-timezoned.enable = true;
 
