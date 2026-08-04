@@ -88,15 +88,22 @@ opt.guioptions:remove("r")
 opt.termguicolors = true
 vim.cmd("syntax enable")
 
+-- Ask the XDG desktop portal for the system colour preference: 0 = no
+-- preference, 1 = dark, 2 = light. Both GNOME and KDE implement this, unlike
+-- the gsettings/dconf route used before, which reported light on Plasma
+-- because gsettings ships with GNOME and simply isn't there otherwise.
+-- Anything short of an explicit "light" stays dark, matching the
+-- noPreference => adwaita_darker choice kitty makes in desktop.nix.
 local function detect_background()
-  local handle = io.popen("gsettings get org.gnome.desktop.interface color-scheme 2>/dev/null")
-  if not handle then return "light" end
+  local handle = io.popen(
+    "busctl --user call org.freedesktop.portal.Desktop /org/freedesktop/portal/desktop "
+      .. "org.freedesktop.portal.Settings ReadOne ss "
+      .. "org.freedesktop.appearance color-scheme 2>/dev/null"
+  )
+  if not handle then return "dark" end
   local out = handle:read("*a") or ""
   handle:close()
-  if out:match("prefer%-dark") then
-    return "dark"
-  end
-  return "light"
+  return out:match("v%s+u%s+2") and "light" or "dark"
 end
 
 local function apply_theme()
@@ -106,8 +113,14 @@ end
 
 apply_theme()
 
-if vim.fn.executable("dconf") == 1 then
-  vim.fn.jobstart({ "dconf", "watch", "/org/gnome/desktop/interface/" }, {
+-- The portal signals every settings change, so filter for the colour one.
+if vim.fn.executable("busctl") == 1 then
+  vim.fn.jobstart({
+    "busctl",
+    "--user",
+    "monitor",
+    "--match=type='signal',interface='org.freedesktop.portal.Settings',member='SettingChanged'",
+  }, {
     on_stdout = function(_, data)
       for _, line in ipairs(data) do
         if line:match("color%-scheme") then
