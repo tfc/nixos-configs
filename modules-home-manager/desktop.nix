@@ -19,6 +19,13 @@
 
   programs.kitty = {
     enable = true;
+    settings = {
+      # Force Mutter to composite kitty instead of direct-scanning it out to the
+      # display plane. A fully-opaque fullscreen window gets unredirected, which
+      # starves the PipeWire screencast (OBS freezes on kitty until an input
+      # event forces a re-composite). <1.0 opacity defeats that optimization.
+      background_opacity = "0.9";
+    };
     font = {
       package = pkgs.adwaita-fonts;
       name = "Adwaita Mono";
