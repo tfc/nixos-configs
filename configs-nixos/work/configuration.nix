@@ -109,6 +109,7 @@
 
   services.fwupd.enable = true;
   services.openssh.enable = true;
+  programs.ssh.startAgent = true;
 
   nixpkgs.config = {
     allowUnfree = true;
