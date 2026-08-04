@@ -1,6 +1,5 @@
 {
   pkgs,
-  lib,
   self,
   flakeInputs,
   ...
@@ -30,8 +29,6 @@
     self.overlays.default
   ];
 
-  services.displayManager.gdm.autoSuspend = false;
-
   services.tailscale.enable = true;
 
   boot.loader.systemd-boot = {
@@ -60,6 +57,9 @@
   environment.sessionVariables = {
     LIBVA_DRIVER_NAME = "nvidia";
     NVD_BACKEND = "direct";
+
+    XKB_DEFAULT_LAYOUT = "us";
+    XKB_DEFAULT_OPTIONS = "eurosign:e,caps:escape";
   };
 
   time.timeZone = "Europe/Berlin";
@@ -71,10 +71,21 @@
     xkb.layout = "us";
     xkb.options = "eurosign:e,caps:escape";
   };
-  services.desktopManager.gnome.enable = true;
-  services.displayManager.gdm.enable = true;
+  services.desktopManager.plasma6.enable = true;
+  services.displayManager.plasma-login-manager.enable = true;
 
-  services.pulseaudio.enable = false;
+  # see wiki.nixos.org/wiki/KDE about locales
+  i18n = {
+    extraLocales = "all";
+    imperativeLocale = true; # Unknown if needed (system settings sets user-level override?)
+  };
+  environment = {
+    pathsToLink = [ "/share/i18n" ];
+  };
+
+  customization.gdm-logo.enable = false;
+  customization.gnome-background.enable = true;
+
   services.pipewire = {
     enable = true;
     pulse.enable = true;
@@ -88,12 +99,7 @@
   environment.systemPackages = with pkgs; [
     vim
     wget
-  ];
-
-  programs.dconf.profiles.gdm.databases = [
-    {
-      settings."org/gnome/desktop/interface".scaling-factor = lib.gvariant.mkUint32 2;
-    }
+    stdenv.cc.libc.out # kde locales
   ];
 
   security.run0.wheelNeedsPassword = false;
@@ -123,7 +129,7 @@
       programs.home-manager.enable = true;
       imports = with self.homeManagerModules; [
         desktop
-        gnome
+        kde
         obs
         programming
         programming-haskell
