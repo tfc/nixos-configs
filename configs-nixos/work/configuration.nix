@@ -43,11 +43,9 @@
   boot.initrd.systemd.enable = true;
   boot.tmp.cleanOnBoot = true;
 
-  # amd-pstate-epp (the active driver on this CPU) only accepts "performance"
-  # and "powersave". "balanced" was silently rejected; the system fell back to
-  # the kernel default ("powersave"). For a sustained AI/video workstation,
-  # pin to performance — the GPU is mostly idle anyway, but CPU bursts during
-  # encodes / model loads benefit from immediate boost.
+  hardware.bluetooth.enable = true;
+  hardware.facter.reportPath = ./facter.json;
+
   powerManagement.cpuFreqGovernor = "performance";
 
   # Compressed RAM swap takes priority over the on-disk swap partition. With
