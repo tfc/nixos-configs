@@ -35,16 +35,45 @@ in
   services.traynix.enable = true;
 
   nix.linux-builder = {
+    package = pkgs.darwin.linux-builder-vz;
+    systems = [
+      "aarch64-linux"
+      "x86_64-linux"
+    ];
+
     enable = true;
     ephemeral = true;
     maxJobs = 4;
+    supportedFeatures = [
+      "kvm"
+      "benchmark"
+      "big-parallel"
+      "nixos-test"
+      # NixOS tests that use containers require uid-range (systemd-nspawn
+      # needs pid 0 inside the sandbox).
+      "uid-range"
+    ];
     config = {
       virtualisation = {
         darwin-builder = {
           diskSize = 40 * 1024;
           memorySize = 8 * 1024;
         };
-        cores = 6;
+        cores = 8;
+        vz.nestedVirtualization = true;
+      };
+
+      # Both list options merge with the guest defaults rather than replacing
+      # them. uid-range only works when the daemon can auto-allocate uids and
+      # confine the build to a cgroup.
+      nix.settings = {
+        system-features = [ "uid-range" ];
+        experimental-features = [
+          "auto-allocate-uids"
+          "cgroups"
+        ];
+        auto-allocate-uids = true;
+        use-cgroups = true;
       };
     };
   };
