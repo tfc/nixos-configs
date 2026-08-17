@@ -55,20 +55,16 @@ in
       virtualisation = {
         darwin-builder = {
           diskSize = 80 * 1024;
-          memorySize = 8 * 1024;
+          memorySize = 24 * 1024;
         };
-        cores = 8;
+        cores = 2;
         vz.nestedVirtualization = true;
       };
 
-      # 2026-08-12: 6.18.44 guest corrupted the kmalloc-192 freelist under heavy I/O.
-      # If this happens again, die so launchd's KeepAlive restarts the builder.
       boot.kernel.sysctl."kernel.panic_on_oops" = 1;
-      boot.kernelParams = [
-        "panic=10"
-        # just for ddebugging
-        "slub_debug=FZP"
-      ];
+
+      boot.kernel.sysctl."vm.panic_on_oom" = 1;
+      boot.kernelParams = [ "panic=10" ];
 
       # "/" is a tmpfs (see nixos/modules/virtualisation/vz-vm.nix).
       # Builds default to temp which is a limited tmpfs.
