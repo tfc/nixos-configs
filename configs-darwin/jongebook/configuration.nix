@@ -49,24 +49,40 @@ in
       "benchmark"
       "big-parallel"
       "nixos-test"
-      # NixOS tests that use containers require uid-range (systemd-nspawn
-      # needs pid 0 inside the sandbox).
-      "uid-range"
+      "uid-range" # Needed by nixos tests with containers
     ];
     config = {
       virtualisation = {
         darwin-builder = {
-          diskSize = 40 * 1024;
+          diskSize = 80 * 1024;
           memorySize = 8 * 1024;
         };
         cores = 8;
         vz.nestedVirtualization = true;
       };
 
-      # Both list options merge with the guest defaults rather than replacing
-      # them. uid-range only works when the daemon can auto-allocate uids and
-      # confine the build to a cgroup.
+      # 2026-08-12: 6.18.44 guest corrupted the kmalloc-192 freelist under heavy I/O.
+      # If this happens again, die so launchd's KeepAlive restarts the builder.
+      boot.kernel.sysctl."kernel.panic_on_oops" = 1;
+      boot.kernelParams = [
+        "panic=10"
+        # just for ddebugging
+        "slub_debug=FZP"
+      ];
+
+      # "/" is a tmpfs (see nixos/modules/virtualisation/vz-vm.nix).
+      # Builds default to temp which is a limited tmpfs.
+      # Put builds on disk to enable the larger ones.
+      systemd.tmpfiles.settings."10-nix-build-dir"."/nix/.rw-store/build".d = {
+        user = "root";
+        group = "root";
+        mode = "0755";
+      };
+
       nix.settings = {
+        build-dir = "/nix/.rw-store/build";
+
+        # needed for nixos tests with containers
         system-features = [ "uid-range" ];
         experimental-features = [
           "auto-allocate-uids"
@@ -100,7 +116,7 @@ in
       trusted-users = [ "@admin" ];
     };
     nixPath = lib.mkForce [ "nixpkgs=${pkgs.path}" ];
-    package = pkgs.nixVersions.latest;
+    #package = pkgs.nixVersions.latest;
   };
 
   nixpkgs.config.allowUnfree = true;
