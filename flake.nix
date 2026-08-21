@@ -71,6 +71,8 @@
               obsbot-tiny-2-control
               play-ready-sound
               tiny2
+              transcribe-speakers
+              transcribe-speakers-turns
               ;
           };
         };

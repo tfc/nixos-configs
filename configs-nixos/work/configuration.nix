@@ -91,6 +91,8 @@
   };
 
   environment.systemPackages = with pkgs; [
+    transcribe-speakers
+    transcribe-speakers-turns
     vim
     wget
     stdenv.cc.libc.out # kde locales
