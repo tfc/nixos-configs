@@ -23,6 +23,7 @@
     self.nixosProfiles.desktop-responsiveness
     self.nixosProfiles.obsbot
     self.nixosProfiles.traynix
+    self.nixosProfiles.zram
   ];
 
   nixpkgs.overlays = [
@@ -44,13 +45,6 @@
   hardware.facter.reportPath = ./facter.json;
 
   powerManagement.cpuFreqGovernor = "performance";
-
-  # Compressed RAM swap takes priority over the on-disk swap partition. With
-  # 32 GB RAM and heavy Resolve/Ollama peaks, this keeps the working set off
-  # the NVMe and avoids the latency cliff of paging to disk.
-  zramSwap.enable = true;
-  zramSwap.memoryPercent = 50;
-  boot.kernel.sysctl."vm.swappiness" = 10;
 
   # Hardware-accelerated video decode for Firefox / mpv on NVIDIA via the
   # libva → NVDEC shim shipped in nvidia_drv_video.so.

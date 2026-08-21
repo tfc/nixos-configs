@@ -29,6 +29,7 @@
     self.nixosProfiles.applicative-systems-customization
     self.nixosProfiles.argunix
     self.nixosProfiles.traynix
+    self.nixosProfiles.zram
   ];
 
   nixpkgs.hostPlatform = "x86_64-linux";

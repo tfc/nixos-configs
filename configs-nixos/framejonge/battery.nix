@@ -7,14 +7,12 @@
 
   # Wi-Fi power saving moved to wifi.nix, where it is now disabled.
 
-  # Compressed RAM swap takes priority over the on-disk swapfile, reducing
-  # NVMe writes under memory pressure and softening the latency cliff when
-  # the working set briefly spikes over physical RAM.
-  zramSwap.enable = true;
+  # zram itself comes from nixosProfiles.zram; a laptop deviates from its
+  # desktop defaults in both directions: a small device because the 8 GB
+  # swapfile behind it is the real overflow tier, and low swappiness because
+  # compressing pages costs CPU (= battery) and we would rather keep the
+  # working set resident than churn it.
   zramSwap.memoryPercent = 25;
-
-  # With swap on NVMe (and zram in front of it), bias the kernel toward
-  # keeping pages resident.
   boot.kernel.sysctl."vm.swappiness" = 10;
 
   # Cap battery charge at 80% for cell longevity. The Framework EC exposes
