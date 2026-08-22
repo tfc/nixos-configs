@@ -41,10 +41,25 @@
   boot.initrd.systemd.enable = true;
   boot.tmp.cleanOnBoot = true;
 
+  # Fan/voltage monitoring for the board's Super-I/O chip (NCT679x on the
+  # TUF B450-PLUS). Without acpi_enforce_resources=lax the ACPI tables
+  # reserve the SIO port range and the driver probe fails with ENODEV, so
+  # the machine ships with no fan RPM visibility at all — which matters
+  # here because the 3800X runs into its thermal ceiling under load.
+  boot.kernelParams = [ "acpi_enforce_resources=lax" ];
+  boot.kernelModules = [ "nct6775" ];
+
   hardware.bluetooth.enable = true;
   hardware.facter.reportPath = ./facter.json;
 
   powerManagement.cpuFreqGovernor = "performance";
+
+  # Plasma pulls in power-profiles-daemon, which takes ownership of the
+  # cpufreq policy at session start and resets all cores to powersave /
+  # EPP balance_performance — silently undoing the line above. This box is
+  # a desktop workstation on mains power, so there is nothing for a profile
+  # switcher to trade off; drop it and let cpufreq.service win.
+  services.power-profiles-daemon.enable = false;
 
   # Hardware-accelerated video decode for Firefox / mpv on NVIDIA via the
   # libva → NVDEC shim shipped in nvidia_drv_video.so.
@@ -91,6 +106,7 @@
   };
 
   environment.systemPackages = with pkgs; [
+    lm_sensors # `sensors` — read the nct6775 fan/temp channels enabled above
     transcribe-speakers
     transcribe-speakers-turns
     vim
