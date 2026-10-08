@@ -24,6 +24,12 @@ let
       ControlMaster = "no";
       ControlPath = "~/.ssh/master-%r@%n:%p";
       ControlPersist = "no";
+      # kitty's TERM (xterm-kitty) has no terminfo entry on most remote hosts,
+      # breaking anything that does terminal capability lookups (e.g. git log's
+      # pager). Fall back to a widely-available TERM for all ssh sessions.
+      SetEnv = {
+        TERM = "xterm-256color";
+      };
     };
   };
 in
