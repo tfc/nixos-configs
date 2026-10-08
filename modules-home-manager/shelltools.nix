@@ -16,7 +16,6 @@
     pciutils
     pstree
     qemu
-    tmate
     unrar
     unzip
     usbutils
