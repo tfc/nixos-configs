@@ -1,4 +1,5 @@
 {
+  config,
   pkgs,
   self,
   flakeInputs,
@@ -41,13 +42,25 @@
   boot.initrd.systemd.enable = true;
   boot.tmp.cleanOnBoot = true;
 
-  # Fan/voltage monitoring for the board's Super-I/O chip (NCT679x on the
-  # TUF B450-PLUS). Without acpi_enforce_resources=lax the ACPI tables
-  # reserve the SIO port range and the driver probe fails with ENODEV, so
-  # the machine ships with no fan RPM visibility at all — which matters
-  # here because the 3800X runs into its thermal ceiling under load.
-  boot.kernelParams = [ "acpi_enforce_resources=lax" ];
-  boot.kernelModules = [ "nct6775" ];
+  # Fan monitoring for the board's Super-I/O chip. The TUF B450-PLUS has an
+  # ITE IT8665E, which the in-tree it87 driver does not recognise (its probe
+  # fails with ENODEV), so pull in the out-of-tree patched driver. Two
+  # wrinkles: it needs ignore_resource_conflict because the ACPI tables
+  # reserve the Super-I/O port range, and it installs under the same module
+  # name and directory as the in-tree driver, where depmod resolves the
+  # collision in favour of the useless in-tree one — so move it to
+  # updates/, which depmod searches first. Only fan1 (CPU) reports RPM.
+  boot.extraModulePackages = [
+    (config.boot.kernelPackages.it87.overrideAttrs (_: {
+      postInstall = ''
+        moddir=$out/lib/modules/${config.boot.kernelPackages.kernel.modDirVersion}
+        mkdir -p $moddir/updates
+        mv $moddir/kernel/drivers/hwmon/it87.ko $moddir/updates/it87.ko
+      '';
+    }))
+  ];
+  boot.kernelModules = [ "it87" ];
+  boot.extraModprobeConfig = "options it87 ignore_resource_conflict=1";
 
   hardware.bluetooth.enable = true;
   hardware.facter.reportPath = ./facter.json;
@@ -106,7 +119,7 @@
   };
 
   environment.systemPackages = with pkgs; [
-    lm_sensors # `sensors` — read the nct6775 fan/temp channels enabled above
+    lm_sensors # `sensors` — read the it8665 fan channels enabled above
     transcribe-speakers
     transcribe-speakers-turns
     vim
