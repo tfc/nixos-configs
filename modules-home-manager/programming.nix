@@ -41,9 +41,7 @@ in
       vhs
       yq
     ]
-    ++ (lib.optionals pkgs.stdenv.isLinux [
-      iotop
-    ]);
+    ++ lib.optional pkgs.stdenv.hostPlatform.isLinux iotop;
 
   programs.git = {
     enable = true;

@@ -6,7 +6,7 @@
     [
       xsel # for tmux-yank
     ]
-    ++ lib.optionals pkgs.stdenv.isDarwin [
+    ++ lib.optionals pkgs.stdenv.hostPlatform.isDarwin [
       reattach-to-user-namespace # sensible
     ];
 

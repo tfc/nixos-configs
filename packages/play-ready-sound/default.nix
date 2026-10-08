@@ -5,7 +5,6 @@
   vorbis-tools,
   pulseaudio,
   coreutils,
-  findutils,
 }:
 
 writeShellApplication {
