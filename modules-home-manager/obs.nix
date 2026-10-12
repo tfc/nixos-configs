@@ -15,6 +15,42 @@ let
           hash = "sha256-JGJc7bj58oZwvtExSv+tv7Ug84RYdEkcMBI3ZmqpaKY=";
         };
       });
+
+      obs-studio-plugins = prev.obs-studio-plugins // {
+        # 3.2.1 fails against OBS 32 (deprecated obs_properties_add_button
+        # + -Werror). Fixed on master, not yet released.
+        obs-move-transition = prev.obs-studio-plugins.obs-move-transition.overrideAttrs (_: {
+          version = "3.2.1-unstable-2026-10-04";
+          src = prev.fetchFromGitHub {
+            owner = "exeldro";
+            repo = "obs-move-transition";
+            rev = "64590490d87d93cc03baf0b35b90709468d9fb03";
+            hash = "sha256-GOXNUwA2ASzDHMjsXSdUYQzqOtEBwmrr3oz5TXueKjY=";
+          };
+        });
+        # master contains an OBS 32 fix (struct offset) not in 1.8.1, but
+        # still calls the deprecated obs_properties_add_button with -Werror.
+        obs-replay-source = prev.obs-studio-plugins.obs-replay-source.overrideAttrs (_: {
+          version = "1.8.1-unstable-2026-09-23";
+          src = prev.fetchFromGitHub {
+            owner = "exeldro";
+            repo = "obs-replay-source";
+            rev = "842a48eaf74fdaa2a3236ba30c42cf574359970f";
+            hash = "sha256-ZIG+jkq7TiZ+d+bektimPRg4E0YQPUjpowotDJHuigQ=";
+          };
+          env.NIX_CFLAGS_COMPILE = "-Wno-error=deprecated-declarations";
+        });
+        # With cudaSupport, OpenCV's CMake config does find_package(CUDAToolkit),
+        # which needs nvcc at build time. Not a source issue; 1.36.1 is latest.
+        advanced-scene-switcher = prev.obs-studio-plugins.advanced-scene-switcher.overrideAttrs (old: {
+          nativeBuildInputs = old.nativeBuildInputs ++ [ prev.cudaPackages.cuda_nvcc ];
+          buildInputs = old.buildInputs ++ [ prev.cudaPackages.cuda_cudart ];
+        });
+        # Still broken on master (2026-10-05), so just relax -Werror.
+        obs-shaderfilter = prev.obs-studio-plugins.obs-shaderfilter.overrideAttrs (_: {
+          env.NIX_CFLAGS_COMPILE = "-Wno-error=discarded-qualifiers -Wno-error=deprecated-declarations";
+        });
+      };
     }
   );
 in
@@ -34,14 +70,7 @@ in
 
     (wrapOBS {
       plugins = with obs-studio-plugins; [
-        # > CMake Error at /nix/store/v2i1hgv567g3v91im5x4g5bff52143i0-cmake-4.1.2/share/cmake-4.1/Modules/FindCUDAToolkit.cmake:890 (message):
-        #       >   Could not find nvcc, please set CUDAToolkit_ROOT.
-        #       > Call Stack (most recent call first):
-        #       >   /nix/store/kyaja74g8jl4drgma0gmqadj33bwg2d2-opencv-4.13.0/lib/cmake/opencv4/OpenCVConfig.cmake:86 (find_package)
-        #       >   /nix/store/kyaja74g8jl4drgma0gmqadj33bwg2d2-opencv-4.13.0/lib/cmake/opencv4/OpenCVConfig.cmake:108 (find_host_package)
-        #       >   plugins/video/CMakeLists.txt:8 (find_package)
-
-        # advanced-scene-switcher
+        advanced-scene-switcher
         droidcam-obs
         obs-backgroundremoval
         obs-composite-blur
