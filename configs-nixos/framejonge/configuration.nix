@@ -25,9 +25,9 @@
     self.nixosModules.steam
     self.nixosModules.user-tfc
     self.nixosModules.virtualization
-    self.nixosProfiles.gnome-autotheme
+    #self.nixosProfiles.gnome-autotheme
     self.nixosProfiles.applicative-systems-customization
-    self.nixosProfiles.argunix
+    #self.nixosProfiles.argunix
     self.nixosProfiles.traynix
     self.nixosProfiles.zram
   ];
