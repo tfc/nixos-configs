@@ -18,9 +18,10 @@
     };
   };
 
+  # No X-Forwarded-* headers on purpose: HA answers 400 to them unless its
+  # reverse proxy settings (kept in HA's .storage, not YAML) are configured.
   services.nginx = {
     enable = true;
-    recommendedProxySettings = true;
     virtualHosts.homeassistant = {
       default = true;
       locations."/" = {
