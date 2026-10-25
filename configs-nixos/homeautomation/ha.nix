@@ -10,8 +10,9 @@
       pull = "newer";
       networks = [ "host" ];
       capabilities = {
-        NET_RAW = true;
+        NET_ADMIN = true;
         NET_BIND_SERVICE = true;
+        NET_RAW = true;
       };
       devices = [ "/dev/ttyACM0:/dev/ttyACM0" ];
     };
