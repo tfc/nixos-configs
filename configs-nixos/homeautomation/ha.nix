@@ -31,6 +31,30 @@
     };
   };
 
+  services.wyoming.piper.servers.de = {
+    enable = true;
+    voice = "de_DE-thorsten-medium";
+    uri = "tcp://127.0.0.1:10200";
+    # would advertise the LAN address, but we only listen on localhost
+    zeroconf.enable = false;
+  };
+
+  nixpkgs.overlays = [
+    (_: prev: {
+      pythonPackagesExtensions = prev.pythonPackagesExtensions ++ [
+        (_: pyprev: {
+          # Pulled in by piper-tts. The test matches an error message that
+          # Python 3.14 words differently ("Expected str, got int").
+          pyopenjtalk-plus = pyprev.pyopenjtalk-plus.overridePythonAttrs (old: {
+            disabledTests = (old.disabledTests or [ ]) ++ [
+              "test_run_njd_from_mecab_invalid_input_should_not_break_next_call"
+            ];
+          });
+        })
+      ];
+    })
+  ];
+
   virtualisation.podman = {
     enable = true;
     autoPrune = {
