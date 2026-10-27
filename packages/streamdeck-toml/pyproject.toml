@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "streamdeck-toml"
+version = "0.1.0"
+description = "Drive an Elgato Stream Deck from a TOML file"
+requires-python = ">=3.14"
+dependencies = ["streamdeck", "pillow", "cairosvg"]
+
+[project.scripts]
+streamdeck-toml = "streamdeck:main"
+
+[tool.setuptools]
+py-modules = ["streamdeck"]
+
+[tool.ruff]
+extend-exclude = ["build"]  # setuptools copies the sources there
+line-length = 100
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [
+    "D",       # docstrings
+    "COM812",  # conflicts with the formatter
+    "T201",    # print is how we log
+    "S603",    # running shell commands is the point
+    "S607",    # sh and fc-match are looked up in PATH on purpose
+    "CPY001",  # no copyright headers
+]
+
+[tool.ty.src]
+exclude = ["build"]

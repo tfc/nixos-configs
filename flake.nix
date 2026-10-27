@@ -66,6 +66,7 @@
 
           packages = {
             inherit (pkgs)
+              streamdeck-toml
               transcribe-speakers
               transcribe-speakers-turns
               ;
