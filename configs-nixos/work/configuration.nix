@@ -39,7 +39,6 @@
   };
   networking.hostName = "work";
   networking.networkmanager.enable = true;
-  boot.initrd.systemd.enable = true;
   boot.tmp.cleanOnBoot = true;
 
   # Fan monitoring for the board's Super-I/O chip. The TUF B450-PLUS has an
