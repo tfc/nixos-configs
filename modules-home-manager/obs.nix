@@ -60,10 +60,6 @@ in
     losslesscut-bin
     shotcut
 
-    obsbot-camera-control
-    obsbot-tiny-2-control
-    tiny2
-
     obs-cmd
     streamcontroller
     wmctrl

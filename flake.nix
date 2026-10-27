@@ -66,12 +66,6 @@
 
           packages = {
             inherit (pkgs)
-              claude-top
-              claude-top-sound
-              obsbot-camera-control
-              obsbot-tiny-2-control
-              play-ready-sound
-              tiny2
               transcribe-speakers
               transcribe-speakers-turns
               ;

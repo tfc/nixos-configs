@@ -19,8 +19,6 @@ in
     [
       afj
       cachix
-      claude-top
-      claude-top-sound
       deadnix
       flake-du
       gcan
@@ -34,7 +32,6 @@ in
       nix-diff
       nixfmt
       nixpkgs-fmt
-      play-ready-sound
       shellcheck
       socat
       statix
