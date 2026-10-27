@@ -19,6 +19,7 @@
     lanzaboote.inputs.nixpkgs.follows = "nixpkgs";
 
     nixos-hardware.url = "github:nixos/nixos-hardware";
+    nixos-hardware.inputs.nixpkgs.follows = "nixpkgs";
 
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
