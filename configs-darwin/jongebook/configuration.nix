@@ -57,7 +57,7 @@ in
           diskSize = 80 * 1024;
           memorySize = 24 * 1024;
         };
-        cores = 2;
+        cores = 8;
         vz.nestedVirtualization = true;
       };
 
