@@ -40,6 +40,8 @@
       set -sg escape-time 0
       set -g mouse on
 
+      set -g default-command "''${SHELL}"
+
       # Pass 24-bit truecolor through to the outer terminal, so neovim/vim-airline
       # (termguicolors) render the same theme-independent RGB colors inside tmux
       # as they do in a bare terminal window. Gate on $COLORTERM so RGB is only

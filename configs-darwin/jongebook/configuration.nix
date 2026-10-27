@@ -130,7 +130,14 @@ in
 
   environment.variables.LANG = "en_US.UTF-8";
 
-  users.users.tfc.home = "/Users/tfc";
+  # nix-darwin only manages the login shell of users listed in knownUsers.
+  users.knownUsers = [ "tfc" ];
+  users.users.tfc = {
+    home = "/Users/tfc";
+    uid = 501;
+    shell = pkgs.bashInteractive;
+  };
+  environment.shells = [ pkgs.bashInteractive ];
 
   fonts.packages = with pkgs; [
     powerline-fonts
@@ -161,7 +168,7 @@ in
       imports = with self.homeManagerModules; [
         programming
         programming-haskell
-        shell-zsh
+        shell-bash
         shelltools
         ssh
         tmux
