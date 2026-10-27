@@ -34,6 +34,7 @@
   hardware.raspberry-pi."4".bluetooth.enable = true;
 
   boot.kernelParams = [ "cma=256M" ];
+  boot.loader.generic-extlinux-compatible.configurationLimit = 3;
 
   fileSystems = {
     "/" = {
