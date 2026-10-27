@@ -69,6 +69,7 @@
   security.sudo.enable = false;
 
   environment.systemPackages = with pkgs; [
+    libraspberrypi
     tmux
     unzip
     vim
