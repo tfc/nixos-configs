@@ -1,10 +1,13 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 
 {
   virtualisation.oci-containers = {
     backend = "podman";
     containers.homeassistant = {
-      volumes = [ "home-assistant:/config" ];
+      volumes = [
+        "home-assistant:/config"
+        "/run/dbus:/run/dbus:ro"
+      ];
       environment.TZ = "Europe/Berlin";
       image = "ghcr.io/home-assistant/home-assistant:stable";
       pull = "newer";
@@ -17,6 +20,22 @@
       devices = [ "/dev/ttyACM0:/dev/ttyACM0" ];
     };
   };
+
+  # network-online.target is reached even when dhcpcd times out (Wi-Fi often
+  # fails its first association after boot). HA's ssdp/zeroconf then fail
+  # setup and Sonos & co. stay dead until the next HA restart, so wait for a
+  # default route first. Give up after 5 minutes rather than never starting.
+  systemd.services.podman-homeassistant.serviceConfig.ExecStartPre = lib.mkBefore [
+    (pkgs.writeShellScript "wait-for-default-route" ''
+      for _ in $(seq 300); do
+        ${pkgs.iproute2}/bin/ip route show default | grep -q . && exit 0
+        sleep 1
+      done
+      echo "no default route after 5 minutes, starting anyway"
+    '')
+  ];
+
+  hardware.bluetooth.enable = true;
 
   # No X-Forwarded-* headers on purpose: HA answers 400 to them unless its
   # reverse proxy settings (kept in HA's .storage, not YAML) are configured.
