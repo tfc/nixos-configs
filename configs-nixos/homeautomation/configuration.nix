@@ -15,6 +15,7 @@
     flakeInputs.home-manager.nixosModules.home-manager
     flakeInputs.nixos-hardware.nixosModules.raspberry-pi-4
     ./ha.nix
+    ./wifi.nix
     #./grafana.nix
   ];
 
@@ -30,6 +31,7 @@
       cp -r $src/{bootcode.bin,start4.elf,fixup4.dat,bcm2711-rpi-4-b.dtb,overlays} $dst/
     '';
   };
+  hardware.raspberry-pi."4".bluetooth.enable = true;
 
   boot.kernelParams = [ "cma=256M" ];
 
@@ -59,6 +61,11 @@
       interfaces = [ "wlan0" ];
     };
   };
+
+  security.run0.wheelNeedsPassword = false;
+  security.run0.enableSudoAlias = true;
+  security.run0.enable = true;
+  security.sudo.enable = false;
 
   environment.systemPackages = with pkgs; [
     tmux
