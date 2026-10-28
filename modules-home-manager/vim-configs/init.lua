@@ -13,6 +13,8 @@ vim.keymap.set('n', '<leader>ff', telescope.find_files, { desc = 'Telescope: fin
 vim.keymap.set('n', '<leader>fg', telescope.live_grep, { desc = 'Telescope: live grep' })
 vim.keymap.set('n', '<leader>fb', telescope.buffers, { desc = 'Telescope: buffers' })
 vim.keymap.set('n', '<leader>fh', telescope.help_tags, { desc = 'Telescope: help tags' })
+vim.keymap.set('n', '<leader>fc', function() telescope.colorscheme({ enable_preview = true }) end,
+  { desc = 'Telescope: colorschemes (live preview)' })
 
 -- Options
 local opt = vim.opt
@@ -106,9 +108,12 @@ local function detect_background()
   return out:match("v%s+u%s+2") and "light" or "dark"
 end
 
+local colorschemes = { dark = "gruvbox", light = "rose-pine-dawn" }
+
 local function apply_theme()
-  vim.opt.background = detect_background()
-  vim.cmd("colorscheme gruvbox")
+  local bg = detect_background()
+  vim.opt.background = bg
+  vim.cmd.colorscheme(colorschemes[bg])
 end
 
 apply_theme()

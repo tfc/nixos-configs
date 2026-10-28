@@ -21,9 +21,24 @@
       haskell-tools-nvim
       purescript-vim
       telescope-nvim
-      vim-colorschemes
+      catppuccin-nvim
+      gruvbox-nvim
+      kanagawa-nvim
+      nightfox-nvim
+      rose-pine
+      tokyonight-nvim
       vim-nix
       vim-tmux-navigator
+      {
+        plugin = nvim-treesitter.withAllGrammars;
+        config = /* lua */ ''
+          vim.api.nvim_create_autocmd("FileType", {
+            pattern = "*",
+            callback = function(args) pcall(vim.treesitter.start, args.buf) end,
+          })
+        '';
+        type = "lua";
+      }
       {
         plugin = bufexplorer;
         config = "vim.keymap.set('n', '<F4>', ':ToggleBufExplorer<CR>', { silent = true })";
@@ -31,7 +46,7 @@
       }
       {
         plugin = nerdtree;
-        config = ''
+        config = /* lua */ ''
           vim.api.nvim_create_autocmd("StdinReadPre", {
             pattern = "*",
             callback = function() vim.g.std_in = 1 end,
@@ -62,7 +77,7 @@
       }
       {
         plugin = vim-better-whitespace;
-        config = ''
+        config = /* lua */ ''
           vim.g.better_whitespace_enabled = 1
           vim.g.strip_whitespace_on_save = 1
           vim.g.strip_whitespace_confirm = 0
