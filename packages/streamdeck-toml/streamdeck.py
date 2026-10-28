@@ -7,6 +7,7 @@ import string
 import subprocess
 import sys
 import threading
+import time
 import tomllib
 from pathlib import Path
 from typing import TYPE_CHECKING, NotRequired, TypedDict
@@ -43,6 +44,7 @@ class KeyConfig(TypedDict):
     bg: NotRequired[str]
     fg: NotRequired[str]
     image: NotRequired[str]
+    image_height: NotRequired[float]
     press: NotRequired[str]
     vars: NotRequired[dict[str, str | VarConfig]]
     image_cmd: NotRequired[str]
@@ -214,6 +216,9 @@ class Key:
         self.image_path: str | None = cfg.get("image")
         self.image: Image.Image | None = None
         self.loaded_path: Path | None = None
+        # With text, the image takes this fraction of the key height at the top and the text
+        # the rest below. 0 lets both fill the whole key, with the text drawn over the image.
+        self.image_height: float = cfg.get("image_height", 0)
         self.press: str | None = cfg.get("press")
         self.vars = [Var(name, var) for name, var in cfg.get("vars", {}).items()]
         self.values: dict[str, Value] = {}
@@ -242,11 +247,19 @@ class Key:
             if path != self.loaded_path:
                 self.image = load_image(path.read_bytes())
                 self.loaded_path = path
+        text_top = 0
         if self.image:
-            pic = ImageOps.contain(self.image, img.size)
-            img.paste(pic, ((w - pic.width) // 2, (h - pic.height) // 2), pic)
+            box = (w, h)
+            if text and self.image_height:
+                text_top = round(h * self.image_height)
+                box = (w - 2 * PADDING, text_top - PADDING)
+            pic = ImageOps.contain(self.image, box)
+            y = PADDING if text_top else (h - pic.height) // 2
+            img.paste(pic, ((w - pic.width) // 2, y), pic)
         if text:
-            draw_text(img, text, self.font, self.fill(look.get("fg", self.fg)))
+            area = img.crop((0, text_top, w, h))
+            draw_text(area, text, self.font, self.fill(look.get("fg", self.fg)))
+            img.paste(area, (0, text_top))
         if self.offset:
             # Compensate for parallax between the display and the keycap surface.
             shifted = PILHelper.create_key_image(self.deck, background=bg)
@@ -323,6 +336,19 @@ def load_keys(deck: StreamDeck, cfg: Config, base_dir: Path) -> dict[int, Key]:
     return keys
 
 
+def start_keys(keys: dict[int, Key]) -> list[threading.Thread]:
+    """Render all keys and start a polling thread for each key with commands."""
+    pollers: list[threading.Thread] = []
+    for key in keys.values():
+        if key.vars or key.image_cmd:
+            key.show()  # with all variables "?" until the first poll finishes
+            pollers.append(threading.Thread(target=key.poll, daemon=True))
+            pollers[-1].start()
+        else:
+            key.render()
+    return pollers
+
+
 def main() -> None:
     path = Path(sys.argv[1] if len(sys.argv) > 1 else "~/.config/streamdeck/config.toml")
     path = path.expanduser().absolute()
@@ -338,12 +364,7 @@ def main() -> None:
     deck.set_brightness(cfg.get("brightness", 75))
 
     keys = load_keys(deck, cfg, path.parent)
-    for key in keys.values():
-        if key.vars or key.image_cmd:
-            key.show()  # with all variables "?" until the first poll finishes
-            threading.Thread(target=key.poll, daemon=True).start()
-        else:
-            key.render()
+    pollers = start_keys(keys)
 
     def on_key(_deck: StreamDeck, index: int, pressed: bool) -> None:  # noqa: FBT001 - callback signature
         if pressed and index in keys:
@@ -351,16 +372,26 @@ def main() -> None:
 
     deck.set_key_callback(on_key)
     try:
-        threading.Event().wait()
+        # The reader thread closes the deck when the device goes away, e.g. when the
+        # hub it hangs off powers down with the monitor. It comes back as a new device,
+        # so exit and let the service manager restart us to open that one.
+        while deck.is_open():
+            time.sleep(1)
+        sys.exit("Stream Deck disconnected")
     except KeyboardInterrupt:
         pass
     finally:
         for key in keys.values():
             key.stop.set()
             key.wake.set()
+        # Pollers must be done before the deck closes, or they print render errors while
+        # the interpreter shuts down, which aborts it when they hold the stderr lock.
+        for poller in pollers:
+            poller.join()
         with deck:
-            deck.reset()
-            deck.close()
+            if deck.is_open():
+                deck.reset()
+                deck.close()
 
 
 if __name__ == "__main__":
