@@ -41,12 +41,6 @@ let
   font = "${pkgs.dejavu_fonts}/share/fonts/truetype/DejaVuSans-Bold.ttf";
   monoFont = "${pkgs.dejavu_fonts}/share/fonts/truetype/DejaVuSansMono-Bold.ttf";
 
-  sceneKey = pos: text: scene: {
-    inherit pos text;
-    bg = green;
-    press = "${obsCmd} scene switch ${scene}";
-  };
-
   obsOff = {
     text = ''
       OBS
@@ -56,13 +50,66 @@ let
     fg = grey;
   };
 
+  # Adwaita's monochrome weather icons, tinted and named like the weather var's
+  # icon output. "?" shows while there is no weather data. Shapes without a fill
+  # inherit it from <svg>, and translucency only dims them on the black keys.
+  weatherIcons = pkgs.runCommand "weather-icons" { } (
+    ''
+      mkdir $out
+    ''
+    +
+      lib.concatMapStrings
+        (
+          {
+            name,
+            icon,
+            color,
+          }:
+          ''
+            sed -E \
+              -e 's/fill="#[0-9a-fA-F]{6}"/fill="${color}"/g' \
+              -e 's/<svg /<svg fill="${color}" /' \
+              -e 's/ fill-opacity="[^"]*"//g' \
+              ${pkgs.adwaita-icon-theme}/share/icons/Adwaita/symbolic/status/${icon}-symbolic.svg \
+              > "$out/${name}.svg"
+          ''
+        )
+        (
+          lib.mapAttrsToList
+            (name: color: {
+              inherit name color;
+              icon = "weather-${name}";
+            })
+            {
+              clear = "#f8e45c";
+              clear-night = "#c0bfbc";
+              few-clouds = "#f8e45c";
+              few-clouds-night = "#c0bfbc";
+              overcast = "#deddda";
+              fog = "#deddda";
+              showers-scattered = "#99c1f1";
+              showers = "#62a0ea";
+              snow = "#ffffff";
+              storm = "#ffbe6f";
+            }
+          ++ [
+            {
+              name = "?";
+              icon = "dialog-question";
+              color = grey;
+            }
+          ]
+        )
+  );
+
   # Keys are addressed as pos = [ column row ], starting at [ 0 0 ] top left.
   # Every `interval` seconds each command in `vars` runs, and text, bg, fg and
   # image can refer to the results as {name}. A var with `match` defines one
   # variable per named regex group instead. Placeholders take Python format
   # specs: {cpu:3} pads a number to 3 digits, {x:.1f} rounds to one decimal.
   # A key's `state` template selects one of its `states`, which override
-  # text, bg, fg and image.
+  # text, bg, fg and image. With text, `image_height` puts the image into that
+  # fraction of the key at the top and the text below it.
   streamdeckSettings = {
     brightness = 75;
     bg = "#000000";
@@ -76,22 +123,54 @@ let
     ];
 
     key = [
-      (sceneKey [ 0 0 ] ''
-        SPEAKER
-        LEFT
-      '' "sc-speaker-l")
-      (sceneKey [ 1 0 ] ''
-        SPEAKER
-        RIGHT
-      '' "sc-speaker-r")
-      (sceneKey [ 1 1 ] ''
-        SPEAKER
-        FULL
-      '' "sc-speaker-full")
-      (sceneKey [ 0 1 ] ''
-        SCREEN
-        ONLY
-      '' "sc-nospeaker")
+      {
+        pos = [
+          0
+          0
+        ];
+        bg = green;
+        text = ''
+          SPEAKER
+          LEFT
+        '';
+        press = "${obsCmd} scene switch sc-speaker-l";
+      }
+      {
+        pos = [
+          1
+          0
+        ];
+        bg = green;
+        text = ''
+          SPEAKER
+          RIGHT
+        '';
+        press = "${obsCmd} scene switch sc-speaker-r";
+      }
+      {
+        pos = [
+          1
+          1
+        ];
+        bg = green;
+        text = ''
+          SPEAKER
+          FULL
+        '';
+        press = "${obsCmd} scene switch sc-speaker-full";
+      }
+      {
+        pos = [
+          0
+          1
+        ];
+        bg = green;
+        text = ''
+          SCREEN
+          ONLY
+        '';
+        press = "${obsCmd} scene switch sc-nospeaker";
+      }
 
       {
         pos = [
@@ -245,6 +324,35 @@ let
         bg = "#9a9996";
       }
 
+      {
+        pos = [
+          2
+          0
+        ];
+        # Open-Meteo refreshes current values every 15 minutes. weather_code is a WMO code.
+        interval = 900;
+        vars.weather = {
+          run = script "weather" [ pkgs.curl pkgs.jq ] ''
+            curl -sf "https://api.open-meteo.com/v1/forecast?latitude=52.265256&longitude=10.529766&current=temperature_2m,weather_code,is_day&timezone=auto" \
+              | jq -r '.current | (.weather_code) as $c | (if .is_day == 1 then "" else "-night" end) as $n
+                  | "\(.temperature_2m | round) " + (
+                    if $c == 0 then "clear\($n)"
+                    elif $c <= 2 then "few-clouds\($n)"
+                    elif $c == 3 then "overcast"
+                    elif $c <= 48 then "fog"
+                    elif $c <= 57 then "showers-scattered"
+                    elif $c <= 67 then "showers"
+                    elif $c <= 77 then "snow"
+                    elif $c <= 82 then "showers-scattered"
+                    elif $c <= 86 then "snow"
+                    else "storm" end)'
+          '';
+          match = ''(?P<temp>-?\d+) (?P<icon>[\w-]+)'';
+        };
+        image = "${weatherIcons}/{icon}.svg";
+        image_height = 0.6;
+        text = "{temp}°C";
+      }
       {
         pos = [
           2
