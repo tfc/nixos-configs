@@ -276,18 +276,22 @@ let
         vars.ram = script "ram-usage" [ pkgs.gawk ] ''
           awk '/^MemTotal/ {t = $2} /^MemAvailable/ {a = $2} END {printf "%d", 100 * (t - a) / t}' /proc/meminfo
         '';
-        vars.vram =
-          script "vram-usage"
-            [
-              osConfig.hardware.nvidia.package.bin
-              pkgs.gawk
-            ]
-            ''
-              nvidia-smi --query-gpu=memory.used,memory.total --format=csv,noheader,nounits \
-                | awk -F', ' '{printf "%d", 100 * $1 / $2}'
-            '';
+        vars.gpu = {
+          run =
+            script "gpu-usage"
+              [
+                osConfig.hardware.nvidia.package.bin
+                pkgs.gawk
+              ]
+              ''
+                nvidia-smi --query-gpu=utilization.gpu,memory.used,memory.total --format=csv,noheader,nounits \
+                  | awk -F', ' '{printf "%d %d", $1, 100 * $2 / $3}'
+              '';
+          match = ''(?P<gpu>\d+) (?P<vram>\d+)'';
+        };
         text = ''
           CPU  {cpu:3}%
+          GPU  {gpu:3}%
           RAM  {ram:3}%
           VRAM {vram:3}%
         '';
