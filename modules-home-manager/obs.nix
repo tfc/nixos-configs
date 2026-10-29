@@ -314,6 +314,7 @@ let
           2
         ];
         image = "${./obs-streamdeck/square_logo.png}";
+        press = "${lib.getExe pkgs.tiny2-setup} follow";
       }
       {
         pos = [
@@ -322,6 +323,7 @@ let
         ];
         image = "${./obs-streamdeck/logo-round.svg}";
         bg = "#9a9996";
+        press = "${lib.getExe pkgs.tiny2-setup} fix";
       }
 
       {
