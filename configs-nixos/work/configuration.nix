@@ -22,6 +22,7 @@
     self.nixosModules.virtualization
     self.nixosProfiles.applicative-systems-customization
     self.nixosProfiles.desktop-responsiveness
+    self.nixosProfiles.obsbot
     self.nixosProfiles.traynix
     self.nixosProfiles.zram
   ];

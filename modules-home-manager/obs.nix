@@ -446,9 +446,15 @@ in
     losslesscut-bin
     shotcut
 
+    obsbot-camera-control
+    obsbot-tiny-2-control
+    tiny2
+    tiny2-setup
+
     obs-cmd
     streamdeck-toml
     wmctrl
+    v4l-utils
 
     (wrapOBS {
       plugins = with obs-studio-plugins; [

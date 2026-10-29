@@ -66,6 +66,10 @@
 
           packages = {
             inherit (pkgs)
+              obsbot-camera-control
+              obsbot-tiny-2-control
+              tiny2
+              tiny2-setup
               streamdeck-toml
               transcribe-speakers
               transcribe-speakers-turns
