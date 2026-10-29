@@ -21,6 +21,7 @@
     self.nixosModules.user-tfc
     self.nixosModules.virtualization
     self.nixosProfiles.applicative-systems-customization
+    self.nixosProfiles.deepfilter-mic
     self.nixosProfiles.desktop-responsiveness
     self.nixosProfiles.obsbot
     self.nixosProfiles.traynix
