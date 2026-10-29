@@ -2,8 +2,8 @@
 
 {
   # Virtual mic "Profile (DeepFilter)": the Sennheiser Profile run through DeepFilterNet.
-  # The attenuation limit caps noise reduction at 20 dB, so whispered consonants are
-  # reduced like noise rather than removed entirely, as RNNoise does.
+  # A low attenuation limit keeps the voice intact while typing: clicks overlapping speech
+  # aren't removed at any setting, but higher limits start chopping the voice instead.
   services.pipewire.extraConfig.pipewire."99-deepfilter-mic" = {
     "context.modules" = [
       {
@@ -20,7 +20,7 @@
                 plugin = "${pkgs.deepfilternet}/lib/ladspa/libdeep_filter_ladspa.so";
                 label = "deep_filter_mono";
                 control = {
-                  "Attenuation Limit (dB)" = 20;
+                  "Attenuation Limit (dB)" = 10;
                 };
               }
             ];
