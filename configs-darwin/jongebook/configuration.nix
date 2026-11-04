@@ -59,25 +59,10 @@ in
         };
         cores = 8;
         vz.nestedVirtualization = true;
-      };
-
-      boot.kernel.sysctl."kernel.panic_on_oops" = 1;
-
-      boot.kernel.sysctl."vm.panic_on_oom" = 1;
-      boot.kernelParams = [ "panic=10" ];
-
-      # "/" is a tmpfs (see nixos/modules/virtualisation/vz-vm.nix).
-      # Builds default to temp which is a limited tmpfs.
-      # Put builds on disk to enable the larger ones.
-      systemd.tmpfiles.settings."10-nix-build-dir"."/nix/.rw-store/build".d = {
-        user = "root";
-        group = "root";
-        mode = "0755";
+        vz.idleTimeout = 5 * 60;
       };
 
       nix.settings = {
-        build-dir = "/nix/.rw-store/build";
-
         # needed for nixos tests with containers
         system-features = [ "uid-range" ];
         experimental-features = [
@@ -161,7 +146,6 @@ in
   home-manager.useGlobalPkgs = true;
   home-manager.backupFileExtension = "backup";
   home-manager.users.tfc =
-    { ... }:
     {
       home.stateVersion = "23.11";
       programs.home-manager.enable = true;
