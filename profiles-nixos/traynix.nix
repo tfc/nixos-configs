@@ -4,14 +4,8 @@
 }:
 
 {
-  imports = [
-    flakeInputs.traynix.nixosModules.default
-  ];
-
-  nixpkgs.overlays = [
-    flakeInputs.traynix.overlays.default
-    flakeInputs.traynix.overlays.naersk
-  ];
+  imports = [ flakeInputs.traynix.nixosModules.default ];
+  nixpkgs.overlays = [ flakeInputs.traynix.overlays.default ];
 
   services.traynix.enable = true;
 }

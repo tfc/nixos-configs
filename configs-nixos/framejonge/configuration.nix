@@ -40,7 +40,6 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.systemd-boot.configurationLimit = 2;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.initrd.systemd.enable = true;
   boot.tmp.cleanOnBoot = true;
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
