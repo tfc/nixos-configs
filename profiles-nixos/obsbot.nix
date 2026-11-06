@@ -6,5 +6,11 @@
   # grant the user on the active seat read/write access to the device node.
   services.udev.extraRules = ''
     SUBSYSTEM=="usb", ATTRS{idVendor}=="3564", ATTRS{idProduct}=="fef8", TAG+="uaccess"
+
+    # Disable USB runtime autosuspend for the camera. After idling suspended
+    # for a while, the firmware stops answering stream setup
+    # ("Failed to set UVC probe control : -110"), so meetings get no video
+    # until the camera is replugged.
+    ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="3564", ATTR{idProduct}=="fef8", ATTR{power/control}="on"
   '';
 }
