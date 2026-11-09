@@ -16,6 +16,9 @@ writeShellApplication {
   text = ''
     dev=/dev/v4l/by-id/usb-Remo_Tech_Co.__Ltd._OBSBOT_Tiny_2-video-index0
 
+    # Other apps can leave the lens in fixed manual focus; the AI modes don't undo that.
+    v4l2-ctl -d "$dev" -c focus_automatic_continuous=1
+
     python3 -I ${./tiny2-ai.py} upperbody
     case "''${1:-fix}" in
       fix)
