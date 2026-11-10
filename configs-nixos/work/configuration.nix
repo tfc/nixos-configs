@@ -20,11 +20,9 @@
     self.nixosModules.steam
     self.nixosModules.user-tfc
     self.nixosModules.virtualization
-    self.nixosProfiles.applicative-systems-customization
     self.nixosProfiles.deepfilter-mic
-    self.nixosProfiles.desktop-responsiveness
+    self.nixosProfiles.desktop-defaults
     self.nixosProfiles.obsbot
-    self.nixosProfiles.traynix
     self.nixosProfiles.zram
   ];
 
@@ -104,9 +102,6 @@
   environment = {
     pathsToLink = [ "/share/i18n" ];
   };
-
-  customization.gdm-logo.enable = false;
-  customization.gnome-background.enable = true;
 
   services.pipewire = {
     enable = true;
