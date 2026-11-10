@@ -8,8 +8,9 @@
     ./traynix.nix
   ];
 
-  customization.gdm-logo.enable = false;
+  customization.gdm-logo.enable = true;
   customization.gnome-background.enable = true;
 
+  services.bootvine.enable = true;
   services.traynix.enable = true;
 }

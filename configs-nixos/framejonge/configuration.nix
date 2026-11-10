@@ -25,9 +25,9 @@
     self.nixosModules.steam
     self.nixosModules.user-tfc
     self.nixosModules.virtualization
-    #self.nixosProfiles.gnome-autotheme
-    self.nixosProfiles.applicative-systems-customization
     #self.nixosProfiles.argunix
+    self.nixosProfiles.desktop-defaults
+    #self.nixosProfiles.gnome-autotheme
     self.nixosProfiles.traynix
     self.nixosProfiles.zram
   ];
@@ -51,8 +51,6 @@
       size = 8 * 1024;
     }
   ];
-
-  boot.plymouth.enable = true;
 
   console = {
     font = "Lat2-Terminus16";
@@ -89,13 +87,6 @@
   services.fwupd.enable = true;
   services.openssh.enable = true;
 
-  #services.tailscale.enable = true;
-  #networking.firewall = {
-  #  checkReversePath = "loose";
-  #  trustedInterfaces = [ "tailscale0" ];
-  #  allowedUDPPorts = [ config.services.tailscale.port ];
-  #};
-
   services.automatic-timezoned.enable = true;
 
   hardware.bluetooth.enable = true;
@@ -116,21 +107,19 @@
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
   home-manager.backupFileExtension = "backup";
-  home-manager.users.tfc =
-    { ... }:
-    {
-      home.stateVersion = "25.05";
-      programs.home-manager.enable = true;
-      imports = with self.homeManagerModules; [
-        gnome
-        desktop
-        programming-haskell
-        programming
-        shell-bash
-        shelltools
-        vim
-        tmux
-        ssh
-      ];
-    };
+  home-manager.users.tfc = {
+    home.stateVersion = "25.05";
+    programs.home-manager.enable = true;
+    imports = with self.homeManagerModules; [
+      gnome
+      desktop
+      programming-haskell
+      programming
+      shell-bash
+      shelltools
+      vim
+      tmux
+      ssh
+    ];
+  };
 }
