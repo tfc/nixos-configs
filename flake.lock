@@ -11,11 +11,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1794395685,
-        "narHash": "sha256-l/Mrg3d7rEqOgvY7Uag8NV8EhI0vaO1ngTl8pk3g7wY=",
+        "lastModified": 1794406259,
+        "narHash": "sha256-IdVWY7Y8VYanRjPjx2WJOMS/ubsVzAYpA0KO/P8mIhA=",
         "ref": "refs/heads/main",
-        "rev": "5435fc12e059e27e9b2041cba081465979ec14e2",
-        "revCount": 291,
+        "rev": "a6702359cc4b5117f8e2d26ad56901de24cb139f",
+        "revCount": 293,
         "type": "git",
         "url": "https://codeberg.org/tfc/argunix"
       },
