@@ -26,7 +26,10 @@ let
     lib.getExe (pkgs.writeShellApplication { inherit name runtimeInputs text; });
 
   # Prints the OBS recording state: off, stopped, recording or paused.
+  # obs-cmd retries a refused connection for ~4 seconds, which can exceed the
+  # poll timeout, so check whether OBS listens at all first.
   obsRecordingState = script "obs-recording-state" [ obs-cmd ] ''
+    (exec 3<>/dev/tcp/127.0.0.1/4455) 2>/dev/null || { echo off; exit; }
     status=$(obs-cmd recording status 2>/dev/null) || { echo off; exit; }
     case "$status" in
       *[Pp]aused:\ true*) echo paused ;;
