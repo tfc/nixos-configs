@@ -334,6 +334,7 @@ let
           2
           0
         ];
+        press = "${lib.getExe' pkgs.soco-cli "sonos"} 192.168.120.25 pauseplay";
         # Open-Meteo refreshes current values every 15 minutes. weather_code is a WMO code.
         interval = 900;
         vars.weather = {
