@@ -29,7 +29,6 @@
     self.nixosProfiles.desktop-defaults
     #self.nixosProfiles.gnome-autotheme
     self.nixosProfiles.traynix
-    self.nixosProfiles.zram
   ];
 
   nixpkgs.hostPlatform = "x86_64-linux";

@@ -7,13 +7,7 @@
 
   # Wi-Fi power saving moved to wifi.nix, where it is now disabled.
 
-  # zram itself comes from nixosProfiles.zram; a laptop deviates from its
-  # desktop defaults in both directions: a small device because the 8 GB
-  # swapfile behind it is the real overflow tier, and low swappiness because
-  # compressing pages costs CPU (= battery) and we would rather keep the
-  # working set resident than churn it.
-  zramSwap.memoryPercent = 25;
-  boot.kernel.sysctl."vm.swappiness" = 10;
+  boot.zswap.enable = true;
 
   # Cap battery charge at 80% for cell longevity. The Framework EC exposes
   # the threshold via /sys; cros_ec (enabled by hardware.framework.enableKmod)
