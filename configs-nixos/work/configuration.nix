@@ -11,6 +11,7 @@
     ./ai.nix
     ./hardware-configuration.nix
     ./nvidia.nix
+    ./swap.nix
     flakeInputs.home-manager.nixosModules.home-manager
     self.nixosModules.flakes
     self.nixosModules.nix-service
@@ -23,7 +24,6 @@
     self.nixosProfiles.deepfilter-mic
     self.nixosProfiles.desktop-defaults
     self.nixosProfiles.obsbot
-    self.nixosProfiles.zram
   ];
 
   nixpkgs.overlays = [

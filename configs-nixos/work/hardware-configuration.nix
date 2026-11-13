@@ -39,7 +39,9 @@
     ];
   };
 
-  swapDevices = [ { device = "/dev/disk/by-uuid/3407b08f-01af-4a0e-954a-323d5ea013cc"; } ];
+  # The old swap partition (nvme0n1p2) is zram's writeback device now,
+  # see swap.nix.
+  swapDevices = [ ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
