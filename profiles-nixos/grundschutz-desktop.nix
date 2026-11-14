@@ -28,7 +28,7 @@
 
     # Updated by hand with nixos-rebuild from the local checkout; an
     # autoUpgrade from GitHub would overwrite uncommitted local changes.
-    "KONF.8.1".exempt = "Desktop, updated manually via nixos-rebuild";
+    # KONF.8.1 is covered by the desktop profile's update notification.
     "KONF.8.2".exempt = "Desktop, updated manually via nixos-rebuild";
   };
 }
