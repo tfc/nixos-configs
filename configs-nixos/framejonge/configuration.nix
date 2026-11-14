@@ -27,6 +27,7 @@
     self.nixosModules.virtualization
     #self.nixosProfiles.argunix
     self.nixosProfiles.desktop-defaults
+    self.nixosProfiles.grundschutz-desktop
     #self.nixosProfiles.gnome-autotheme
     self.nixosProfiles.traynix
   ];
@@ -78,7 +79,6 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  security.run0.wheelNeedsPassword = false;
   security.run0.enableSudoAlias = true;
   security.run0.enable = true;
   security.sudo.enable = false;

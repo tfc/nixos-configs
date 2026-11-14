@@ -22,6 +22,7 @@
     self.nixosModules.virtualization
     self.nixosProfiles.deepfilter-mic
     self.nixosProfiles.desktop-defaults
+    self.nixosProfiles.grundschutz-desktop
     self.nixosProfiles.obsbot
   ];
 
@@ -121,7 +122,11 @@
     stdenv.cc.libc.out # kde locales
   ];
 
+  # Stationary machine: run0 stays passwordless (KONF.6.4 deviation).
   security.run0.wheelNeedsPassword = false;
+  grundschutz.requirements."KONF.6.4".allowPasswordlessSudo = true;
+  # TODO: reinstall with LUKS on / and /data.
+  grundschutz.requirements."KONF.3.2".exempt = "Root and /data are not encrypted yet";
   security.run0.enableSudoAlias = true;
   security.run0.enable = true;
   security.sudo.enable = false;
