@@ -1,6 +1,6 @@
 # zram swap with the old NVMe swap partition as writeback device.
 # Sysctls adapted from Connor Baker's config: https://github.com/ConnorBaker/nixos-configs
-{ utils, ... }:
+{ config, utils, ... }:
 
 let
   # By PARTUUID because the swap signature's UUID no longer means anything.
@@ -44,8 +44,12 @@ in
 
   # zram-generator orders setup against nothing but the swap unit, so it can
   # race udev creating the /dev/disk/by-* link and fail to set backing_dev.
+  # Any NixOS service definition emits its own Environment=PATH, and this
+  # instance drop-in overrides the template's, so repeat the template's path
+  # (util-linux) or systemd-makefs can't find mkswap.
   systemd.services."systemd-zram-setup@zram0" = {
     overrideStrategy = "asDropin";
+    inherit (config.systemd.services."systemd-zram-setup@") path;
     requires = [ writebackDeviceUnit ];
     after = [ writebackDeviceUnit ];
   };
