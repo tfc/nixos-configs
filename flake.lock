@@ -177,11 +177,11 @@
     "grundschutz": {
       "flake": false,
       "locked": {
-        "lastModified": 1794679242,
-        "narHash": "sha256-zmFRT2yzgM6Owv0jA8q2wVDGDGosCMxlt4CyhlZFVHk=",
+        "lastModified": 1794682683,
+        "narHash": "sha256-TKvEffuogTNcQyF23tVWRNsh/YufeT/TkQdaIY2b3eA=",
         "owner": "applicative-systems",
         "repo": "dos",
-        "rev": "f52883452d22b3a051dabec0b28a05f28e1cb6a9",
+        "rev": "510376c0a734d03c2bd9ca65e529cfe3ba7f69ad",
         "type": "github"
       },
       "original": {
