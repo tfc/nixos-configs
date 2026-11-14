@@ -16,17 +16,18 @@
     withPython3 = false;
     initLua = builtins.readFile ./vim-configs/init.lua;
     plugins = with pkgs.vimPlugins; [
-      plenary-nvim # dep of haskell-tools.nvim
-      nvim-lspconfig
-      haskell-tools-nvim
-      purescript-vim
-      telescope-nvim
       catppuccin-nvim
       gruvbox-nvim
+      haskell-tools-nvim
       kanagawa-nvim
       nightfox-nvim
+      nvim-lspconfig
+      plenary-nvim # dep of haskell-tools.nvim
+      purescript-vim
       rose-pine
+      telescope-nvim
       tokyonight-nvim
+      vim-fugitive
       vim-nix
       vim-tmux-navigator
       {
