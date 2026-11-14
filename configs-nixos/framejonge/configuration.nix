@@ -27,6 +27,7 @@
     self.nixosModules.virtualization
     #self.nixosProfiles.argunix
     self.nixosProfiles.desktop-defaults
+    self.nixosProfiles.grundschutz-desktop
     #self.nixosProfiles.gnome-autotheme
     self.nixosProfiles.traynix
   ];
@@ -78,7 +79,6 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  security.run0.wheelNeedsPassword = false;
   security.run0.enableSudoAlias = true;
   security.run0.enable = true;
   security.sudo.enable = false;
@@ -87,6 +87,8 @@
   services.openssh.enable = true;
 
   services.automatic-timezoned.enable = true;
+
+  grundschutz.requirements."BER.3.12".timeout = 5;
 
   hardware.bluetooth.enable = true;
 

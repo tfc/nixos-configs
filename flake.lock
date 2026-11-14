@@ -174,6 +174,22 @@
         "type": "github"
       }
     },
+    "grundschutz": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1794679242,
+        "narHash": "sha256-zmFRT2yzgM6Owv0jA8q2wVDGDGosCMxlt4CyhlZFVHk=",
+        "owner": "applicative-systems",
+        "repo": "dos",
+        "rev": "f52883452d22b3a051dabec0b28a05f28e1cb6a9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "applicative-systems",
+        "repo": "dos",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -316,6 +332,7 @@
         "darwin": "darwin",
         "disko": "disko",
         "flake-parts": "flake-parts",
+        "grundschutz": "grundschutz",
         "home-manager": "home-manager",
         "lanzaboote": "lanzaboote",
         "nixos-hardware": "nixos-hardware",
