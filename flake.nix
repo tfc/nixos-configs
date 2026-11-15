@@ -2,9 +2,6 @@
   description = "My personal NixOS configs";
 
   inputs = {
-    bootvine.url = "git+https://codeberg.org/wvhulle/bootvine";
-    bootvine.inputs.nixpkgs.follows = "nixpkgs";
-
     disko.url = "github:nix-community/disko";
     disko.inputs.nixpkgs.follows = "nixpkgs";
 

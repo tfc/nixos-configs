@@ -1,11 +1,8 @@
-{ flakeInputs, ... }:
-
 {
   imports = [
     ./applicative-systems-customization.nix
     ./desktop-responsiveness.nix
     ./traynix.nix
-    flakeInputs.bootvine.nixosModules.default
   ];
 
   customization.gdm-logo.enable = true;
