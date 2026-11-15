@@ -13,6 +13,7 @@
     nix-diff
     nix-output-monitor
     nix-prefetch-github
+    nix-tree
     pciutils
     pstree
     qemu
