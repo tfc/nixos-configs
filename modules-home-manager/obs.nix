@@ -326,7 +326,17 @@ let
         ];
         image = "${./obs-streamdeck/logo-round.svg}";
         bg = "#9a9996";
-        press = "${lib.getExe pkgs.tiny2-setup} fix";
+        press =
+          script "tiny2-fix-keylights"
+            [
+              pkgs.curl
+              pkgs.tiny2-setup
+            ]
+            ''
+              curl -sf --max-time 3 -X POST \
+                http://homeautomation:8123/api/webhook/-_6UYibXm11RyLkE_lJtcpcXt || true
+              tiny2-setup fix
+            '';
       }
 
       {
