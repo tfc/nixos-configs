@@ -11,11 +11,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1794425098,
-        "narHash": "sha256-0vfwadjUvGdbyk+UjHdwnxhFay1OKp//aOO2JEC4WyA=",
+        "lastModified": 1794754381,
+        "narHash": "sha256-GZ23lhjXn/t4Mk8IC6A6MTUWYjSZQE7LonGVdk48rvI=",
         "ref": "refs/heads/main",
-        "rev": "2b96312b7779f70dcaa86c557610040916a64444",
-        "revCount": 300,
+        "rev": "a9084c6314d45e73b1d7f33a45c4b46677fbe8fe",
+        "revCount": 301,
         "type": "git",
         "url": "https://codeberg.org/tfc/argunix"
       },
@@ -160,11 +160,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1794278858,
-        "narHash": "sha256-rkrJwLgLSHBnXfgoSKIDa+2LLGdTqynsV3GAxOTGhUU=",
+        "lastModified": 1794865930,
+        "narHash": "sha256-a3My+u9CEwEFmuGXb3PV9COj7Gd8o28b19TvtDiKPfg=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "82ce401aa350502897c3f2e85f384d61cd3b0b6d",
+        "rev": "9d7ba6bef3904a018d38b92f83132eaf01eb8ef3",
         "type": "github"
       },
       "original": {
@@ -236,11 +236,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1794425805,
-        "narHash": "sha256-4s5CRvkYX4oAJVZ+zu2bBKFH2gG2GqN6OKHEWgJr1AY=",
+        "lastModified": 1794597451,
+        "narHash": "sha256-bUkc9dMpCFiJuuf5Efr7pnCDs5q18aA8zJah+MYZl9w=",
         "owner": "nixos",
         "repo": "nixos-hardware",
-        "rev": "b6ca87f78ec5bafc4b2aef7b29803dcf419266af",
+        "rev": "eb3c90bd715f7a9a28719bb014f53d309ccb2fc8",
         "type": "github"
       },
       "original": {
