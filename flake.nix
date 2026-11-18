@@ -69,6 +69,7 @@
 
           packages = {
             inherit (pkgs)
+              kbd-glow
               obsbot-camera-control
               obsbot-tiny-2-control
               tiny2

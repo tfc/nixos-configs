@@ -23,6 +23,7 @@
     self.nixosProfiles.deepfilter-mic
     self.nixosProfiles.desktop-defaults
     self.nixosProfiles.grundschutz-desktop
+    self.nixosProfiles.mq80
     self.nixosProfiles.obsbot
   ];
 
