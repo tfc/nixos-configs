@@ -6,6 +6,8 @@
 }:
 let
   cfg = config.customization;
+  gnomeEnabled = config.services.desktopManager.gnome.enable;
+  plasmaEnabled = config.services.desktopManager.plasma6.enable;
 
   logo = pkgs.runCommand "logo.png" { HOME = "/build"; } ''
     ${pkgs.inkscape}/bin/inkscape \
@@ -33,7 +35,7 @@ let
         nativeBuildInputs = [ pkgs.inkscape ];
       }
       ''
-        cp ${cfg.gnome-background.tilingSvg} colored.svg
+        cp ${cfg.background.tilingSvg} colored.svg
         # Anchor each substitution on its class selector. Replacing the bare
         # 'fill:#000000' would also hit a background recolored to #000000 (the
         # dark scheme), collapsing background and logo to the same grey.
@@ -44,10 +46,39 @@ let
       '';
 
   lightWallpaper = mkWallpaper "wallpaper-applicative-light.png" {
-    inherit (cfg.gnome-background.light) backgroundColor logoColor;
+    inherit (cfg.background.light) backgroundColor logoColor;
   };
   darkWallpaper = mkWallpaper "wallpaper-applicative-dark.png" {
-    inherit (cfg.gnome-background.dark) backgroundColor logoColor;
+    inherit (cfg.background.dark) backgroundColor logoColor;
+  };
+
+  # Plasma wallpaper KPackage with light (images/) and dark (images_dark/)
+  # variants. Plasma switches between them following the color scheme.
+  plasmaWallpaperName = "Applicative";
+  plasmaWallpaper = pkgs.runCommand "plasma-wallpaper-applicative" { } ''
+    dir=$out/share/wallpapers/${plasmaWallpaperName}
+    mkdir -p $dir/contents/images $dir/contents/images_dark
+    ln -s ${lightWallpaper} $dir/contents/images/3840x2160.png
+    ln -s ${darkWallpaper} $dir/contents/images_dark/3840x2160.png
+    cat > $dir/metadata.json <<'JSON'
+    {
+      "KPlugin": {
+        "Id": "${plasmaWallpaperName}",
+        "Name": "Applicative Systems",
+        "Authors": [ { "Name": "Applicative Systems" } ],
+        "License": "proprietary"
+      }
+    }
+    JSON
+  '';
+  plasmaWallpaperPath = "${plasmaWallpaper}/share/wallpapers/${plasmaWallpaperName}";
+
+  apply-plasma-wallpaper = pkgs.writeShellApplication {
+    name = "plasma-apply-applicative-wallpaper";
+    runtimeInputs = [ pkgs.kdePackages.plasma-workspace ];
+    text = ''
+      plasma-apply-wallpaperimage ${plasmaWallpaperPath}
+    '';
   };
 
   reset-background = pkgs.writeShellApplication {
@@ -71,10 +102,15 @@ in
         description = "Path to the logo file";
       };
     };
-    gnome-background = {
-      enable = lib.mkEnableOption "GNOME custom background setter" // {
-        default = true;
-      };
+    background = {
+      enable =
+        lib.mkEnableOption (
+          "the Applicative Systems light/dark wallpaper. Applied to whichever of "
+          + "GNOME and Plasma 6 are enabled on the host"
+        )
+        // {
+          default = true;
+        };
       tilingSvg = lib.mkOption {
         type = lib.types.path;
         default = ./artwork/logos/tiling-wallpaper.svg;
@@ -108,10 +144,11 @@ in
           description = "HTML color code for the tiled logos in the dark color scheme";
         };
       };
-      resetUserBackground =
+      enforceAtLogin =
         lib.mkEnableOption (
-          "resetting each user's GNOME background keys to the system default at session start, "
-          + "so per-user dconf overrides do not shadow the system-provided wallpaper"
+          "re-applying the wallpaper at every session start, overriding per-user choices "
+          + "(GNOME: reset the user's background keys to the system default; "
+          + "Plasma: apply the wallpaper package to all desktops)"
         )
         // {
           default = true;
@@ -139,14 +176,15 @@ in
         }
       ];
     })
-    (lib.mkIf cfg.gnome-background.enable {
+    # GNOME: system gsettings defaults for light and dark color schemes.
+    (lib.mkIf (cfg.background.enable && gnomeEnabled) {
       services.desktopManager.gnome.extraGSettingsOverrides = ''
         [org.gnome.desktop.background]
         picture-uri='file://${lightWallpaper}'
         picture-uri-dark='file://${darkWallpaper}'
       '';
     })
-    (lib.mkIf (cfg.gnome-background.enable && cfg.gnome-background.resetUserBackground) {
+    (lib.mkIf (cfg.background.enable && cfg.background.enforceAtLogin && gnomeEnabled) {
       systemd.user.services.gnome-reset-background = {
         description = "Reset GNOME background to system default at login";
         unitConfig.ConditionEnvironment = "XDG_CURRENT_DESKTOP=GNOME";
@@ -155,6 +193,31 @@ in
         serviceConfig = {
           Type = "oneshot";
           ExecStart = lib.getExe reset-background;
+        };
+      };
+    })
+    # Plasma: wallpaper KPackage with light/dark variants.
+    (lib.mkIf (cfg.background.enable && plasmaEnabled) {
+      environment.systemPackages = [ plasmaWallpaper ];
+      # The lock screen reads its wallpaper from kscreenlockerrc, which KConfig
+      # cascades from /etc/xdg; users who never changed it get ours.
+      environment.etc."xdg/kscreenlockerrc".text = lib.mkAfter ''
+
+        [Greeter][Wallpaper][org.kde.image][General]
+        Image=${plasmaWallpaperPath}
+      '';
+    })
+    (lib.mkIf (cfg.background.enable && cfg.background.enforceAtLogin && plasmaEnabled) {
+      systemd.user.services.plasma-apply-applicative-wallpaper = {
+        description = "Apply Applicative Systems wallpaper to all Plasma desktops";
+        unitConfig.ConditionEnvironment = "XDG_CURRENT_DESKTOP=KDE";
+        wantedBy = [ "plasma-workspace.target" ];
+        after = [ "plasma-plasmashell.service" ];
+        requires = [ "plasma-plasmashell.service" ];
+        partOf = [ "graphical-session.target" ];
+        serviceConfig = {
+          Type = "oneshot";
+          ExecStart = lib.getExe apply-plasma-wallpaper;
         };
       };
     })
